@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :citizens, except: [:index, :destroy] do 
     get :inventory
   end
+  
   resources :projects
   resources :facilities
   

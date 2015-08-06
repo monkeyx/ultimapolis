@@ -31,14 +31,25 @@
             <% end %>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <% if user_signed_in? && current_user.citizen %>
-            <li class="<% if is_navigation_active?('Users') %>active<% end %> dropdown">
-              <%=link_to(current_user.citizen, current_user.citizen) %>
-              <ul class="dropdown-menu" role="menu">
-                <li><%=link_to 'Inventory', citizen_inventory_path(current_user.citizen) %></li>
-                <li><%=link_to 'Facilities', main_app.facilities_path %></li>
-                <li><%=link_to 'Projects', main_app.projects_path %></li>
-              </ul>
+            <% if user_signed_in? %>
+              <% if current_user.citizen %>
+                <li class="<% if is_navigation_active?('Users') %>active<% end %> dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=current_user.citizen %> <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><%=link_to 'Inventory', main_app.citizen_inventory_path(current_user.citizen) %></li>
+                    <li><%=link_to 'Facilities', main_app.facilities_path %></li>
+                    <li><%=link_to 'Projects', main_app.projects_path %></li>
+                    <li class="divider"></li>
+                    <li><%=link_to 'Sign Out', main_app.destroy_user_session_path, :method => :delete %></li>
+                  </ul>
+                </li>
+              <% else %>
+                <li><%=link_to 'Become a Citizen', main_app.new_citizen_path %></li>
+                <li class="divider"></li>
+                <li><%=link_to 'Sign Out', main_app.destroy_user_session_path, :method => :delete %></li>
+              <% end %>
+            <% else %>
+              <li><%=link_to 'Sign In', main_app.new_user_session_path %></li>
             <% end %>
             <li class="<% if is_navigation_active?('Help Topics') %>active<% end %>"><%=link_to('Help', main_app.help_topics_path)%></li>
           </ul>

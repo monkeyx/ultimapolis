@@ -1,7 +1,9 @@
-<%= form_for(@citizen) do |f| %>
+<%= form_for(@citizen, html: {class: "form-horizontal"}) do |f| %>
+  <%=f.hidden_field :credits %>
   <% if @citizen.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@citizen.errors.count, "error") %> prohibited this citizen from being saved:</h2>
+    <div id="error_explanation" class="alert alert-dismissible alert-warning">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <h4><%= pluralize(@citizen.errors.count, "error") %> prohibited this citizen from being saved:</h4>
 
       <ul>
       <% @citizen.errors.full_messages.each do |message| %>
@@ -11,7 +13,96 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
+  <% if defined?(@user) && @user.errors.any? %>
+    <div id="error_explanation" class="alert alert-dismissible alert-warning">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <h4><%= pluralize(@user.errors.count, "error") %> prohibited this citizen from being saved:</h4>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <% if @citizen.new_record? %>
+    <legend>Home District</legend>
+    <p>Your home district taught you some things you will never forget.</p>
+    <div class="form-group">
+      <div class="col-lg-10">
+        <% i = 0 %>
+        <% District.all.each do |district| %>
+          <div class="radio">
+            <label>
+              <input type="radio" name="citizen[home_district_id]" id="home_district_id_<%=i%>" value="<%=district.id%>" <%=(district.id == @citizen.home_district_id ? 'checked' : '')%>>
+                <strong><%=link_to(district.name, district, target: '_new')%></strong>: <em><%=district.description%></em> &nbsp; (<strong><% if @citizen.new_record?%>+1<% end %> <%=link_to(district.skill.name, district.skill, target: '_new')%></strong>&nbsp;)
+              </input>
+            </label>
+          </div>
+          <% i += 1 %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+    
+    <legend>Profession</legend>
+    <% if @citizen.new_record? %>
+    <p>Every citizen works although some contribute more to society than others. Your first choice of profession will give you some additional skills. You can continue in this profession or change later. Working in a profession increases your chance of gaining new ranks and with it skill increases although never quite as much as you will get now.</p>
+    <% end %>
+    <div class="form-group">
+      <div class="col-lg-10">
+        <% i = 0 %>
+        <% Profession.all.each do |profession| %>
+          <div class="radio">
+            <label>
+              <input type="radio" name="citizen[current_profession_id]" id="current_profession_id_<%=i%>" value="<%=profession.id%>" <%=(profession.id == @citizen.current_profession_id ? 'checked' : '')%>>
+                <strong><%=link_to(profession.name, profession, target: '_new')%></strong>: <em><%=profession.description%></em> &nbsp; (&nbsp;
+                <% profession.skills.each do |skill| %>
+                <strong><% if @citizen.new_record?%>+1<% end %> <%=link_to(skill.name, skill, target: '_new')%></strong> &nbsp;
+                <% end %>
+                )
+              </input>
+            </label>
+          </div>
+          <% i += 1 %>
+        <% end %>
+      </div>
+    </div>
+
+    <% unless current_user %>
+    <legend>Account</legend>
+    <p>To enable you to come back and manage your citizen, we need a little information from you.</p>
+
+    <div class="form-group">
+      <label for="email" class="col-lg-2 control-label">Email</label>
+      <div class="col-lg-10">
+        <input type="text" name="email" class="form-control" id="email" placeholder="Email" value="<%=params[:email]%>">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password" class="col-lg-2 control-label">Password</label>
+      <div class="col-lg-10">
+        <input type="password" name="password" class="form-control" id="password" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password_confirmation" class="col-lg-2 control-label">Confirm Password</label>
+      <div class="col-lg-10">
+        <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" autocomplete="off">
+      </div>
+    </div>
+
+    <% end %>
+
+  </fieldset>
+
+  <div class="form-group">
+      <div class="col-lg-2 col-lg-offset-10">
+        <%= f.submit class: "btn-lg btn-primary" %>
+      </div>
   </div>
 <% end %>

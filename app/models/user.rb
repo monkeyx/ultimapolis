@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
     devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable, :lockable, :omniauthable
+         :lockable, :omniauthable
 
     USER_ROLES = %w(player admin)
 

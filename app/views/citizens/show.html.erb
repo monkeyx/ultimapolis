@@ -1,44 +1,29 @@
-<% content_for :title, @citizen %>
+<% content_for :title, @citizen.to_s %>
+<% content_for :lead, "<p>#{@citizen.status}</p>".html_safe %>
 
-<p>
-  <strong>Email:</strong>
-  <%= @citizen.email %>
-</p>
+<% if @citizen.citizen_careers.count > 0 %>
+<h2>Careers</h2>
+<ul class="list-group">
+  <% @citizen.citizen_careers.each do |career| %>
+  <li class="list-group-item">
+    <%=link_to career.profession.name, career.profession %>
+  </li>
+  <% end %>
+</ul>
+<% end %>
 
-<p>
-  <strong>Password:</strong>
-  <%= @citizen.password %>
-</p>
+<% if @citizen.facts.size > 0 %>
+<h2>Facts</h2>
+<table class="table table-striped table-hover ">
+  <tbody>
+    <% @citizen.facts.each do |fact| %>
+    <tr>
+      <th><%=fact[0]%></th>
+      <td><%=fact[1]%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
 
-<p>
-  <strong>Email notifications:</strong>
-  <%= @citizen.email_notifications %>
-</p>
-
-<p>
-  <strong>Daily updates:</strong>
-  <%= @citizen.daily_updates %>
-</p>
-
-<p>
-  <strong>Instant updates:</strong>
-  <%= @citizen.instant_updates %>
-</p>
-
-<p>
-  <strong>Credits:</strong>
-  <%= @citizen.credits %>
-</p>
-
-<p>
-  <strong>Home district:</strong>
-  <%= @citizen.home_district_id %>
-</p>
-
-<p>
-  <strong>Current profession:</strong>
-  <%= @citizen.current_profession_id %>
-</p>
-
-<%= link_to 'Edit', edit_citizen_path(@citizen) %> |
-<%= link_to 'Back', citizens_path %>
+<% if can?(:edit, @citizen)%><p><%= link_to 'Change Profession', edit_citizen_path(@citizen), class: 'btn-lg btn-primary' %></p><% end %>

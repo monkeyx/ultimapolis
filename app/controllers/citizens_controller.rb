@@ -25,7 +25,23 @@ class CitizensController < ApplicationController
   # POST /citizens
   # POST /citizens.json
   def create
+
     @citizen = Citizen.new(citizen_params)
+
+    if current_user
+      @citizen.user = current_user  
+    else
+      @user = User.new(email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
+      unless @user.save
+        respond_to do |format|
+          format.html { render :new }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+        return
+      else
+        sign_in(:user, @user)
+      end
+    end
 
     respond_to do |format|
       if @citizen.save

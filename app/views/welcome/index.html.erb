@@ -1,5 +1,5 @@
 <% content_for :title, "Ultimapolis" %>
-<% unless user_signed_in? && current_user.citizen %>
+<% unless current_user && !current_user.admin? && current_user.citizen %>
 <% content_for :lead, "<p>The future city simulation</p><p><a class=\"btn btn-primary btn-lg\" href=\"#{new_citizen_path}\">Become a Citizen</a>".html_safe %>
 <% else %>
 <% content_for :lead, "<p>The future city simulation</p>".html_safe %>

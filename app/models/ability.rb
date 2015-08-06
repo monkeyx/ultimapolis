@@ -7,12 +7,16 @@ class Ability
 
     can :read, [Citizen, District, DistrictEffect, EquipmentType, Event, Facility, FacilityType, GlobalEffect, Profession, Project, Skill, TradeGood]
     
+    if user.admin? || user.citizen.nil?
+        can :create, Citizen
+    end
+
     if user.admin?
         can :access, :rails_admin
         can :dashboard
         can :manage, :all
     elsif user.player?
-        can :create, [Citizen, Facility, Project]
+        can :create, [Facility, Project]
         can :update, Citizen, user_id: user.id
         can :destroy, Citizen, user_id: user.id
         

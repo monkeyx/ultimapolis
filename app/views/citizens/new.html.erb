@@ -1,5 +1,6 @@
-<% content_for :title, 'New Citizen' %>
+<% content_for :title, 'Become a Citizen' %>
+<% content_for :lead, "<p>You are about to take your first steps into a wider world.</p>".html_safe %>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', citizens_path %>
+<%= link_to 'Back', root_url %>
