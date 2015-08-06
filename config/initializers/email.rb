@@ -15,8 +15,8 @@ ActionMailer::Base.raise_delivery_errors = true
 ActionMailer::Base.smtp_settings = {
   :address  => "smtp.mandrillapp.com",
   :port  => 587, 
-  :user_name => "monkeyx@gmail.com",
-  :password => "64aiT4zVxBR4hP9lmNGzfw",
+  :user_name => ENV['SMTP_USERNAME'],
+  :password => ENV['SMTP_PASSWORD'],
   :domain  => "ultimapolis.com",
   :enable_starttls_auto => true
 }
