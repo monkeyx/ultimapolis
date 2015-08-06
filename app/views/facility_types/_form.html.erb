@@ -1,0 +1,61 @@
+<%= form_for(@facility_type) do |f| %>
+  <% if @facility_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@facility_type.errors.count, "error") %> prohibited this facility_type from being saved:</h2>
+
+      <ul>
+      <% @facility_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :district_id %><br>
+    <%= f.number_field :district_id %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :icon %><br>
+    <%= f.text_field :icon %>
+  </div>
+  <div class="field">
+    <%= f.label :build_cost %><br>
+    <%= f.number_field :build_cost %>
+  </div>
+  <div class="field">
+    <%= f.label :maintenance_cost %><br>
+    <%= f.number_field :maintenance_cost %>
+  </div>
+  <div class="field">
+    <%= f.label :employees %><br>
+    <%= f.number_field :employees %>
+  </div>
+  <div class="field">
+    <%= f.label :automation %><br>
+    <%= f.number_field :automation %>
+  </div>
+  <div class="field">
+    <%= f.label :power_consumption %><br>
+    <%= f.number_field :power_consumption %>
+  </div>
+  <div class="field">
+    <%= f.label :power_generation %><br>
+    <%= f.number_field :power_generation %>
+  </div>
+  <div class="field">
+    <%= f.label :pollution %><br>
+    <%= f.number_field :pollution %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

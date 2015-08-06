@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @citizen.email %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @citizen.password %>
+</p>
+
+<p>
+  <strong>Email notifications:</strong>
+  <%= @citizen.email_notifications %>
+</p>
+
+<p>
+  <strong>Daily updates:</strong>
+  <%= @citizen.daily_updates %>
+</p>
+
+<p>
+  <strong>Instant updates:</strong>
+  <%= @citizen.instant_updates %>
+</p>
+
+<p>
+  <strong>Credits:</strong>
+  <%= @citizen.credits %>
+</p>
+
+<p>
+  <strong>Home district:</strong>
+  <%= @citizen.home_district_id %>
+</p>
+
+<p>
+  <strong>Current profession:</strong>
+  <%= @citizen.current_profession_id %>
+</p>
+
+<%= link_to 'Edit', edit_citizen_path(@citizen) %> |
+<%= link_to 'Back', citizens_path %>

@@ -1,0 +1,2 @@
+module DistrictEffectsHelper
+end

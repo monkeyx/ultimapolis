@@ -1,0 +1,1 @@
+json.extract! @facility_type, :id, :name, :district_id, :description, :icon, :build_cost, :maintenance_cost, :employees, :automation, :power_consumption, :power_generation, :pollution, :created_at, :updated_at

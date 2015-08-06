@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @facility_type.name %>
+</p>
+
+<p>
+  <strong>District:</strong>
+  <%= @facility_type.district_id %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @facility_type.description %>
+</p>
+
+<p>
+  <strong>Icon:</strong>
+  <%= @facility_type.icon %>
+</p>
+
+<p>
+  <strong>Build cost:</strong>
+  <%= @facility_type.build_cost %>
+</p>
+
+<p>
+  <strong>Maintenance cost:</strong>
+  <%= @facility_type.maintenance_cost %>
+</p>
+
+<p>
+  <strong>Employees:</strong>
+  <%= @facility_type.employees %>
+</p>
+
+<p>
+  <strong>Automation:</strong>
+  <%= @facility_type.automation %>
+</p>
+
+<p>
+  <strong>Power consumption:</strong>
+  <%= @facility_type.power_consumption %>
+</p>
+
+<p>
+  <strong>Power generation:</strong>
+  <%= @facility_type.power_generation %>
+</p>
+
+<p>
+  <strong>Pollution:</strong>
+  <%= @facility_type.pollution %>
+</p>
+
+<%= link_to 'Edit', edit_facility_type_path(@facility_type) %> |
+<%= link_to 'Back', facility_types_path %>

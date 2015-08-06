@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @district_effect.event_id %>
+</p>
+
+<p>
+  <strong>Started on:</strong>
+  <%= @district_effect.started_on %>
+</p>
+
+<p>
+  <strong>Expires on:</strong>
+  <%= @district_effect.expires_on %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @district_effect.active %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @district_effect.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @district_effect.description %>
+</p>
+
+<p>
+  <strong>Icon:</strong>
+  <%= @district_effect.icon %>
+</p>
+
+<%= link_to 'Edit', edit_district_effect_path(@district_effect) %> |
+<%= link_to 'Back', district_effects_path %>

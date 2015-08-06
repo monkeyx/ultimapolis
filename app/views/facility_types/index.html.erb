@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Facility Types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>District</th>
+      <th>Description</th>
+      <th>Icon</th>
+      <th>Build cost</th>
+      <th>Maintenance cost</th>
+      <th>Employees</th>
+      <th>Automation</th>
+      <th>Power consumption</th>
+      <th>Power generation</th>
+      <th>Pollution</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @facility_types.each do |facility_type| %>
+      <tr>
+        <td><%= facility_type.name %></td>
+        <td><%= facility_type.district_id %></td>
+        <td><%= facility_type.description %></td>
+        <td><%= facility_type.icon %></td>
+        <td><%= facility_type.build_cost %></td>
+        <td><%= facility_type.maintenance_cost %></td>
+        <td><%= facility_type.employees %></td>
+        <td><%= facility_type.automation %></td>
+        <td><%= facility_type.power_consumption %></td>
+        <td><%= facility_type.power_generation %></td>
+        <td><%= facility_type.pollution %></td>
+        <td><%= link_to 'Show', facility_type %></td>
+        <td><%= link_to 'Edit', edit_facility_type_path(facility_type) %></td>
+        <td><%= link_to 'Destroy', facility_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Facility type', new_facility_type_path %>

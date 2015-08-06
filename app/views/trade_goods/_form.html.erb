@@ -1,0 +1,41 @@
+<%= form_for(@trade_good) do |f| %>
+  <% if @trade_good.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@trade_good.errors.count, "error") %> prohibited this trade_good from being saved:</h2>
+
+      <ul>
+      <% @trade_good.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :facility_type_id %><br>
+    <%= f.number_field :facility_type_id %>
+  </div>
+  <div class="field">
+    <%= f.label :exchange_price %><br>
+    <%= f.number_field :exchange_price %>
+  </div>
+  <div class="field">
+    <%= f.label :total %><br>
+    <%= f.number_field :total %>
+  </div>
+  <div class="field">
+    <%= f.label :produced_last_turn %><br>
+    <%= f.number_field :produced_last_turn %>
+  </div>
+  <div class="field">
+    <%= f.label :for_sale %><br>
+    <%= f.number_field :for_sale %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+module TradeGoodsHelper
+end

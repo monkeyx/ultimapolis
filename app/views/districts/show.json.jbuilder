@@ -1,0 +1,1 @@
+json.extract! @district, :id, :name, :skill_id, :transport_capacity, :civilians, :automatons, :unrest, :health, :policing, :social, :environment, :housing, :education, :community, :creativity, :aesthetics, :crime, :corruption, :created_at, :updated_at

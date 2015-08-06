@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Global Effects</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Started on</th>
+      <th>Expires on</th>
+      <th>Active</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Icon</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @global_effects.each do |global_effect| %>
+      <tr>
+        <td><%= global_effect.event_id %></td>
+        <td><%= global_effect.started_on %></td>
+        <td><%= global_effect.expires_on %></td>
+        <td><%= global_effect.active %></td>
+        <td><%= global_effect.name %></td>
+        <td><%= global_effect.description %></td>
+        <td><%= global_effect.icon %></td>
+        <td><%= link_to 'Show', global_effect %></td>
+        <td><%= link_to 'Edit', edit_global_effect_path(global_effect) %></td>
+        <td><%= link_to 'Destroy', global_effect, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Global effect', new_global_effect_path %>

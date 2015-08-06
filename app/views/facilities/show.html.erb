@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Citizen:</strong>
+  <%= @facility.citizen_id %>
+</p>
+
+<p>
+  <strong>Facility type:</strong>
+  <%= @facility.facility_type_id %>
+</p>
+
+<p>
+  <strong>Powered:</strong>
+  <%= @facility.powered %>
+</p>
+
+<p>
+  <strong>Maintained:</strong>
+  <%= @facility.maintained %>
+</p>
+
+<p>
+  <strong>Utilised:</strong>
+  <%= @facility.utilised %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @facility.level %>
+</p>
+
+<%= link_to 'Edit', edit_facility_path(@facility) %> |
+<%= link_to 'Back', facilities_path %>

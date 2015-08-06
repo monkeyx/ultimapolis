@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @global_effect.event_id %>
+</p>
+
+<p>
+  <strong>Started on:</strong>
+  <%= @global_effect.started_on %>
+</p>
+
+<p>
+  <strong>Expires on:</strong>
+  <%= @global_effect.expires_on %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @global_effect.active %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @global_effect.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @global_effect.description %>
+</p>
+
+<p>
+  <strong>Icon:</strong>
+  <%= @global_effect.icon %>
+</p>
+
+<%= link_to 'Edit', edit_global_effect_path(@global_effect) %> |
+<%= link_to 'Back', global_effects_path %>

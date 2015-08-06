@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @trade_good.name %>
+</p>
+
+<p>
+  <strong>Facility type:</strong>
+  <%= @trade_good.facility_type_id %>
+</p>
+
+<p>
+  <strong>Exchange price:</strong>
+  <%= @trade_good.exchange_price %>
+</p>
+
+<p>
+  <strong>Total:</strong>
+  <%= @trade_good.total %>
+</p>
+
+<p>
+  <strong>Produced last turn:</strong>
+  <%= @trade_good.produced_last_turn %>
+</p>
+
+<p>
+  <strong>For sale:</strong>
+  <%= @trade_good.for_sale %>
+</p>
+
+<%= link_to 'Edit', edit_trade_good_path(@trade_good) %> |
+<%= link_to 'Back', trade_goods_path %>

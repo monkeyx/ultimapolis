@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @equipment_type.name %>
+</p>
+
+<p>
+  <strong>Facility type:</strong>
+  <%= @equipment_type.facility_type_id %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @equipment_type.description %>
+</p>
+
+<p>
+  <strong>Icon:</strong>
+  <%= @equipment_type.icon %>
+</p>
+
+<p>
+  <strong>Skill:</strong>
+  <%= @equipment_type.skill_id %>
+</p>
+
+<p>
+  <strong>Skill modifier:</strong>
+  <%= @equipment_type.skill_modifier %>
+</p>
+
+<p>
+  <strong>Exchange price:</strong>
+  <%= @equipment_type.exchange_price %>
+</p>
+
+<%= link_to 'Edit', edit_equipment_type_path(@equipment_type) %> |
+<%= link_to 'Back', equipment_types_path %>

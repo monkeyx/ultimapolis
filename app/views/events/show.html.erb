@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @event.name %>
+</p>
+
+<p>
+  <strong>Event type:</strong>
+  <%= @event.event_type %>
+</p>
+
+<p>
+  <strong>Started on:</strong>
+  <%= @event.started_on %>
+</p>
+
+<p>
+  <strong>Finished on:</strong>
+  <%= @event.finished_on %>
+</p>
+
+<p>
+  <strong>Max duration:</strong>
+  <%= @event.max_duration %>
+</p>
+
+<p>
+  <strong>Success:</strong>
+  <%= @event.success %>
+</p>
+
+<p>
+  <strong>Summary:</strong>
+  <%= @event.summary %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event.description %>
+</p>
+
+<p>
+  <strong>Winning project:</strong>
+  <%= @event.winning_project_id %>
+</p>
+
+<p>
+  <strong>Icon:</strong>
+  <%= @event.icon %>
+</p>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>
