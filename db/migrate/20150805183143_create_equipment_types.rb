@@ -6,11 +6,21 @@ class CreateEquipmentTypes < ActiveRecord::Migration
       t.text :description
       t.string :icon
       t.integer :skill_id
-      t.integer :skill_modifier
-      t.integer :exchange_price
+      t.integer :skill_modifier, default: 0
+      t.integer :exchange_price, default: 0
+      t.integer :for_sale, default: 0
 
       t.timestamps null: false
     end
     add_index :equipment_types, :facility_type_id
+
+    create_table :equipment_raw_materials do |t|
+      t.integer :equipment_type_id
+      t.integer :trade_good_id
+      t.integer :quantity, default: 0
+
+      t.timestamps null: false
+    end
+    add_index :equipment_raw_materials, [:equipment_type_id, :trade_good_id], name: 'erm_mapping'
   end
 end

@@ -1,14 +1,13 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, "#{@profession.name} [#{@profession.profession_group}]" %>
+<% content_for :lead, "<p>#{@profession.description}</p>".html_safe %>
+
+<h2>Skills</h2>
+<ul class="list-group">
+<% @profession.skills.each do |skill| %>
+	<li class="list-group-item"><%=link_to skill.name, skill %></li>
+<% end %>
+</ul>
 
 <p>
-  <strong>Name:</strong>
-  <%= @profession.name %>
-</p>
-
-<p>
-  <strong>Group:</strong>
-  <%= @profession.group %>
-</p>
-
-<%= link_to 'Edit', edit_profession_path(@profession) %> |
 <%= link_to 'Back', professions_path %>
+</p>

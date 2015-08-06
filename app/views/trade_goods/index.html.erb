@@ -1,16 +1,13 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, 'Trade Goods' %>
+<% content_for :lead, "<p>Produced in <a href=\"/facility_types\">facilities</a> trade goods can be further refined, used in <a href=\"/projects\">projects</a> or turned into <a href=\"/equipment_types\">equipment</a>.</p>".html_safe %>
 
-<h1>Listing Trade Goods</h1>
-
-<table>
+<table class="table table-striped table-hover">
   <thead>
     <tr>
+      <th></th>
       <th>Name</th>
-      <th>Facility type</th>
-      <th>Exchange price</th>
-      <th>Total</th>
-      <th>Produced last turn</th>
-      <th>For sale</th>
+      <th>Produced In</th>
+      <th>For Sale</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,20 +15,17 @@
   <tbody>
     <% @trade_goods.each do |trade_good| %>
       <tr>
-        <td><%= trade_good.name %></td>
-        <td><%= trade_good.facility_type_id %></td>
-        <td><%= trade_good.exchange_price %></td>
-        <td><%= trade_good.total %></td>
-        <td><%= trade_good.produced_last_turn %></td>
-        <td><%= trade_good.for_sale %></td>
-        <td><%= link_to 'Show', trade_good %></td>
-        <td><%= link_to 'Edit', edit_trade_good_path(trade_good) %></td>
-        <td><%= link_to 'Destroy', trade_good, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><!--<%=image_tag(trade_good.icon)%>--></td>
+        <td><%= link_to trade_good.name, trade_good %></td>
+        <td><%= link_to trade_good.facility_type.name, trade_good.facility_type %></td>
+        <td>
+          <% if trade_good.for_sale > 0 %>
+          <%= trade_good.for_sale %> @ &cent; <%= trade_good.exchange_price %>
+          <% else %>
+          N/A
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Trade good', new_trade_good_path %>

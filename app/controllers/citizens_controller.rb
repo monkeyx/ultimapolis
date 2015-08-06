@@ -1,5 +1,5 @@
 class CitizensController < ApplicationController
-  before_action :set_citizen, only: [:show, :edit, :update, :destroy]
+  before_action :set_citizen, only: [:show, :edit, :update, :inventory]
   load_and_authorize_resource
 
   # GET /citizens
@@ -52,17 +52,10 @@ class CitizensController < ApplicationController
     end
   end
 
-  # DELETE /citizens/1
-  # DELETE /citizens/1.json
-  def destroy
-    @citizen.destroy
-    respond_to do |format|
-      format.html { redirect_to citizens_url, notice: 'Citizen was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+  def inventory
   end
 
-  private
+ private
     # Use callbacks to share common setup or constraints between actions.
     def set_citizen
       @citizen = Citizen.find(params[:id])

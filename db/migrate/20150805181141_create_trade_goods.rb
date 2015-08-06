@@ -3,15 +3,25 @@ class CreateTradeGoods < ActiveRecord::Migration
     create_table :trade_goods do |t|
       t.string :name
       t.integer :facility_type_id
-      t.integer :exchange_price
-      t.integer :total
-      t.integer :produced_last_turn
-      t.integer :for_sale
+      t.integer :exchange_price, default: 0
+      t.integer :total, default: 0
+      t.integer :produced_last_turn, default: 0
+      t.integer :for_sale, default: 0
       t.text :description
       t.string :icon
 
       t.timestamps null: false
     end
     add_index :trade_goods, :facility_type_id
+
+    create_table :trade_good_raw_materials do |t|
+      t.integer :trade_good_id
+      t.integer :raw_material_id
+      t.integer :quantity, default: 0
+
+      t.timestamps null: false
+    end
+    add_index :trade_good_raw_materials, [:trade_good_id, :raw_material_id], name: 'tgrm_mapping'
+
   end
 end

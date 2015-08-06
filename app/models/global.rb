@@ -1,16 +1,4 @@
 class Global < ActiveRecord::Base
-# t.integer :infrastructure
-# t.integer :grid
-# t.integer :power
-# t.integer :stability
-# t.integer :climate
-# t.integer :liberty
-# t.integer :security
-# t.integer :borders
-# t.integer :turn
-# t.integer :inflation
-# t.integer :citizens
-# t.integer :gdp
 
 	validates :infrastructure, numericality: {only_integer: true}
 	validates :grid, numericality: {only_integer: true}
@@ -25,6 +13,8 @@ class Global < ActiveRecord::Base
 	validates :citizens, numericality: {only_integer: true}
 	validates :gdp, numericality: {only_integer: true}
 
-	
+	def self.singleton
+		@singleton ||= Global.first
+	end	
 
 end

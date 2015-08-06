@@ -18,6 +18,8 @@ gem 'cancancan'
 gem 'rails_admin'
 gem 'bootstrap-sass'
 gem 'bootswatch-rails'
+gem 'acts-as-taggable-on'
+gem 'blogit'
 
 group :development, :test do
   gem 'byebug'

@@ -24,6 +24,8 @@ class Citizen < ActiveRecord::Base
 	has_many :projects, foreign_key: 'leader_id'
 	has_many :project_members
 
-	
+	def to_s
+		"Citizen \##{id}"
+	end
 
 end

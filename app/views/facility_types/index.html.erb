@@ -1,18 +1,19 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, 'Facilities' %>
+<% content_for :lead, "<p>Citizens may build facilities to produce goods and services for Ultimapolis. Different types of facilities may be built in each of the <a href=\"/districts\">districts</a>.</p>".html_safe %>
 
-<h1>Listing Facility Types</h1>
 
-<table>
+<table class="table table-striped table-hover">
   <thead>
     <tr>
+      <th></th>
       <th>Name</th>
       <th>District</th>
       <th>Description</th>
-      <th>Icon</th>
       <th>Build cost</th>
       <th>Maintenance cost</th>
       <th>Employees</th>
       <th>Automation</th>
+      <th>Housing</th>
       <th>Power consumption</th>
       <th>Power generation</th>
       <th>Pollution</th>
@@ -23,25 +24,19 @@
   <tbody>
     <% @facility_types.each do |facility_type| %>
       <tr>
-        <td><%= facility_type.name %></td>
-        <td><%= facility_type.district_id %></td>
+        <td><!-- <%= image_tag facility_type.icon %>--></td>
+        <td><%= link_to facility_type.name, facility_type %></td>
+        <td><%= link_to facility_type.district.name, facility_type.district %></td>
         <td><%= facility_type.description %></td>
-        <td><%= facility_type.icon %></td>
-        <td><%= facility_type.build_cost %></td>
-        <td><%= facility_type.maintenance_cost %></td>
+        <td>&cent; <%= facility_type.build_cost %></td>
+        <td>&cent; <%= facility_type.maintenance_cost %></td>
         <td><%= facility_type.employees %></td>
         <td><%= facility_type.automation %></td>
+        <td><%= facility_type.housing_mod %></td>
         <td><%= facility_type.power_consumption %></td>
         <td><%= facility_type.power_generation %></td>
         <td><%= facility_type.pollution %></td>
-        <td><%= link_to 'Show', facility_type %></td>
-        <td><%= link_to 'Edit', edit_facility_type_path(facility_type) %></td>
-        <td><%= link_to 'Destroy', facility_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Facility type', new_facility_type_path %>

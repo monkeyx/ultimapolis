@@ -1,29 +1,36 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, 'Professions' %>
+<% content_for :lead, "<p>Every citizens belongs to a profession which pays them wages and gives them <a href=\"/skills\">skill training</a>. Citizens may advance up the ranks of their chosen profession or change jobs at any time.</p>".html_safe %>
 
-<h1>Listing Professions</h1>
+<% i = 0 %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Group</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @professions.each do |profession| %>
+  <% if i % 3 == 0 %>
+    <div class="row">
+  <% end %>
 
-  <tbody>
-    <% @professions.each do |profession| %>
-      <tr>
-        <td><%= profession.name %></td>
-        <td><%= profession.group %></td>
-        <td><%= link_to 'Show', profession %></td>
-        <td><%= link_to 'Edit', edit_profession_path(profession) %></td>
-        <td><%= link_to 'Destroy', profession, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="col-lg-4">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><!--<%=image_tag(profession.icon)%>--><h3 class="panel-title"><%=link_to(profession.name, profession) %></h3></div>
+      <div class="panel-body">
+        <p><%=profession.description.html_safe %></p>
+        <p><strong>Skills:</strong>
+          <ul class="list-group">
+            <% profession.skills.each do |skill| %>
+            <li class="list-group-item"><%=link_to skill.name, skill %></li>
+            <% end %>
+          </ul>
+        </p>
+      </div>
+    </div>
+  </div>
 
-<br>
+  <% if i % 3 == 2 %>
+    </div>
+  <% end %>
 
-<%= link_to 'New Profession', new_profession_path %>
+  <% i += 1 %>
+<% end %>
+
+<% if i % 3 != 0 %>
+    </div>
+<% end %>

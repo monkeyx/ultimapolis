@@ -1,29 +1,38 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, 'Skills' %>
+<% content_for :lead, "<p>Citizens learn skills to help them make a worthwhile contribution to <a href=\"/projects\">projects</a>. Every citizen learned something from their home district and from their <a href=\"/professions\">profession</a>.</p>".html_safe %>
 
-<h1>Listing Skills</h1>
 
-<table>
+<table class="table table-striped table-hover">
   <thead>
     <tr>
+      <th></th>
       <th>Name</th>
       <th>Group</th>
-      <th colspan="3"></th>
+      <th>Learned In</th>
     </tr>
   </thead>
 
   <tbody>
     <% @skills.each do |skill| %>
       <tr>
-        <td><%= skill.name %></td>
-        <td><%= skill.group %></td>
-        <td><%= link_to 'Show', skill %></td>
-        <td><%= link_to 'Edit', edit_skill_path(skill) %></td>
-        <td><%= link_to 'Destroy', skill, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><!--<%=image_tag(skill.icon)%>--></td>
+        <td><%= link_to skill.name, skill %></td>
+        <td><%= skill.skill_group %></td>
+        <td>
+          <% if skill.district %>
+          <%= link_to skill.district.name, skill.district %> &nbsp;
+          <% end %>
+          <% if skill.primary_profession %>
+          <%= link_to skill.primary_profession.name, skill.primary_profession %> &nbsp;
+          <% end %>
+          <% if skill.secondary_profession %>
+          <%= link_to skill.secondary_profession.name, skill.secondary_profession %> &nbsp;
+          <% end %>
+          <% if skill.tertiary_profession %>
+          <%= link_to skill.tertiary_profession.name, skill.tertiary_profession %> &nbsp;
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Skill', new_skill_path %>

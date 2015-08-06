@@ -1,35 +1,50 @@
-<div class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <a href="/" class="navbar-brand">Ultimapolis</a>
-      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-    <div class="navbar-collapse collapse" id="navbar-main">
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="districts">Districts <span class="caret"></span></a>
-          <ul class="dropdown-menu" aria-labelledby="districts">
-          <% (1..9).each do |n| %>
-            <li><a href="/districts/<%=n%>"><%=n%></a></li>
-          <% end %>
+<div class="bs-docs-section clearfix">
+
+  <div class="bs-component">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Ultimapolis</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <% navigation_items.each do |item| %>
+            <li class="<% if is_navigation_active?(item[0]) %>active<% end %><% unless item[2].nil? %> dropdown<% end %>">
+              <% if item[2] %>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=item[0]%> <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <% item[2].each do |sub_item| %>
+                  <li><%=link_to sub_item[0], sub_item[1] %></li>
+                <% end %>
+              </ul>
+              <% else %>
+                <%=link_to(item[0], item[1])%>
+              <% end %>
+            </li>
+            <% end %>
           </ul>
-        </li>
-        <li>
-          <a href="/news">News</a>
-        </li>
-        <li>
-          <a href="/help">Help</a>
-        </li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <%=render partial: '/layouts/user_nav' %>
-      </ul>
-
-    </div>
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? && current_user.citizen %>
+            <li class="<% if is_navigation_active?('Users') %>active<% end %> dropdown">
+              <%=link_to(current_user.citizen, current_user.citizen) %>
+              <ul class="dropdown-menu" role="menu">
+                <li><%=link_to 'Inventory', citizen_inventory_path(current_user.citizen) %></li>
+                <li><%=link_to 'Facilities', main_app.facilities_path %></li>
+                <li><%=link_to 'Projects', main_app.projects_path %></li>
+              </ul>
+            <% end %>
+            <li class="<% if is_navigation_active?('Help Topics') %>active<% end %>"><%=link_to('Help', main_app.help_topics_path)%></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   </div>
+
 </div>

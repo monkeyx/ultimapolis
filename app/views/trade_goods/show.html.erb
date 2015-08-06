@@ -1,34 +1,29 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, @trade_good.name %>
+<% content_for :lead, "<p>#{@trade_good.description}. Produced in #{link_to @trade_good.facility_type.name, @trade_good.facility_type}.</p>".html_safe %>
+
+<h2>Production Cost</h2>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Trade Good</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @trade_good.trade_good_raw_materials.sort{|a,b| a.raw_material.name <=> b.raw_material.name}.each do | erm | %>
+    <tr>
+      <td><%= link_to(erm.raw_material.name, erm.raw_material) %></td>
+      <td><%= erm.quantity %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% unless @trade_good.for_sale < 1 %>
+<h2>Exchange Sale Listings</h2>
+<%= @trade_good.for_sale %> @ &cent; <%= @trade_good.exchange_price %>
+<% end %>
 
 <p>
-  <strong>Name:</strong>
-  <%= @trade_good.name %>
-</p>
-
-<p>
-  <strong>Facility type:</strong>
-  <%= @trade_good.facility_type_id %>
-</p>
-
-<p>
-  <strong>Exchange price:</strong>
-  <%= @trade_good.exchange_price %>
-</p>
-
-<p>
-  <strong>Total:</strong>
-  <%= @trade_good.total %>
-</p>
-
-<p>
-  <strong>Produced last turn:</strong>
-  <%= @trade_good.produced_last_turn %>
-</p>
-
-<p>
-  <strong>For sale:</strong>
-  <%= @trade_good.for_sale %>
-</p>
-
-<%= link_to 'Edit', edit_trade_good_path(@trade_good) %> |
 <%= link_to 'Back', trade_goods_path %>
+</p>

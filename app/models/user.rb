@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	devise :database_authenticatable, :registerable,
+    devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable, :omniauthable
 
@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
     validates :role, inclusion: {in:  USER_ROLES}
 
     has_one :citizen
+
+    blogs
 
     USER_ROLES.each do |role|
     	define_method("#{role}?") do
@@ -18,5 +20,19 @@ class User < ActiveRecord::Base
 
     def role?(role)
     	self.role == role
+    end
+
+    def username
+      if player?
+        if citizen
+          citizen.to_s
+        else
+          'Ghost Avatar'
+        end
+      elsif admin?
+        'City Core'
+      else
+        'Anonymous'
+      end
     end
 end

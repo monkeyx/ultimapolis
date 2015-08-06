@@ -1,16 +1,12 @@
 class Facility < ActiveRecord::Base
-# t.integer :citizen_id
-# t.integer :facility_type_id
-# t.boolean :powered
-# t.boolean :maintained
-# t.integer :utilised
-# t.integer :level
 
 	belongs_to :citizen
 	belongs_to :facility_type
-	validates :utilised, numericality: {only_integer: true}
+	# t.boolean :powered
+	# t.boolean :maintained
 	validates :level, numericality: {only_integer: true}
-
+	belongs_to :producing_trade_good, class_name: 'TradeGood'
+    belongs_to :producing_equipment_type, class_name: 'EquipmentType'
 	
 
 end

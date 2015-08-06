@@ -1,14 +1,22 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, "#{@skill.name} [#{@skill.skill_group}]" %>
+<% content_for :lead, "<p>#{@skill.description}</p>".html_safe %>
 
+<h2>Learned In</h2>
 <p>
-  <strong>Name:</strong>
-  <%= @skill.name %>
+	<% if @skill.district %>
+	<%= link_to @skill.district.name, @skill.district %> &nbsp;
+	<% end %>
+	<% if @skill.primary_profession %>
+	<%= link_to @skill.primary_profession.name, @skill.primary_profession %> &nbsp;
+	<% end %>
+	<% if @skill.secondary_profession %>
+	<%= link_to @skill.secondary_profession.name, @skill.secondary_profession %> &nbsp;
+	<% end %>
+	<% if @skill.tertiary_profession %>
+	<%= link_to @skill.tertiary_profession.name, @skill.tertiary_profession %> &nbsp;
+	<% end %>
 </p>
 
 <p>
-  <strong>Group:</strong>
-  <%= @skill.group %>
-</p>
-
-<%= link_to 'Edit', edit_skill_path(@skill) %> |
 <%= link_to 'Back', skills_path %>
+</o>

@@ -6,7 +6,7 @@ class Project < ActiveRecord::Base
 # t.string :status
 # t.integer :wages
 
-	PROJECT_STATUS = %w(init started cancelled finished)
+	PROJECT_STATUS = %w(draft started cancelled finished)
 
 	belongs_to :leader, class_name: 'Citizen'
 	belongs_to :event 

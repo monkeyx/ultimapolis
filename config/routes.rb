@@ -1,17 +1,33 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  resources :facilities
-  resources :district_effects
-  resources :global_effects
-  resources :events
+  mount Blogit::Engine => "/news"
+  
+  resources :citizens, except: [:index, :destroy] do 
+    get :inventory
+  end
   resources :projects
+  resources :facilities
+  
+  resources :districts, only: [:index, :show] do 
+    resources :district_effects, only: [:show]
+  end
+
+  resources :equipment_types, only: [:index, :show]
+  
+  resources :facility_types, only: [:index, :show]
+  
+  resources :professions, only: [:index, :show]
+  
+  resources :skills, only: [:index, :show]
+  
+  resources :trade_goods, only: [:index, :show]
+  
+  resources :help_topics, only: [:index, :show]
+  
+  resources :events, only: [:show]
+
+  resource :global_effects, only: [:index, :show]
+  
   devise_for :users
-  resources :citizens
-  resources :equipment_types
-  resources :facility_types
-  resources :trade_goods
-  resources :professions
-  resources :skills
-  resources :districts
   root 'welcome#index'
 end

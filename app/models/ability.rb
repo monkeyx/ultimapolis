@@ -5,6 +5,8 @@ class Ability
 
     user ||= User.new
 
+    can :read, [Citizen, District, DistrictEffect, EquipmentType, Event, Facility, FacilityType, GlobalEffect, Profession, Project, Skill, TradeGood]
+    
     if user.admin?
         can :access, :rails_admin
         can :dashboard
@@ -23,7 +25,5 @@ class Ability
         end
     end
 
-    can :read, [Citizen, District, DistrictEffect, EquipmentType, Event, Facility, GlobalEffect, Project, Skill, TradeGood]
-    
   end
 end

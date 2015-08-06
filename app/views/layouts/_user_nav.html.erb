@@ -1,6 +1,0 @@
-<% unless user_signed_in? %>
-	<li><%= link_to "Resume Citizenship", new_session_path(:user) %></li>
-	<li><%= link_to "Become a Citizen", new_registration_path(:user) %></li>
-<% else %>
-	<li><%= link_to "Profile", '' %></li>
-<% end %>

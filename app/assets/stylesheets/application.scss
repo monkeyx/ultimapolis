@@ -4,7 +4,14 @@
 
 $font-family-sans-serif: 'Oswald', sans-serif;
 
-@import "bootswatch/darkly/variables";
+@import "color_scheme";
+
+@import "bootswatch/sandstone/variables";
 @import "bootstrap";
 
-@import "bootswatch/darkly/bootswatch";
+@import "bootswatch/sandstone/bootswatch";
+
+.navbar-brand {
+	text-transform: uppercase;
+	font-weight: bold;
+}

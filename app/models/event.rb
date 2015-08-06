@@ -15,6 +15,7 @@ class Event < ActiveRecord::Base
 
 	validates :name, presence: true
 	validates :event_type, inclusion: {in: EVENT_TYPES}
+	belongs_to :trigger_after_event, class_name: 'Event'
 	belongs_to :winning_project, class_name: 'Project'
 
 	has_many :district_effects
@@ -23,7 +24,7 @@ class Event < ActiveRecord::Base
 	has_many :event_rewards
 	has_many :event_skill_costs
 	has_many :projects
-
+	has_one :previous_event, foreign_key: 'trigger_after_event_id', class_name: 'Event'
 	
 
 end

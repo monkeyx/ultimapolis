@@ -1,39 +1,27 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, @equipment_type.name %>
+<% content_for :lead, "<p>#{@equipment_type.description}. Gives +#{@equipment_type.skill_modifier} to #{link_to @equipment_type.skill.name, @equipment_type.skill} skill. Produced in a #{link_to @equipment_type.facility_type.name, @equipment_type.facility_type}.</p>".html_safe %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @equipment_type.name %>
-</p>
+<h2>Production Cost</h2>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Trade Good</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @equipment_type.equipment_raw_materials.sort{|a,b| a.trade_good.name <=> b.trade_good.name}.each do | erm | %>
+    <tr>
+      <td><%= link_to(erm.trade_good.name, erm.trade_good) %></td>
+      <td><%= erm.quantity %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<p>
-  <strong>Facility type:</strong>
-  <%= @equipment_type.facility_type_id %>
-</p>
+<% unless @equipment_type.for_sale < 1 %>
+<h2>Exchange Sale Listings</h2>
+<%= @equipment_type.for_sale %> @ &cent; <%= @equipment_type.exchange_price %>
+<% end %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @equipment_type.description %>
-</p>
-
-<p>
-  <strong>Icon:</strong>
-  <%= @equipment_type.icon %>
-</p>
-
-<p>
-  <strong>Skill:</strong>
-  <%= @equipment_type.skill_id %>
-</p>
-
-<p>
-  <strong>Skill modifier:</strong>
-  <%= @equipment_type.skill_modifier %>
-</p>
-
-<p>
-  <strong>Exchange price:</strong>
-  <%= @equipment_type.exchange_price %>
-</p>
-
-<%= link_to 'Edit', edit_equipment_type_path(@equipment_type) %> |
-<%= link_to 'Back', equipment_types_path %>
+<p><%= link_to 'Back', equipment_types_path %></p>
