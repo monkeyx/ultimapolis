@@ -1,0 +1,10 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,700);
+
+@import "bootstrap-sprockets";
+
+$font-family-sans-serif: 'Oswald', sans-serif;
+
+@import "bootswatch/darkly/variables";
+@import "bootstrap";
+
+@import "bootswatch/darkly/bootswatch";

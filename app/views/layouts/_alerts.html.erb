@@ -1,0 +1,23 @@
+<% unless alert.blank? %>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="bs-component">
+			<div class="alert alert-dismissible alert-warning">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<h4>Warning!</h4>
+			<p><%= alert %></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% end %>
+
+<% unless notice.blank? %>
+<div class="bs-component">
+	<div class="alert alert-dismissible alert-info">
+	    <button type="button" class="close" data-dismiss="alert">&times;</button>
+	    <p><%= notice %></p>
+	</div>
+</div>
+<% end %>

@@ -16,6 +16,8 @@ gem 'omniauth'
 gem 'devise'
 gem 'cancancan'
 gem 'rails_admin'
+gem 'bootstrap-sass'
+gem 'bootswatch-rails'
 
 group :development, :test do
   gem 'byebug'
