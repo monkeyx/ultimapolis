@@ -23,7 +23,9 @@ class Citizen < ActiveRecord::Base
 
 	after_create :set_initial_skills!
 	after_create :create_free_facility!
+	after_create :increment_citizen_count!
 	after_save :check_careers!
+	after_destroy :decrease_citizen_count!
 
 	def owns_facility?(facility)
 		facility && facility.citizen_id == self.id
@@ -100,5 +102,13 @@ class Citizen < ActiveRecord::Base
 			career_index = CitizenCareer.for_citizen(self).count + 1
 			citizen_careers.create!(profession: current_profession, career_index: career_index, current: true)
 		end
+	end
+
+	def increment_citizen_count!
+		Global.singleton.update_attributes!(citizens: Global.singleton.citizens + 1)
+	end
+
+	def decrease_citizen_count!
+		Global.singleton.update_attributes!(citizens: Global.singleton.citizens - 1)
 	end
 end

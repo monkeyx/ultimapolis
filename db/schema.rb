@@ -204,7 +204,7 @@ ActiveRecord::Schema.define(version: 20150806204107) do
     t.integer  "event_id"
     t.integer  "trade_good_id"
     t.integer  "equipment_type_id"
-    t.integer  "facility_id"
+    t.integer  "facility_type_id"
     t.boolean  "credits",           default: false
     t.integer  "quantity",          default: 0
     t.datetime "created_at",                        null: false

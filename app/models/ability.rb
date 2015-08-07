@@ -5,8 +5,10 @@ class Ability
 
     user ||= User.new
 
-    can :read, [Citizen, District, DistrictEffect, EquipmentType, Event, FacilityType, GlobalEffect, Profession, Skill, TradeGood]
+    can :read, [Citizen, District, DistrictEffect, EquipmentType, FacilityType, GlobalEffect, Profession, Skill, TradeGood]
     
+    can :read, Event, active: true
+
     if user.admin? || user.citizen.nil?
         can :create, Citizen
     end

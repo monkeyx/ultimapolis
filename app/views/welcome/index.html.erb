@@ -11,7 +11,11 @@
 		    <h3 class="panel-title">Current Opportunity</h3>
 		  </div>
 		  <div class="panel-body">
-		    Opportunity Details
+		  	<% if Event.current_opportunity %>
+		  	<%=render partial: '/events/briefing', locals: {event: Event.current_opportunity} %>
+		  	<% else %>
+		  	<p>There is no current opportunity. There will be another long shortly.</p>
+		  	<% end %>
 		  </div>
 		</div>
 	</div>
@@ -28,7 +32,11 @@
 		    <h3 class="panel-title">Current Crisis</h3>
 		  </div>
 		  <div class="panel-body">
-		    Crisis Details
+		    <% if Event.current_crisis %>
+		    <%=render partial: '/events/briefing', locals: {event: Event.current_crisis} %>
+		  	<% else %>
+		  	<p>There is no current crisis. Phew!</p>
+		  	<% end %>
 		  </div>
 		</div>
 	</div>

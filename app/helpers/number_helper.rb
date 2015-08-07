@@ -8,4 +8,11 @@ module NumberHelper
 		"&cent; #{number_with_delimiter(n)}".html_safe
 	end
 
+	def format_turn(n)
+		if n < 0
+			"Never"
+		else
+			"Turn #{n}"
+		end
+	end
 end

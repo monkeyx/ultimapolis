@@ -1,31 +1,13 @@
 class DistrictEffect < ActiveRecord::Base
-# t.integer :event_id
-# t.integer :district_id
-# t.integer :started_on
-# t.integer :expires_on
-# t.boolean :active
-# t.string :name
-# t.text :description
-# t.string :icon
-# t.integer :total_land
-# t.integer :transport_capacity
-# t.integer :civilians
-# t.integer :automatons
-# t.integer :unrest
-# t.integer :health
-# t.integer :policing
-# t.integer :social
-# t.integer :environment
-# t.integer :housing
-# t.integer :education
-# t.integer :community
-# t.integer :creativity
-# t.integer :aesthetics
-# t.integer :crime
-# t.integer :corruption
-	
+
 	belongs_to :event
 	belongs_to :district
+	# t.integer :started_on
+	# t.integer :expires_on
+	# t.boolean :active
+	validates :name, presence: true
+	# t.text :description
+	# t.string :icon
 	validates :total_land, numericality: {only_integer: true}
 	validates :transport_capacity, numericality: {only_integer: true}
 	validates :civilians, numericality: {only_integer: true}

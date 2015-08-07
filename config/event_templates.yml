@@ -1,0 +1,1088 @@
+#
+# Opportunities
+#
+-
+  trigger: 
+  name: Education 
+  event_type: Opportunity
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: Infrastructure 
+  event_type: Opportunity
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: Artworks 
+  event_type: Opportunity
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: BorderSecurity 
+  event_type: Opportunity
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: CommunitySpirit 
+  event_type: Opportunity
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: BroadcastEntertainment 
+  event_type: Opportunity
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: GridUpgrade 
+  event_type: Opportunity
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: Elections 
+  event_type: Opportunity
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: EnvironmentCleanUp 
+  event_type: Opportunity
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: SecurityUpgrade 
+  event_type: Opportunity
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: BigBrother 
+  event_type: Opportunity
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: LandClaim 
+  event_type: Opportunity
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: MassTransit 
+  event_type: Opportunity
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: Pacification 
+  event_type: Opportunity
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: Policing 
+  event_type: Opportunity
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: Housing 
+  event_type: Opportunity
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: Festival 
+  event_type: Opportunity
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: CorruptionProbe 
+  event_type: Opportunity
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+#
+# Crisis
+#
+-
+  trigger: status_transport_crisis?
+  name: DistrictTransportCrisis 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: status_disorder?
+  name: DistrictDisorder 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: status_lawlessness?
+  name: DistrictLawlessness 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: status_urban_decay?
+  name: DistrictUrbanDecay 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: status_homelessness?
+  name: DistrictHomelessness 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: status_hazardous_environment?
+  name: DistrictHazardousEnvironment 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: status_poor_schools?
+  name: DistrictPoorSchools 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: status_ethnic_tensions?
+  name: DistrictEthnicTensions 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: status_stifling?
+  name: DistrictStifling 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: status_ugly?
+  name: DistrictUgly 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: status_organised_crime?
+  name: DistrictOrganisedCrime 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: status_corrupt?
+  name: DistrictCorrupt 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: status_grid_overpowered?
+  name: GlobalGridOverloaded 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: status_instability?
+  name: GlobalInstability 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: status_climate_change?
+  name: GlobalClimateChange 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: status_revolution?
+  name: GlobalRevolution 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: status_terrorism?
+  name: GlobalTerrorism 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: status_poor_public_health?
+  name: DistrictPlague 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+
+

@@ -1,5 +1,6 @@
 class District < ActiveRecord::Base
-
+	include DistrictStatus
+	
 	validates :name, presence: true
 	belongs_to :skill 
 	validates :total_land, numericality: {only_integer: true}
@@ -79,27 +80,6 @@ class District < ActiveRecord::Base
 		else
 			"N/A"
 		end
-	end
-
-	def notes
-		return @notes if defined?(@notes)
-		@notes = []
-		return @notes if total_land < 1
-		@notes << 'Inadequete public transport' if transport_capacity < civilians
-		@notes << "Public disorder" if unrest > 0
-		@notes << "Poor public health" if health < 25
-		@notes << "Lawlessness" if policing < 25
-		@notes << "Urban decay" if social < 25
-		@notes << "Homelessness" if housing < civilians
-		@notes << "Hazardous environment" if environment < 25
-		@notes << "Poor schools" if education < 25
-		@notes << "Ethnic tensions" if community < 25
-		@notes << "Stifling atmosphere" if creativity < 25
-		@notes << "Ugly landscape" if aesthetics < 25
-		@notes << "Organised crime" if crime > 25
-		@notes << "Corrupt beauracracy" if corruption > 25
-		@notes.sort!
-		@notes
 	end
 
 	def metrics

@@ -12,7 +12,7 @@
 <ul class="list-group">
   <% @citizen.citizen_skills.each do |skill| %>
   <li class="list-group-item">
-    <%=link_to skill.skill.name, skill.skill %> <%=skill.rank %>
+    <%=link_to skill.skill.name, skill.skill %> <span class="badge"><%=skill.rank %></span>
   </li>
   <% end %>
 </ul>
