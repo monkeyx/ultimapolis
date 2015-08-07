@@ -20,7 +20,7 @@
         <td><%= link_to trade_good.facility_type.name, trade_good.facility_type %></td>
         <td>
           <% if trade_good.for_sale > 0 %>
-          <%= trade_good.for_sale %> @ &cent; <%= trade_good.exchange_price %>
+          <%= trade_good.for_sale %> @ <%=format_currency trade_good.exchange_price %>
           <% else %>
           N/A
           <% end %>

@@ -5,25 +5,34 @@ class FacilitiesController < ApplicationController
   # GET /facilities/1
   # GET /facilities/1.json
   def show
+    @breadcrumbs = [["Home", root_url], [@facility.citizen,"/citizens/#{@facility.citizen.id}"], [@facility, "/facilities/#{@facility.id}"]]
   end
 
   # GET /facilities/new
   def new
     @facility = Facility.new
+    @facility_types = (current_user && current_user.citizen ? FacilityType.buildable_and_affordable(current_user.citizen.credits) : [])
+    if @facility_types.empty?
+      respond_to do |format|
+        format.html { redirect_to current_user.citizen , alert: 'No suitable facilities can be built.' }
+      end
+    end
   end
 
   # GET /facilities/1/edit
   def edit
+    @breadcrumbs = [["Home", root_url], [@facility.citizen,"/citizens/#{@facility.citizen.id}"], [@facility, "/facilities/#{@facility.id}"]]
   end
 
   # POST /facilities
   # POST /facilities.json
   def create
     @facility = Facility.new(facility_params)
+    @facility.citizen = current_user.citizen
 
     respond_to do |format|
       if @facility.save
-        format.html { redirect_to @facility, notice: 'Facility was successfully created.' }
+        format.html { redirect_to @facility, notice: 'Facility was successfully built.' }
         format.json { render :show, status: :created, location: @facility }
       else
         format.html { render :new }
@@ -36,8 +45,8 @@ class FacilitiesController < ApplicationController
   # PATCH/PUT /facilities/1.json
   def update
     respond_to do |format|
-      if @facility.update(facility_params)
-        format.html { redirect_to @facility, notice: 'Facility was successfully updated.' }
+      if !params[:levels].blank? && (@facility.update_attributes(level: @facility.level + params[:levels].to_i))
+        format.html { redirect_to @facility, notice: 'Facility was successfully upgraded.' }
         format.json { render :show, status: :ok, location: @facility }
       else
         format.html { render :edit }
@@ -51,7 +60,7 @@ class FacilitiesController < ApplicationController
   def destroy
     @facility.destroy
     respond_to do |format|
-      format.html { redirect_to facilities_url, notice: 'Facility was successfully destroyed.' }
+      format.html { redirect_to @facility.citizen, notice: 'Facility was successfully demolished.' }
       format.json { head :no_content }
     end
   end
@@ -64,6 +73,6 @@ class FacilitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def facility_params
-      params.require(:facility).permit(:citizen_id, :facility_type_id, :powered, :maintained, :utilised, :level)
+      params.require(:facility).permit(:facility_type_id)
     end
 end

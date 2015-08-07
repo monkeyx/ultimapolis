@@ -29,4 +29,7 @@ class EquipmentType < ActiveRecord::Base
 		et
 	end
 
+	def to_s
+		name
+	end
 end

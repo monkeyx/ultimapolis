@@ -23,9 +23,5 @@
 
 <% unless @trade_good.for_sale < 1 %>
 <h2>Exchange Sale Listings</h2>
-<%= @trade_good.for_sale %> @ &cent; <%= @trade_good.exchange_price %>
+<%= @trade_good.for_sale %> @ <%=format_currency @trade_good.exchange_price %>
 <% end %>
-
-<p>
-<%= link_to 'Back', trade_goods_path %>
-</p>

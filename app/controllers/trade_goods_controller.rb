@@ -5,12 +5,14 @@ class TradeGoodsController < ApplicationController
   # GET /trade_goods
   # GET /trade_goods.json
   def index
+    @breadcrumbs = [["Home", root_url], ["Trade Goods","/trade_goods"]]
     @trade_goods = TradeGood.all
   end
 
   # GET /trade_goods/1
   # GET /trade_goods/1.json
   def show
+    @breadcrumbs = [["Home", root_url], ["Trade Goods","/trade_goods"], [@trade_good.to_s, "/trade_goods/#{@trade_good.id}"]]
   end
 
   private

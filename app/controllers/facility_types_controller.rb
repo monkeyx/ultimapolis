@@ -5,6 +5,7 @@ class FacilityTypesController < ApplicationController
   # GET /facility_types
   # GET /facility_types.json
   def index
+    @breadcrumbs = [["Home", root_url], ["Facilities","/facility_types"]]
     @facility_types = FacilityType.all
     unless params[:filter_district].blank?
       @filter_district = District.where(id: params[:filter_district]).first
@@ -15,6 +16,7 @@ class FacilityTypesController < ApplicationController
   # GET /facility_types/1
   # GET /facility_types/1.json
   def show
+    @breadcrumbs = [["Home", root_url], ["Facilities","/facility_types"], [@facility_type.to_s, "/facility_types/#{@facility_type.id}"]]
   end
 
   private

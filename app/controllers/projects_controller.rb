@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @breadcrumbs = [["Home", root_url], [current_user.citizen.to_s,"/citizens/#{current_user.citizen.id}"], [@project.to_s, "/projects/#{@project.id}"]]
   end
 
   # GET /projects/new
@@ -14,6 +15,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    @breadcrumbs = [["Home", root_url], [current_user.citizen.to_s,"/citizens/#{current_user.citizen.id}"], [@project.to_s, "/projects/#{@project.id}"]]
   end
 
   # POST /projects

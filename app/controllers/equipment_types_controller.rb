@@ -5,12 +5,14 @@ class EquipmentTypesController < ApplicationController
   # GET /equipment_types
   # GET /equipment_types.json
   def index
+    @breadcrumbs = [["Home", root_url], ["Equipment","/equipment_types"]]
     @equipment_types = EquipmentType.all
   end
 
   # GET /equipment_types/1
   # GET /equipment_types/1.json
   def show
+    @breadcrumbs = [["Home", root_url], ["Equipment","/equipment_types"], [@equipment_type.to_s, "/equipment_types/#{@equipment_type.id}"]]
   end
 
   private

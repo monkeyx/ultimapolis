@@ -26,6 +26,8 @@ class District < ActiveRecord::Base
 	has_many :facility_types
 	has_many :facilities, through: :facility_types
 
+	scope :has_free_land, ->{ where("free_land > 0")}
+
 	default_scope ->{ order('name ASC') }
 
 	def self.create_new!(name, description, skill, options={})
@@ -61,6 +63,10 @@ class District < ActiveRecord::Base
 
 	def free_facility_for_new_citizen?
 		@free_facility_for_new_citizen ||= (free_land_ratio > 0.5)
+	end
+
+	def land_cost
+		@land_cost ||= (free_land_ratio == 0 ? -1 : 1000 / free_land_ratio).round(0).to_i
 	end
 
 	def free_land_ratio

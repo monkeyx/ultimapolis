@@ -7,4 +7,8 @@ class HelpTopic < ActiveRecord::Base
 	validates :body, presence: true
 
 	default_scope ->{ order('topic_index ASC') }
+
+	def to_s
+		name
+	end
 end

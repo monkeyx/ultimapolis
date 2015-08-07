@@ -1,6 +1,40 @@
-<h1>Editing Facility</h1>
+<% content_for :title, "Upgrade #{@facility}" %>
+<% content_for :lead, "<p>It will cost #{format_currency(@facility.upgrade_cost)} to upgrade this facility by one level.</p>".html_safe %>
 
-<%= render 'form' %>
+<%= form_for(@facility, html: {class: "form-horizontal"}) do |f| %>
+  <% if @facility.errors.any? %>
+    <div id="error_explanation" class="alert alert-dismissible alert-warning">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <h4>There was a problem upgrading this facility</h4>
 
-<%= link_to 'Show', @facility %> |
-<%= link_to 'Back', facilities_path %>
+      <ul>
+      <% @facility.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset>
+    <legend>Levels</legend>
+
+    <div class="form-group">
+      <div class="col-lg-10">
+      	<%=number_field_tag :levels, 1, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+	   <div class="row">
+	      <div class="col-lg-2">
+	        <%= link_to 'Cancel', @facility, class: 'btn-lg btn-default' %>
+	      </div>
+
+	      <div class="col-lg-offset-8 col-lg-2">
+	        <%= f.submit "Upgrade", class: "btn-lg btn-primary" %>
+	      </div>
+	    </div>
+	 </div>
+
+  </fieldset>
+
+<% end %>

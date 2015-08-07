@@ -1,0 +1,9 @@
+<% if defined?(@breadcrumbs) && !@breadcrumbs.empty? %>
+<ul class="breadcrumb">
+	<% @breadcrumbs.each do |crumb| %>
+	<li class="<% if @breadcrumbs.last[0] == crumb[0]%>active<% end %>">
+		<%=link_to crumb[0], crumb[1] %>
+	</li>
+	<% end %>
+</ul>
+<% end %>

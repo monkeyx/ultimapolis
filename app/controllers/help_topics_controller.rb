@@ -4,12 +4,14 @@ class HelpTopicsController < ApplicationController
   # GET /help_topics
   # GET /help_topics.json
   def index
+    @breadcrumbs = [["Home", root_url], ["Help","/help_topics"]]
     @help_topics = HelpTopic.all
   end
 
   # GET /help_topics/1
   # GET /help_topics/1.json
   def show
+    @breadcrumbs = [["Home", root_url], ["Help","/help_topics"], [@help_topic.to_s, "/help_topics/#{@help_topic.id}"]]
   end
 
   private

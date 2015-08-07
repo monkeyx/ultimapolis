@@ -19,6 +19,9 @@ class FacilityType < ActiveRecord::Base
 
 	scope :for_district, ->(district) { where(district_id: district.id )}
 
+	scope :buildable, -> { where(["district_id in (?)", District.has_free_land.select{|d| d.land_cost > 0 }.map{|d| d.id}]) }
+	scope :build_cost_less_or_equal_to, ->(credits) { where(["build_cost <= ?", credits])}
+
 	default_scope ->{ order('name ASC') }
 
 	def self.create_new!(name, description, district, options={})
@@ -40,7 +43,22 @@ class FacilityType < ActiveRecord::Base
 		create!(options)
 	end
 
+	def self.buildable_and_affordable(credits)
+		FacilityType.buildable.build_cost_less_or_equal_to(credits).select{|ft| credits >= (ft.build_cost + ft.district.land_cost)}
+	end
+
+	def to_s
+		name
+	end
+
 	def count
 		@count ||= facilities.count
+	end
+
+	def produceable
+		return @produceable if defined?(@produceable)
+		@producable = trade_goods.to_a + equipment_types.to_a
+		@producable.sort!{|a, b| a.name <=> b.name }
+		@producable
 	end
 end

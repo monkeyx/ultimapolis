@@ -88,12 +88,12 @@ class Citizen < ActiveRecord::Base
 	def create_free_facility!
 		if home_district && home_district.free_facility_for_new_citizen?
 			facility_type = home_district.facility_types.to_a.sample
-			Facility.create_new!(self, facility_type)
+			Facility.create_new!(self, facility_type, true)
 		end
 	end
 
 	def check_careers!
-		if current_career_mapping.nil? || (current_career_mapping.profesion_id != current_profession_id)
+		if current_career_mapping.nil? || (current_career_mapping.profession_id != current_profession_id)
 			if current_career_mapping
 				current_career_mapping.update_attributes!(current: false)
 			end

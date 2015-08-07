@@ -21,4 +21,8 @@ class Skill < ActiveRecord::Base
 			tertiary_profession: tertiary
 		)
 	end
+
+	def to_s
+		name
+	end
 end

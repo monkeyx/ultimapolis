@@ -27,4 +27,8 @@ class TradeGood < ActiveRecord::Base
 
 		tg
 	end
+
+	def to_s
+		name
+	end
 end

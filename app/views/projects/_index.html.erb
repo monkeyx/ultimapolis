@@ -28,7 +28,7 @@
         <td><%= link_to project.event.name, project.event %></td>
         <td><%= link_to project.leader.name, project.leader %></td>
         <td><%= project.status %></td>
-        <td>&cent; <%= project.wages %></td>
+        <td><%=format_currency  project.wages %></td>
         <% if current_citizen %>
           <% if (@project_member_mapping = current_citizen.project_member_mapping(project)) %>
         <td>

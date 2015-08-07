@@ -34,8 +34,8 @@
         <td><%= link_to facility_type.name, facility_type %></td>
         <td><%= link_to facility_type.district.name, facility_type.district %></td>
         <td><%= facility_type.description %></td>
-        <td>&cent; <%= facility_type.build_cost %></td>
-        <td>&cent; <%= facility_type.maintenance_cost %></td>
+        <td><%=format_currency  facility_type.build_cost %></td>
+        <td><%=format_currency  facility_type.maintenance_cost %></td>
         <td><%= facility_type.employees %></td>
         <td><%= facility_type.automation %></td>
         <td><%= facility_type.housing_mod %></td>

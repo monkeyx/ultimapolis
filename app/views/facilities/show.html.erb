@@ -1,34 +1,26 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, @facility.facility_type.name %>
+<% content_for :lead, "<p>#{@facility.facility_type.description}. Level #{@facility.level}.</p>".html_safe %>
 
-<p>
-  <strong>Citizen:</strong>
-  <%= @facility.citizen_id %>
-</p>
+<% content_for(:data_body) do %>
+  <tr>
+      <th>Powered:</th>
+      <td><%= glyph_check_or_cross @facility.powered %></td>
+  </tr>
+  <tr>
+      <th>Maintained:</th>
+      <td><%= glyph_check_or_cross @facility.maintained %></td>
+  </tr>
+<% end %>
 
-<p>
-  <strong>Facility type:</strong>
-  <%= @facility.facility_type_id %>
-</p>
+<%=render partial: '/facility_types/show', locals: {facility_type: @facility.facility_type} %>
 
-<p>
-  <strong>Powered:</strong>
-  <%= @facility.powered %>
-</p>
-
-<p>
-  <strong>Maintained:</strong>
-  <%= @facility.maintained %>
-</p>
-
-<p>
-  <strong>Utilised:</strong>
-  <%= @facility.utilised %>
-</p>
-
-<p>
-  <strong>Level:</strong>
-  <%= @facility.level %>
-</p>
-
-<%= link_to 'Edit', edit_facility_path(@facility) %> |
-<%= link_to 'Back', facilities_path %>
+<% if current_citizen && current_citizen.owns_facility?(@facility) %>
+<div class="row">
+  <div class="col-lg-1">
+    <%=link_to 'Demolish', @facility, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn-lg btn-danger' %>
+  </div>
+  <div class="col-lg-offset-9 col-lg-1">
+    <%=link_to 'Upgrade', edit_facility_path(@facility), class: 'btn-lg btn-primary' %>
+  </div>
+</div>
+<% end %>

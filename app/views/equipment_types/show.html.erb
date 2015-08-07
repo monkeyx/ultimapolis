@@ -21,7 +21,5 @@
 
 <% unless @equipment_type.for_sale < 1 %>
 <h2>Exchange Sale Listings</h2>
-<%= @equipment_type.for_sale %> @ &cent; <%= @equipment_type.exchange_price %>
+<%= @equipment_type.for_sale %> @ <%= format_currency @equipment_type.exchange_price %>
 <% end %>
-
-<p><%= link_to 'Back', equipment_types_path %></p>

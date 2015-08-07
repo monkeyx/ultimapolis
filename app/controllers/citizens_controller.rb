@@ -2,15 +2,10 @@ class CitizensController < ApplicationController
   before_action :set_citizen, only: [:show, :edit, :update, :inventory]
   load_and_authorize_resource
 
-  # GET /citizens
-  # GET /citizens.json
-  def index
-    @citizens = Citizen.all
-  end
-
   # GET /citizens/1
   # GET /citizens/1.json
   def show
+    @breadcrumbs = [["Home", root_url], [@citizen.to_s, "/citizens/#{@citizen.id}"]]
     @projects = Project.for_citizen(@citizen)
     @facilities = Facility.for_citizen(@citizen)
   end
@@ -22,6 +17,7 @@ class CitizensController < ApplicationController
 
   # GET /citizens/1/edit
   def edit
+    @breadcrumbs = [["Home", root_url], [@citizen.to_s, "/citizens/#{@citizen.id}"]]
   end
 
   # POST /citizens

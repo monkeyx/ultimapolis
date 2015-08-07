@@ -1,0 +1,57 @@
+<% if facility_type.produceable.count > 0 %>
+<h2>Production</h2>
+<ul class="list-group">
+  <% facility_type.produceable.each do |item| %>
+  <li class="list-group-item">
+    <%=link_to item.name, item %>
+  </li>
+  <% end %>
+</ul>
+<% end %>
+
+<h2>Data</h2>
+<table class="table table-striped table-hover">
+  <tbody>
+    <%=content_for(:data_body)%>
+    <tr>
+      <th>Build cost:</th>
+      <td><%=format_currency  facility_type.build_cost %></td>
+    </tr>
+    <tr>
+      <th>Mainteance cost:</th>
+      <td><%=format_currency  facility_type.maintenance_cost %></td>
+    </tr>
+    <tr>
+      <th>Employees:</th>
+      <td><%= facility_type.employees %></td>
+    </tr>
+    <tr>
+      <th>Automation:</th>
+      <td><%= facility_type.automation %></td>
+    </tr>
+    <% if facility_type.power_consumption > 0 %>
+    <tr>
+      <th>Power consumption:</th>
+      <td><%= facility_type.power_consumption %></td>
+    </tr>
+    <% end %>
+    <% if facility_type.power_generation > 0 %>
+    <tr>
+      <th>Power generation:</th>
+      <td><%= facility_type.power_generation %></td>
+    </tr>
+    <% end %>
+    <%if facility_type.pollution > 0 %>
+    <tr>
+      <th>Pollution:</th>
+      <td><%= facility_type.pollution %></td>
+    </tr>
+    <% end %>
+    <% if facility_type.housing_mod > 0 %>
+    <tr>
+      <th>Housing:</th>
+      <td><%= facility_type.housing_mod %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

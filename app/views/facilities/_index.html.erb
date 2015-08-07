@@ -26,7 +26,7 @@
     <% @facilities.each do |facility| %>
       <tr>
         <td><!-- <%= image_tag facility.facility_type.icon %>--></td>
-        <td><%= link_to facility.facility_type.name, facility.facility_type %></td>
+        <td><%= link_to facility.facility_type.name, facility %></td>
         <td><%= glyph_check_or_cross(facility.powered) %></td>
         <td><%= glyph_check_or_cross(facility.maintained) %></td>
         <td><%= facility.level %></td>

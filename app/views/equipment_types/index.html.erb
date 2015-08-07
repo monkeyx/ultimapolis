@@ -24,7 +24,7 @@
         <td><%= link_to equipment_type.skill.name, equipment_type.skill %> +<%= equipment_type.skill_modifier %></td>
         <td>
           <% unless equipment_type.for_sale < 1 %>
-          <%= equipment_type.for_sale %> @ &cent; <%= equipment_type.exchange_price %>
+          <%= equipment_type.for_sale %> @ <%= format_currency equipment_type.exchange_price %>
           <% else %>
           N/A
           <% end %>

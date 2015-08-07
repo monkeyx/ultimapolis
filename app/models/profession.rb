@@ -19,6 +19,10 @@ class Profession < ActiveRecord::Base
 		)
 	end
 
+	def to_s
+		name
+	end
+
 	def skills
 		@skills ||= (primary_skills.to_a + secondary_skills.to_a + tertiary_skills.to_a).sort{|a, b| a.name <=> b.name }
 	end
