@@ -110,7 +110,7 @@ wastelands = District.create_new!("Wastelands", "Beyond the borders of Ultimapol
 
 ## Wastelands
 
-outpost = FacilityType.create_new!("Outpost", "Remote extraction outpost", wastelands, {build_cost: 100000, maintenance_cost: 10000})
+outpost = FacilityType.create_new!("Outpost", "Remote extraction facility", wastelands, {build_cost: 10000, maintenance_cost: 1000})
 
 exotic_bio = TradeGood.create_new!("Exotic Biochemicals", "Dangerous chemicals, extracts from endangered species", outpost, [])
 exotic_drugs = TradeGood.create_new!("Exotic Drugs", "Addictive drugs, combat drugs", outpost, [])
@@ -156,7 +156,7 @@ basic_factory = FacilityType.create_new!("Basic Factory", "Basic heavy industria
 robot_factory = FacilityType.create_new!("Robot Factory", "Factory for producing robots", district6, {pollution: 1})
 vehicle_assembly = FacilityType.create_new!("Vehicle Assembly Factory", "Factory for assembling vehicles", district6, {pollution: 1})
 advanced_factory = FacilityType.create_new!("Advanced Factory", "Advanced heavy industrial factory", district6, {pollution: 2, build_cost: 10000, maintenance_cost: 1000})
-state_of_art_factory = FacilityType.create_new!("State of the Art Factory", "State of the art heavy industrial factory", district6, {pollution: 2, build_cost: 100000, maintenance_cost: 1000})
+state_of_art_factory = FacilityType.create_new!("State of the Art Factory", "State of the art heavy industrial factory", district6, {pollution: 2, build_cost: 50000, maintenance_cost: 1000})
 
 basic_electronics = TradeGood.create_new!("Basic Electronics", "Simple electronics including basic computers", basic_factory, [[alloys, 1], [precious_metals, 2]])
 basic_machine_parts = TradeGood.create_new!("Basic Machine Parts", "Machine components and spare parts for common machinery", basic_factory, [[alloys, 2], [polymers, 1]])

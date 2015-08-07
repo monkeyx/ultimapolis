@@ -6,7 +6,9 @@ class CitizenCareer < ActiveRecord::Base
 	validates :term_length, numericality: {only_integer: true}
 	# t.boolean :current
 	
+	scope :for_citizen, ->(citizen) { where(citizen_id: citizen.id )}
+	scope :current, -> { where(current: true )}
 
-	default_scope ->{ order('career_index DESC') }
+	default_scope ->{ includes(:profession).order('career_index DESC') }
 	
 end

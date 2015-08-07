@@ -1,8 +1,11 @@
 class CitizenSkill < ActiveRecord::Base
-# t.integer :citizen_id
-# t.integer :skill_id
-# t.integer :rank
+
 	belongs_to :citizen
 	belongs_to :skill
 	validates :rank, numericality: {only_integer: true}
+
+	scope :for_citizen, ->(citizen) { where(citizen_id: citizen.id )}
+	scope :for_skill, ->(skill) { where(skill_id: skill.id )}
+
+	default_scope ->{ includes(:skill).order('skills.name ASC') }
 end

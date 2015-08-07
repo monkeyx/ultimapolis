@@ -1,6 +1,7 @@
 <% content_for :title, @trade_good.name %>
-<% content_for :lead, "<p>#{@trade_good.description}. Produced in #{link_to @trade_good.facility_type.name, @trade_good.facility_type}.</p>".html_safe %>
+<% content_for :lead, "<p>#{@trade_good.description}. Produced in a #{link_to @trade_good.facility_type.name, @trade_good.facility_type}.</p>".html_safe %>
 
+<% if @trade_good.trade_good_raw_materials.count > 0 %>
 <h2>Production Cost</h2>
 <table class="table table-striped table-hover">
   <thead>
@@ -18,6 +19,7 @@
     <% end %>
   </tbody>
 </table>
+<% end %>
 
 <% unless @trade_good.for_sale < 1 %>
 <h2>Exchange Sale Listings</h2>

@@ -11,6 +11,8 @@ class CitizensController < ApplicationController
   # GET /citizens/1
   # GET /citizens/1.json
   def show
+    @projects = Project.for_citizen(@citizen)
+    @facilities = Facility.for_citizen(@citizen)
   end
 
   # GET /citizens/new

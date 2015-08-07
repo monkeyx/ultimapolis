@@ -17,6 +17,8 @@ class FacilityType < ActiveRecord::Base
 	has_many :trade_goods
 	has_many :facilities
 
+	scope :for_district, ->(district) { where(district_id: district.id )}
+
 	default_scope ->{ order('name ASC') }
 
 	def self.create_new!(name, description, district, options={})

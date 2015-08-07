@@ -59,9 +59,17 @@ class District < ActiveRecord::Base
 		self.name
 	end
 
+	def free_facility_for_new_citizen?
+		@free_facility_for_new_citizen ||= (free_land_ratio > 0.5)
+	end
+
+	def free_land_ratio
+		@free_land_ratio ||= (total_land == 0 ? 0 : (free_land / total_land))
+	end
+
 	def land_usage
 		if total_land > 0
-			"#{((100 - (free_land / total_land) * 100)).round(0)}%"
+			"#{((100 - free_land_ratio * 100)).round(0)}%"
 		else
 			"N/A"
 		end

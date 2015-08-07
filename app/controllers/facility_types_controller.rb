@@ -6,6 +6,10 @@ class FacilityTypesController < ApplicationController
   # GET /facility_types.json
   def index
     @facility_types = FacilityType.all
+    unless params[:filter_district].blank?
+      @filter_district = District.where(id: params[:filter_district]).first
+      @facility_types = @facility_types.for_district(@filter_district) if @filter_district
+    end
   end
 
   # GET /facility_types/1

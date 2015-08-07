@@ -15,3 +15,7 @@ $font-family-sans-serif: 'Oswald', sans-serif;
 	text-transform: uppercase;
 	font-weight: bold;
 }
+
+.alert a, .alert .alert-link {
+	color: #000;
+}

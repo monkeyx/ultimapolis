@@ -1,0 +1,37 @@
+<h2>Profile</h2>
+
+<% if @citizen.citizen_skills.count > 0 %>
+<h3>Skills</h3>
+<ul class="list-group">
+  <% @citizen.citizen_skills.each do |skill| %>
+  <li class="list-group-item">
+    <%=link_to skill.skill.name, skill.skill %> <%=skill.rank %>
+  </li>
+  <% end %>
+</ul>
+<% end %>
+
+<% if @citizen.citizen_careers.count > 0 %>
+<h3>Careers</h3>
+<ul class="list-group">
+  <% @citizen.citizen_careers.each do |career| %>
+  <li class="list-group-item">
+    <%=link_to career.profession.name, career.profession %>
+  </li>
+  <% end %>
+</ul>
+<% end %>
+
+<% if @citizen.facts.size > 0 %>
+<h3>Facts</h3>
+<table class="table table-striped table-hover ">
+  <tbody>
+    <% @citizen.facts.each do |fact| %>
+    <tr>
+      <th><%=fact[0]%></th>
+      <td><%=fact[1]%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

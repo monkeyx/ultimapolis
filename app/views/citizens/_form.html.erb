@@ -37,7 +37,7 @@
           <div class="radio">
             <label>
               <input type="radio" name="citizen[home_district_id]" id="home_district_id_<%=i%>" value="<%=district.id%>" <%=(district.id == @citizen.home_district_id ? 'checked' : '')%>>
-                <strong><%=link_to(district.name, district, target: '_new')%></strong>: <em><%=district.description%></em> &nbsp; (<strong><% if @citizen.new_record?%>+1<% end %> <%=link_to(district.skill.name, district.skill, target: '_new')%></strong>&nbsp;)
+                <strong><%=link_to(district.name, district, target: '_new')%></strong>: <em><%=district.description%></em> &nbsp; (<strong><% if @citizen.new_record?%>+1<% end %> <%=link_to(district.skill.name, district.skill, target: '_new')%><% if @citizen.new_record? && district.free_facility_for_new_citizen? %> <%=link_to('FREE FACILITY',"#{facility_types_path}?filter_district=#{district.id}", target: '_new')%><% end %></strong>&nbsp;)
               </input>
             </label>
           </div>
@@ -47,7 +47,7 @@
     </div>
     <% end %>
     
-    <legend>Profession</legend>
+    <legend><%= @citizen.new_record? ? '' : 'New ' %>Profession</legend>
     <% if @citizen.new_record? %>
     <p>Every citizen works although some contribute more to society than others. Your first choice of profession will give you some additional skills. You can continue in this profession or change later. Working in a profession increases your chance of gaining new ranks and with it skill increases although never quite as much as you will get now.</p>
     <% end %>
