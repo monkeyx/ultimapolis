@@ -47,6 +47,10 @@ class FacilityType < ActiveRecord::Base
 		FacilityType.buildable.build_cost_less_or_equal_to(credits).select{|ft| credits >= (ft.build_cost + ft.district.land_cost)}
 	end
 
+	def defaultable_trade_goods
+		@defaultable_trade_goods ||= trade_goods.select{|tg| tg.no_raw_materials? }
+	end
+
 	def to_s
 		name
 	end

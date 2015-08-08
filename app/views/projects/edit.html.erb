@@ -1,3 +1,5 @@
-<h1>Editing Project</h1>
+<% content_for :title, @project.to_s %>
+<% content_for :lead, "<p class=\"lead\">You can change what you will offer pay to #{@project.event.crisis? ? 'handle this crisis' : 'tacke this opportunity'} but if you decrease the amount all existing members will leave immediately.</p>".html_safe %>
 
+<h2>Adjust Wages Offered</h2>
 <%= render 'form' %>

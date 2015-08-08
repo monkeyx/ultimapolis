@@ -18,6 +18,7 @@
       <th>Powered</th>
       <th>Maintained</th>
       <th>Level</th>
+      <th>Producing</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -30,8 +31,16 @@
         <td><%= glyph_check_or_cross(facility.powered) %></td>
         <td><%= glyph_check_or_cross(facility.maintained) %></td>
         <td><%= facility.level %></td>
+        <td>
+          <% if facility.producing_trade_good %>
+          <%=link_to facility.producing_trade_good.to_s, facility.producing_trade_good %><br/>
+          <% end %>
+          <% if facility.producing_equipment_type %>
+          <%=link_to facility.producing_equipment_type.to_s, facility.producing_equipment_type %><br/>
+          <% end %>
+        </td>
         <% if current_citizen && current_citizen.owns_facility?(facility) %>
-        <td><%= link_to 'Upgrade', edit_facility_path(facility), class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Manage', edit_facility_path(facility), class: 'btn btn-primary' %></td>
         <td><%= link_to 'Demolish', facility, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
         <% end %>
       </tr>

@@ -5,7 +5,7 @@ class FacilitiesController < ApplicationController
   # GET /facilities/1
   # GET /facilities/1.json
   def show
-    @breadcrumbs = [["Home", root_url], [@facility.citizen,"/citizens/#{@facility.citizen.id}"], [@facility, "/facilities/#{@facility.id}"]]
+    @breadcrumbs = [["Home", root_url], [@facility.citizen,"/citizens/#{@facility.citizen.id}?tab=facilities"], [@facility, "/facilities/#{@facility.id}"]]
   end
 
   # GET /facilities/new
@@ -44,9 +44,16 @@ class FacilitiesController < ApplicationController
   # PATCH/PUT /facilities/1
   # PATCH/PUT /facilities/1.json
   def update
+    levels = params[:levels].blank? ? nil : params[:levels].to_i
+    @facility.level += levels
     respond_to do |format|
-      if !params[:levels].blank? && (@facility.update_attributes(level: @facility.level + params[:levels].to_i))
-        format.html { redirect_to @facility, notice: 'Facility was successfully upgraded.' }
+      if @facility.update(facility_params)
+        if levels > 0
+          notice = 'Facility was successfully upgraded.'
+        else
+          notice = 'Facility was successfully managed.'
+        end
+        format.html { redirect_to @facility, notice: notice }
         format.json { render :show, status: :ok, location: @facility }
       else
         format.html { render :edit }
@@ -73,6 +80,6 @@ class FacilitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def facility_params
-      params.require(:facility).permit(:facility_type_id)
+      params.require(:facility).permit(:facility_type_id, :producing_trade_good_id, :producing_equipment_type_id)
     end
 end

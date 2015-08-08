@@ -1,3 +1,12 @@
-<h1>New Project</h1>
-
+<% content_for :title, @event.name %>
+<%=render partial: '/events/briefing', locals: {event: @project.event, no_button: true} %>
+<% projects = current_citizen ? @event.suitable_projects(current_citizen) : [] %>
+<% if projects.empty? %>
+<% content_for :lead, "<p class=\"lead\">You can organise a project to #{@event.crisis? ? 'handle this crisis' : 'tacke this opportunity'} but you will need to offer wages for other citizens to assist you. Furthermore, you will be responsible for providing all the resources required to tackle the project. If you should succeed all the rewards are yours alone.</p>".html_safe %>
+<% else %>
+<% content_for :lead, "<p class=\"lead\">There are existing projects attempting to #{@event.crisis? ? 'handle this crisis' : 'tacke this opportunity'} but you can start your own and offer better wages for other citizens to assist you instead. As you will be responsible for providing all the resources required to tackle the project, you will reap all the rewards for yourself.</p>".html_safe %>
+<h2>Existing Projects</h2>
+<%=render partial: '/projects/table', locals: {projects:  projects } %>
+<% end %>
+<h2>New Project</h2>
 <%= render 'form' %>

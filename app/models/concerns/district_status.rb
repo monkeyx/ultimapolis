@@ -53,24 +53,32 @@ module DistrictStatus
 		corruption > 25
 	end
 
+	def status_poor_infrastructure?
+		Global.singleton.status_poor_infrastructure?
+	end
+
 	def status_grid_overpowered?
-		# TODO
+		Global.singleton.status_grid_overpowered?
 	end
 
 	def status_instability?
-		# TODO
+		Global.singleton.status_instability?
 	end
 
 	def status_climate_change?
-		# TODO
+		Global.singleton.status_climate_change?
 	end
 
 	def status_revolution?
-		# TODO
+		Global.singleton.status_revolution?
 	end
 
 	def status_terrorism?
-		# TODO
+		Global.singleton.status_terrorism?
+	end
+
+	def status_invasion?
+		Global.singleton.status_invasion?
 	end
 
 	def notes

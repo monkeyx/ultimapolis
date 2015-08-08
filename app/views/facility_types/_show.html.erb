@@ -4,6 +4,12 @@
   <% facility_type.produceable.each do |item| %>
   <li class="list-group-item">
     <%=link_to item.name, item %>
+    <% if defined?(producing_trade_good) && producing_trade_good && item.id == producing_trade_good.id %>
+    <span class="badge"><%=glyph_check_or_cross(true)%></span>
+    <% end %>
+    <% if defined?(producing_equipment_type) && producing_equipment_type && item.id == producing_equipment_type.id %>
+    <span class="badge"><%=glyph_check_or_cross(true)%></span>
+    <% end %>
   </li>
   <% end %>
 </ul>

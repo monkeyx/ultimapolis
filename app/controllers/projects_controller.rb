@@ -1,31 +1,27 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:edit, :update, :destroy]
+  before_action :set_event, only: [:new, :create]
   load_and_authorize_resource
-
-  # GET /projects/1
-  # GET /projects/1.json
-  def show
-    @breadcrumbs = [["Home", root_url], [current_user.citizen.to_s,"/citizens/#{current_user.citizen.id}"], [@project.to_s, "/projects/#{@project.id}"]]
-  end
 
   # GET /projects/new
   def new
-    @project = Project.new
+    @project = Project.new(event_id: @event.id)
   end
 
   # GET /projects/1/edit
   def edit
-    @breadcrumbs = [["Home", root_url], [current_user.citizen.to_s,"/citizens/#{current_user.citizen.id}"], [@project.to_s, "/projects/#{@project.id}"]]
+    @breadcrumbs = [["Home", root_url], [current_user.citizen.to_s,"/citizens/#{current_user.citizen.id}?tab=projects"], [@project.to_s, "/projects/#{@project.id}/edit"]]
   end
 
   # POST /projects
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    @project.leader = current_user.citizen
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.html { redirect_to "/citizens/#{current_user.citizen.id}?tab=projects", notice: 'Project was started.' }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }
@@ -39,7 +35,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        format.html { redirect_to "/citizens/#{current_user.citizen.id}?tab=projects", notice: 'Project was updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit }
@@ -53,12 +49,29 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+      format.html { redirect_to "/citizens/#{current_user.citizen.id}?tab=projects", notice: 'Project was cancelled.' }
       format.json { head :no_content }
     end
   end
 
   private
+    def set_event
+      if params[:event_type].blank?
+        redirect_to "/citizens/#{current_user.citizen.id}?tab=projects", alert: "Invalid event"
+        return false
+      else
+        case params[:event_type]
+        when 'Crisis'
+          @event = Event.current_crisis
+        when 'Opportunity'
+          @event = Event.current_opportunity
+       end
+      end
+      unless @event 
+        redirect_to "/citizens/#{current_user.citizen.id}?tab=projects", alert: "Invalid event"
+        return false
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:id])

@@ -27,6 +27,10 @@ class Citizen < ActiveRecord::Base
 	after_save :check_careers!
 	after_destroy :decrease_citizen_count!
 
+	def dealing_with_event?(event)
+		Project.for_event(event).for_citizen(self).count > 0
+	end
+
 	def owns_facility?(facility)
 		facility && facility.citizen_id == self.id
 	end
@@ -89,7 +93,7 @@ class Citizen < ActiveRecord::Base
 
 	def create_free_facility!
 		if home_district && home_district.free_facility_for_new_citizen?
-			facility_type = home_district.facility_types.to_a.sample
+			facility_type = FacilityType.for_district(home_district).build_cost_less_or_equal_to(1000).to_a.sample
 			Facility.create_new!(self, facility_type, true)
 		end
 	end

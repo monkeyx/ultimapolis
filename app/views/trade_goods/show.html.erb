@@ -1,5 +1,5 @@
 <% content_for :title, @trade_good.name %>
-<% content_for :lead, "<p>#{@trade_good.description}. Produced in a #{link_to @trade_good.facility_type.name, @trade_good.facility_type}.</p>".html_safe %>
+<% content_for :lead, "<p class=\"lead\">#{@trade_good.description}. Produced in a #{link_to @trade_good.facility_type.name, @trade_good.facility_type}.</p>".html_safe %>
 
 <% if @trade_good.trade_good_raw_materials.count > 0 %>
 <h2>Production Cost</h2>

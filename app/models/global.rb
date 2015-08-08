@@ -1,5 +1,6 @@
 class Global < ActiveRecord::Base
-
+	include GlobalStatus
+	
 	validates :infrastructure, numericality: {only_integer: true}
 	validates :grid, numericality: {only_integer: true}
 	validates :power, numericality: {only_integer: true}

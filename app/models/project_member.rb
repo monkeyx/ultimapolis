@@ -8,7 +8,13 @@ class ProjectMember < ActiveRecord::Base
 	validates :contribution, numericality: {only_integer: true}
 	validates :wages, numericality: {only_integer: true}
 
+	before_create :set_joined_on
+
 	scope :for_project, ->(project) { where(project_id: project.id )}	
 	scope :for_citizen, ->(citizen) { where(citizen_id: citizen.id )}
 	scope :active, -> { where(active: true )}
+
+	def set_joined_on
+		joined_on = Global.singleton.turn
+	end
 end

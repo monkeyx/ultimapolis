@@ -16,6 +16,13 @@ class Event < ActiveRecord::Base
 	belongs_to :trigger_after_event, class_name: 'Event'
 	belongs_to :winning_project, class_name: 'Project'
 
+	EVENT_TYPES.each do |event_type|
+    	define_method("#{event_type.downcase}?") do
+  			event_type?(event_type)
+	  	end
+	  	scope "#{event_type.downcase.pluralize}".to_sym, -> { where(event_type: event_type)}
+    end
+
 	has_many :district_effects
 	has_many :global_effects
 	has_many :event_resource_costs
@@ -25,12 +32,16 @@ class Event < ActiveRecord::Base
 	has_one :previous_event, foreign_key: 'trigger_after_event_id', class_name: 'Event'
 
 	def self.current_opportunity
-		@current_opportunity ||= Event.where(event_type: 'Opportunity', current: true).first
+		@@current_opportunity ||= Event.where(event_type: 'Opportunity', current: true).first
 	end
 
 	def self.current_crisis
-		@current_crisis ||= Event.where(event_type: 'Crisis', current: true).first
+		@@current_crisis ||= Event.where(event_type: 'Crisis', current: true).first
 	end
+
+	def event_type?(event_type)
+    	self.event_type == event_type
+    end
 	
 	def add_district_effect!(options={})
 		district_effects.create!(options)
@@ -62,6 +73,14 @@ class Event < ActiveRecord::Base
 
 	def add_credit_reward!(quantity)
 		event_rewards.create!(credits: true, quantity: quantity)
+	end
+
+	def suitable_projects(citizen)
+		Project.for_event(self).not_for_citizen(citizen).started
+	end
+
+	def to_s
+		name 
 	end
 
 	def expires

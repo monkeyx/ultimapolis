@@ -1,7 +1,8 @@
-<%= form_for(@project) do |f| %>
+<%= form_for(@project, html: {class: "form-horizontal"}) do |f| %>
   <% if @project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+    <div id="error_explanation" class="alert alert-dismissible alert-warning">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <h4><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h4>
 
       <ul>
       <% @project.errors.full_messages.each do |message| %>
@@ -10,8 +11,27 @@
       </ul>
     </div>
   <% end %>
-  
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%=f.hidden_field :event_id %>
+  <%=hidden_field_tag :event_type, params[:event_type] %>
+  <fieldset>
+    <div class="form-group">
+      <label for="wages" class="col-lg-2 control-label">Wages Offered</label>
+      <div class="col-lg-10">
+        <%=f.number_field :wages, class: "form-control" %>
+        <span class="help-block">
+          This is the amount of credits you will pay for each skill point contribution. Consider the events requirements and rewards when deciding what to pay.
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-2 text-left">
+        <%= link_to 'Cancel', "#{citizen_path(current_citizen)}?tab=projects", class: 'btn-lg btn-default' %>
+      </div>
+
+      <div class="col-lg-offset-8 col-lg-2 text-right">
+        <%= f.submit class: "btn-lg btn-primary" %>
+      </div>
+    </div>
+  </fieldset>
 <% end %>

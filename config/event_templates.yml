@@ -905,6 +905,36 @@
     - Mine
   reward_credts: 100
 -
+  trigger: status_poor_infrastructure?
+  name: GlobalPoorInfrastructure 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
   trigger: status_grid_overpowered?
   name: GlobalGridOverloaded 
   event_type: Crisis
@@ -1027,6 +1057,36 @@
 -
   trigger: status_terrorism?
   name: GlobalTerrorism 
+  event_type: Crisis
+  max_duration: 7
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: status_invasion?
+  name: GlobalInvasion 
   event_type: Crisis
   max_duration: 7
   summary: Summary

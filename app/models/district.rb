@@ -63,7 +63,7 @@ class District < ActiveRecord::Base
 	end
 
 	def free_facility_for_new_citizen?
-		@free_facility_for_new_citizen ||= (free_land_ratio > 0.5)
+		@is_free_facility_for_new_citizen ||= (free_land_ratio > 0.5)
 	end
 
 	def land_cost

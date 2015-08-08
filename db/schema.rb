@@ -376,10 +376,10 @@ ActiveRecord::Schema.define(version: 20150806204107) do
     t.integer  "event_id"
     t.integer  "began_on"
     t.integer  "finished_on"
-    t.string   "status",      default: "draft"
+    t.string   "status",      default: "Started"
     t.integer  "wages"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   add_index "projects", ["event_id", "status"], name: "index_projects_on_event_id_and_status", using: :btree

@@ -5,7 +5,7 @@ class CreateProjects < ActiveRecord::Migration
       t.integer :event_id
       t.integer :began_on
       t.integer :finished_on
-      t.string :status, default: 'draft'
+      t.string :status, default: 'Started'
       t.integer :wages
 
       t.timestamps null: false

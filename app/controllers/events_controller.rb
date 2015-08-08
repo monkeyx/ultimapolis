@@ -5,6 +5,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    @breadcrumbs = [["Home", root_url], [current_user.citizen.to_s,"/citizens/#{current_user.citizen.id}?tab=projects"], [@event.to_s, "/events/#{@event.id}"]]
   end
 
  private

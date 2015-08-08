@@ -1,0 +1,27 @@
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Leader</th>
+      <th>Status</th>
+      <th>Wages</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% projects.each do |project| %>
+      <tr>
+        <td><%= link_to project.leader.to_s, project.leader %></td>
+        <td><%= project.status %></td>
+        <td><%=format_currency  project.wages %></td>
+        <td>
+          <%= form_for(ProjectMember.new(project: project, citizen: current_citizen)) do |f| %>
+          <%=f.hidden_field :project_id %>
+          <%=f.hidden_field :citizen_id %>
+          <%=f.submit "Join", class: "btn btn-primary" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -12,6 +12,7 @@ class Facility < ActiveRecord::Base
 
     validate :validate_facility
 
+    before_save :choose_default_producing
     before_save :deduct_costs!
 
     scope :for_citizen, ->(citizen) { where(citizen_id: citizen.id )}
@@ -32,6 +33,10 @@ class Facility < ActiveRecord::Base
     	)
     end
 
+    def producer?
+        @is_producer ||= facility_type && facility_type.produceable.count > 0
+    end
+
     def to_s
         "#{facility_type && facility_type.name} \##{id}"
     end
@@ -41,7 +46,14 @@ class Facility < ActiveRecord::Base
     end
 
     def upgrade_cost(levels=1)
-        facility_type.build_cost * levels
+        cost = 0
+        target_level = self.level + levels
+        level = self.level
+        while level <= target_level do 
+            cost += (facility_type.build_cost * level)
+            level += 1
+        end 
+        cost
     end
 
     def validate_facility
@@ -58,18 +70,23 @@ class Facility < ActiveRecord::Base
         unless build_for_free
             if new_record?
                 if citizen.credits < build_cost
-                    errors.add(:facility_type, "is too expensive to build")
+                    errors.add(:facility_type, "is too expensive to build (need #{build_cost} credits)")
                 end
             else
                 if level_changed? && citizen.credits < upgrade_cost(level - level_was)
-                    errors.add(:level, "is too expensive to upgrade")
+                    errors.add(:level, "is too expensive to upgrade to #{level} (need #{upgrade_cost((level - level_was))} credits)")
                 end
             end
         end
     end
 
+    def choose_default_producing
+        if new_record? && facility_type && facility_type.defaultable_trade_goods.count > 0
+            self.producing_trade_good = facility_type.defaultable_trade_goods.to_a.sample
+        end
+    end
+
     def deduct_costs!
-        Kernel.p "BUILD COST: #{build_cost} FREE? #{build_for_free}"
         return if build_for_free
         if new_record?
             citizen.credits -= build_cost

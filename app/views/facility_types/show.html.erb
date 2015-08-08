@@ -1,4 +1,4 @@
 <% content_for :title, @facility_type.name %>
-<% content_for :lead, "<p>#{@facility_type.description}. Only built in #{link_to @facility_type.district.name, @facility_type.district}.</p>".html_safe %>
+<% content_for :lead, "<p class=\"lead\">#{@facility_type.description}. Only built in #{link_to @facility_type.district.name, @facility_type.district}.</p>".html_safe %>
 
 <%=render partial: '/facility_types/show', locals: {facility_type: @facility_type} %>

@@ -1,0 +1,54 @@
+<table class="table table-striped table-hover">
+<tbody>
+	<tr>
+		<th>Skills</th>
+		<td>
+			<% event.event_skill_costs.each do |skill_cost| %>
+			<%=link_to(skill_cost.skill.name, skill_cost.skill)%> <span class="badge"><%=skill_cost.cost%></span>
+			<br/>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<th>Resources</th>
+		<td>
+			<% event.event_resource_costs.each do |resource_cost| %>
+				<%=link_to(resource_cost.trade_good.name, resource_cost.trade_good)%> <span class="badge"><%=resource_cost.cost%></span>
+				<br/>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<th>Rewards</th>
+		<td>
+			<% event.event_rewards.each do |reward| %>
+				<%=reward.to_s.html_safe%></span>
+				<br/>
+			<% end %>
+		</td>
+	</tr>
+	<% if event.current %>
+	<tr>
+		<th>Expires</th>
+		<td>
+			<%=format_turn(event.expires)%>
+		</td>
+	</tr>
+	<% else %>
+	<tr>
+		<th>Finished</th>
+		<td>
+			<%=format_turn(event.finished_on)%>
+		</td>
+	</tr>
+	<% end %>
+	<% if event.winning_project %>
+	<tr>
+		<th>Resolved By</th>
+		<td>
+			<%=link_to(event.winning_project.leader.to_s, event.winning_project.leader) %>
+		</td>
+	</tr>
+	<% end %>
+</tbody>
+</table>

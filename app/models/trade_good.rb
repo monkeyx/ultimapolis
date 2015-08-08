@@ -28,6 +28,10 @@ class TradeGood < ActiveRecord::Base
 		tg
 	end
 
+	def no_raw_materials?
+		@no_raw_materials ||= trade_good_raw_materials.count < 1
+	end
+
 	def to_s
 		name
 	end

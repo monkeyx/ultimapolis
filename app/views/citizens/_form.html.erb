@@ -99,11 +99,11 @@
     <% end %>
 
   <div class="form-group">
-      <div class="col-lg-2">
+      <div class="col-lg-2 text-left">
         <%= link_to 'Cancel', (@citizen.new_record? ? root_url : @citizen), class: 'btn-lg btn-default' %>
       </div>
 
-      <div class="col-lg-offset-8 col-lg-2">
+      <div class="col-lg-offset-8 col-lg-2 text-right">
         <%= f.submit class: "btn-lg btn-primary" %>
       </div>
   </div>

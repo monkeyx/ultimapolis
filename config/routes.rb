@@ -6,8 +6,8 @@ Rails.application.routes.draw do
     get :inventory
   end
   
-  resources :projects, except: [:index]
-  resource  :project_members, only: [:new, :create, :destroy]
+  resources :projects, except: [:index, :show]
+  resources  :project_members, only: [:new, :create, :destroy]
   resources :facilities, except: [:index]
   
   resources :districts, only: [:index, :show] do 

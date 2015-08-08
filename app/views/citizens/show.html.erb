@@ -1,4 +1,4 @@
 <% content_for :title, @citizen.to_s %>
-<% content_for :lead, "<p>#{@citizen.status}</p>".html_safe %>
+<% content_for :lead, "<p class=\"lead\">#{@citizen.status}</p>".html_safe %>
 
 <%=render partial: '/citizens/tabs', locals: {current_tab: params[:tab] || 'profile'} %>

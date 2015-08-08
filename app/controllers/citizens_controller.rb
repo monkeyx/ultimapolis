@@ -26,9 +26,7 @@ class CitizensController < ApplicationController
 
     @citizen = Citizen.new(citizen_params)
 
-    if current_user
-      @citizen.user = current_user  
-    else
+    unless current_user
       @user = User.new(email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
       unless @user.save
         respond_to do |format|
@@ -37,9 +35,13 @@ class CitizensController < ApplicationController
         end
         return
       else
+        @citizen.user = @user  
         sign_in(:user, @user)
       end
+    else
+      @citizen.user = current_user  
     end
+
 
     respond_to do |format|
       if @citizen.save

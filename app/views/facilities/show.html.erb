@@ -1,5 +1,5 @@
 <% content_for :title, @facility.facility_type.name %>
-<% content_for :lead, "<p>#{@facility.facility_type.description}. Level #{@facility.level}.</p>".html_safe %>
+<% content_for :lead, "<p class=\"lead\">#{@facility.facility_type.description}. Level #{@facility.level}.</p>".html_safe %>
 
 <% content_for(:data_body) do %>
   <tr>
@@ -12,15 +12,15 @@
   </tr>
 <% end %>
 
-<%=render partial: '/facility_types/show', locals: {facility_type: @facility.facility_type} %>
+<%=render partial: '/facility_types/show', locals: {facility_type: @facility.facility_type, producing_trade_good: @facility.producing_trade_good, producing_equipment_type: @facility.producing_equipment_type} %>
 
 <% if current_citizen && current_citizen.owns_facility?(@facility) %>
 <div class="row">
-  <div class="col-lg-1">
+  <div class="col-lg-1 text-left">
     <%=link_to 'Demolish', @facility, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn-lg btn-danger' %>
   </div>
-  <div class="col-lg-offset-9 col-lg-1">
-    <%=link_to 'Upgrade', edit_facility_path(@facility), class: 'btn-lg btn-primary' %>
+  <div class="col-lg-offset-10 col-lg-1 text-right">
+    <%=link_to 'Manage', edit_facility_path(@facility), class: 'btn-lg btn-primary' %>
   </div>
 </div>
 <% end %>
