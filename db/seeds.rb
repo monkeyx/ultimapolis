@@ -144,32 +144,32 @@ smelter = FacilityType.create_new!("Smelter", "Smelter of metal ore", district7,
 small_power = FacilityType.create_new!("Small Power Plant", "Power generation with minimal pollution", district7, {power_consumption: 0, power_generation: 10, pollution: 2})
 large_power = FacilityType.create_new!("Large Power Plant", "Power generation with maximal output", district7, {power_consumption: 0, power_generation: 50, pollution: 10, build_cost: 10000, maintenance_cost: 1000})
 
-bio_chems = TradeGood.create_new!("Biochemicals", "Biofuels, organic chemicals, extracts", chemical_plant, [[organics, 1]])
-petro_chems = TradeGood.create_new!("Petrochemicals", "Oil, liquid fuels", chemical_plant, [[organics, 1]])
-polymers = TradeGood.create_new!("Polymers", "Plastics and other synthetics", chemical_plant, [[organics, 1]])
-alloys = TradeGood.create_new!("Processed Metals", "Alloys and durable metals", smelter, [[basic_ores, 1]])
-precious_metals = TradeGood.create_new!("Precious Metals", "Gold, silver, platinum, rare elements", smelter, [[uncommon_ore, 1]])
+bio_chems = TradeGood.create_new!("Biochemicals", "Biofuels, organic chemicals, extracts", chemical_plant, [[organics, 2]])
+petro_chems = TradeGood.create_new!("Petrochemicals", "Oil, liquid fuels", chemical_plant, [[organics, 2]])
+polymers = TradeGood.create_new!("Polymers", "Plastics and other synthetics", chemical_plant, [[organics, 2]])
+alloys = TradeGood.create_new!("Processed Metals", "Alloys and durable metals", smelter, [[basic_ores, 2]])
+precious_metals = TradeGood.create_new!("Precious Metals", "Gold, silver, platinum, rare elements", smelter, [[uncommon_ore, 2]])
 
 ## District 6 (heavy industry)
 
 basic_factory = FacilityType.create_new!("Basic Factory", "Basic heavy industrial factory", district6, {pollution: 1})
 robot_factory = FacilityType.create_new!("Robot Factory", "Factory for producing robots", district6, {pollution: 1})
 vehicle_assembly = FacilityType.create_new!("Vehicle Assembly Factory", "Factory for assembling vehicles", district6, {pollution: 1})
-advanced_factory = FacilityType.create_new!("Advanced Factory", "Advanced heavy industrial factory", district6, {pollution: 2, build_cost: 10000, maintenance_cost: 1000})
-state_of_art_factory = FacilityType.create_new!("State of the Art Factory", "State of the art heavy industrial factory", district6, {pollution: 2, build_cost: 50000, maintenance_cost: 1000})
+advanced_factory = FacilityType.create_new!("Advanced Factory", "Advanced heavy industrial factory", district6, {pollution: 2, build_cost: 5000, maintenance_cost: 1000})
+state_of_art_factory = FacilityType.create_new!("State of the Art Factory", "State of the art heavy industrial factory", district6, {pollution: 2, build_cost: 10000, maintenance_cost: 1000})
 
 basic_electronics = TradeGood.create_new!("Basic Electronics", "Simple electronics including basic computers", basic_factory, [[alloys, 1], [precious_metals, 2]])
 basic_machine_parts = TradeGood.create_new!("Basic Machine Parts", "Machine components and spare parts for common machinery", basic_factory, [[alloys, 2], [polymers, 1]])
 basic_materials = TradeGood.create_new!("Basic Materials", "Processed metal, plastics, chemicals and other basic materials.", basic_factory, [[alloys, 1], [polymers, 2]])
 basic_manufactered = TradeGood.create_new!("Basic Manufactured Goods", "Household appliances, clothing", basic_factory, [[alloys, 1],[polymers, 2]])
-robots = TradeGood.create_new!("Robots", "Industrial and personal robots and drones", robot_factory, [[basic_electronics, 1],[basic_machine_parts, 1]])
+robots = TradeGood.create_new!("Robots", "Industrial and personal robots and drones", robot_factory, [[basic_electronics, 1],[basic_machine_parts, 2]])
 vehicles = TradeGood.create_new!("Vehicles", "Wheeled, tracked and other vehicles", vehicle_assembly, [[basic_electronics, 1], [basic_machine_parts, 2], [petro_chems, 1]])
 advanced_electronics = TradeGood.create_new!("Advanced Electronics", "Advanced sensors, computers and other electronics", advanced_factory, [[basic_electronics, 1],[precious_metals, 1],[crystals, 1]])
 advanced_machine_parts = TradeGood.create_new!("Advanced Machine Parts", "Machine components and spare parts", advanced_factory, [[basic_machine_parts, 1],[basic_electronics, 1], [uncommon_materials, 1]])
-advanced_manufactured = TradeGood.create_new!("Advanced Manufactured Goods", "Devices and clothing incorporating advanced technologies", advanced_factory, [[advanced_electronics, 1], [advanced_machine_parts, 1]])
+advanced_manufactured = TradeGood.create_new!("Advanced Manufactured Goods", "Devices and clothing incorporating advanced technologies", advanced_factory, [[advanced_electronics, 2], [advanced_machine_parts, 1]])
 advanced_weapons = TradeGood.create_new!("Advanced Weapons", "Firearms, explosives, ammunition, artillery and other military-grade weaponry", state_of_art_factory, [[advanced_electronics, 1], [advanced_machine_parts, 1], [radioactives, 1]])
 advanced_vehicles = TradeGood.create_new!("Advanced Vehicles", "Aircraft and grav lifters", state_of_art_factory, [[advanced_electronics, 1], [advanced_machine_parts, 1], [radioactives, 1]])
-power_relay = TradeGood.create_new!("Power Relay", "Enhances power grid reach and reliability", basic_factory, [[basic_electronics, 1],[alloys, 2], [polymers, 2]])
+power_relay = TradeGood.create_new!("Power Relay", "Enhances power grid reach and reliability", basic_factory, [[basic_electronics, 1],[alloys, 1], [polymers, 1]])
 scrubbers = TradeGood.create_new!("Scrubbers", "Removes pollutants from atmosphere", state_of_art_factory, [[advanced_electronics, 1],[robots, 1],[advanced_vehicles, 1]])
 
 ## District 5 (light industry)
@@ -181,10 +181,10 @@ techlab = FacilityType.create_new!("Techlab", "Technology and electronics goods 
 
 pharma = TradeGood.create_new!("Pharmaceuticals", "Drugs, medical supplies", biolab, [[bio_chems, 1]])
 textiles = TradeGood.create_new!("Textiles", "Clothing and fabrics", textile_factory, [[polymers, 1]])
-basic_consumables = TradeGood.create_new!("Basic Consumables", "Food, drink and other agricultural products", light_factory, [[live_animals, 1], [organics, 1],[bio_chems, 1]])
-cybernetics = TradeGood.create_new!("Cybernetics", "Cybernetic components, replacement limbs", techlab, [[advanced_electronics, 1], [bio_chems, 1]])
-luxury_consumables = TradeGood.create_new!("Luxury Consumables", "Rare foods, fine liquors", light_factory, [[basic_consumables, 1],[spices, 1]])
-luxury_goods = TradeGood.create_new!("Luxury Goods", "Rare or extremely high-quality manufactured goods", light_factory, [[advanced_manufactured, 1]])
+basic_consumables = TradeGood.create_new!("Basic Consumables", "Food, drink and other agricultural products", light_factory, [[live_animals, 1], [organics, 2],[bio_chems, 2]])
+cybernetics = TradeGood.create_new!("Cybernetics", "Cybernetic components, replacement limbs", techlab, [[advanced_electronics, 2], [bio_chems, 3]])
+luxury_consumables = TradeGood.create_new!("Luxury Consumables", "Rare foods, fine liquors", light_factory, [[basic_consumables, 4],[spices, 1]])
+luxury_goods = TradeGood.create_new!("Luxury Goods", "Rare or extremely high-quality manufactured goods", light_factory, [[advanced_manufactured, 5]])
 
 ## District 4 (housing/community)
 
@@ -192,7 +192,7 @@ basic_housing = FacilityType.create_new!("Basic Housing", "Basic Housing", distr
 dense_housing = FacilityType.create_new!("Dense Housing", "High Density Housing", district4, {build_cost: 10000, maintenance_cost: 500, housing_mod: 1000})
 community_centre = FacilityType.create_new!("Community Centre", "Community centre for producing communal goods", district4, {})
 
-communal_goods = TradeGood.create_new!("Communal Goods", "Working to tie communities together", community_centre, [[basic_consumables, 1],[pharma, 1]])
+communal_goods = TradeGood.create_new!("Communal Goods", "Working to tie communities together", community_centre, [[basic_consumables, 4],[pharma, 3]])
 
 ## District 3 (knowledge)
 
@@ -201,10 +201,10 @@ college = FacilityType.create_new!("College", "Education college", district3, {}
 hospital = FacilityType.create_new!("Hospital", "Emergency health care facility", district3, {})
 nursing_home = FacilityType.create_new!("Nursing Home", "Long-term care facility", district3, {})
 
-health_kit = TradeGood.create_new!("Health Kit", "Improves public health", hospital, [[pharma, 1]])
-nurse_bot = TradeGood.create_new!("Nurse Bot", "Increases social care in districts", nursing_home, [[robots, 1],[health_kit, 1]])
-basic_education = TradeGood.create_new!("Basic Education", "Standard education for children", school, [[basic_electronics, 1]])
-advanced_education = TradeGood.create_new!("Advanced Education", "Education for the bright and determined", college, [[advanced_electronics, 1], [basic_education, 1]])
+health_kit = TradeGood.create_new!("Health Kit", "Improves public health", hospital, [[pharma, 11]])
+nurse_bot = TradeGood.create_new!("Nurse Bot", "Increases social care in districts", nursing_home, [[robots, 1],[health_kit, 10]])
+basic_education = TradeGood.create_new!("Basic Education", "Standard education for children", school, [[basic_electronics, 11]])
+advanced_education = TradeGood.create_new!("Advanced Education", "Education for the bright and determined", college, [[advanced_electronics, 3], [basic_education, 8]])
 
 ## District 2 (finance / business)
 

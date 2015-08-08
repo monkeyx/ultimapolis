@@ -7,6 +7,7 @@
       <th></th>
       <th>Name</th>
       <th>Produced In</th>
+      <th>Raw Materials</th>
       <th>For Sale</th>
       <th colspan="3"></th>
     </tr>
@@ -18,6 +19,11 @@
         <td><!--<%=image_tag(trade_good.icon)%>--></td>
         <td><%= link_to trade_good.name, trade_good %></td>
         <td><%= link_to trade_good.facility_type.name, trade_good.facility_type %></td>
+        <td>
+          <% trade_good.trade_good_raw_materials.each do |raw_material| %>
+          <%=link_to(raw_material.raw_material.to_s, raw_material.raw_material)%> x <%=raw_material.quantity%> &nbsp;
+          <% end %>
+        </td>
         <td>
           <% if trade_good.for_sale > 0 %>
           <%= trade_good.for_sale %> @ <%=format_currency trade_good.exchange_price %>
