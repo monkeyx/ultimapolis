@@ -18,6 +18,7 @@ class Facility < ActiveRecord::Base
     before_save :choose_default_producing
     before_save :deduct_costs!
     after_destroy :recoup_value!
+    after_create :use_free_land!
     
     scope :for_citizen, ->(citizen) { where(citizen_id: citizen.id )}
     scope :with_facility_types, ->(facility_types) { where(["facility_type_id in (?)", facility_types.map{|ft| ft.id }])}
@@ -68,6 +69,10 @@ class Facility < ActiveRecord::Base
         "#{facility_type && facility_type.name} \##{id}"
     end
 
+    def maintenance_cost
+        @maintenance_cost ||= (facility_type.maintenance_cost * self.level)
+    end
+
     def build_cost
         @build_cost ||= (facility_type.build_cost + facility_type.district.land_cost)
     end
@@ -100,8 +105,9 @@ class Facility < ActiveRecord::Base
                     errors.add(:facility_type, "is too expensive to build (need #{build_cost} credits)")
                 end
             else
-                if level_changed? && citizen.credits < upgrade_cost(level - level_was)
-                    errors.add(:level, "is too expensive to upgrade to #{level} (need #{upgrade_cost((level - level_was))} credits)")
+                if level_changed? && citizen.credits < upgrade_cost(level - level_was, level_was)
+                    errors.add(:level, "is too expensive to upgrade to #{level} (need #{upgrade_cost((level - level_was), level_was)} credits)")
+                    self.level = level_was
                 end
             end
         end
@@ -124,8 +130,8 @@ class Facility < ActiveRecord::Base
         if new_record?
             citizen.credits -= build_cost
             citizen.save!
-        elsif level_changed?
-            citizen.credits -= upgrade_cost(level - level_was)
+        elsif level_changed? && (diff = (level - level_was)) > 0
+            citizen.credits -= upgrade_cost(diff, level_was)
             citizen.save!
         end
     end
@@ -133,5 +139,26 @@ class Facility < ActiveRecord::Base
     def recoup_value!
         citizen.credits += value 
         citizen.save!
+    end
+
+    def use_free_land!
+        self.facility_type.district.update_attributes!(free_land: self.facility_type.district.free_land - 1)
+    end
+
+    def turn_update!
+        transaction do
+            if self.citizen.credits < maintenance_cost
+                self.maintained = false
+            else
+                self.citizen.credits -= maintenance_cost
+            end
+            self.powered = rand(100) < Global.singleton.powered_chance
+
+            if self.powered && self.maintained
+                # TODO do production
+            end
+
+            save!
+        end
     end
 end

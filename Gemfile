@@ -20,6 +20,7 @@ gem 'bootstrap-sass'
 gem 'bootswatch-rails'
 gem 'acts-as-taggable-on'
 gem 'blogit'
+gem 'ruby-progressbar'
 
 group :development, :test do
   gem 'byebug'

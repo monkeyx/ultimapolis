@@ -18,6 +18,7 @@ class FacilityType < ActiveRecord::Base
 	has_many :facilities
 
 	scope :for_district, ->(district) { where(district_id: district.id ) }
+	scope :in_districts, ->(districts) { where(["district_id in (?)", districts.map{|d| d.id }])}
 	scope :buildable, -> { where(["district_id in (?)", District.has_free_land.select{|d| d.land_cost > 0 }.map{|d| d.id}]) }
 	scope :build_cost_less_or_equal_to, ->(credits) { where(["build_cost <= ?", credits])}
 	scope :power_generator, -> { where("power_generation > 0")}

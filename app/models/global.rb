@@ -55,11 +55,16 @@ class Global < ActiveRecord::Base
 	end
 
 	def turn_update!
-		# Power
-		self.power = Facility.with_facility_types(FacilityType.power_generator).to_a.sum do |f|
-			f.level * f.facility_type.power_generation
+		transaction do
+			# TODO Create snapshot
+			self.turn += 1
+			# Power
+			self.power = Facility.with_facility_types(FacilityType.power_generator).to_a.sum do |f|
+				f.level * f.facility_type.power_generation
+			end
+			# TODO Global Effects
+			save!
 		end
-		save!
 	end
 
 end

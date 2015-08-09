@@ -2,7 +2,7 @@ class DistrictEffectsController < ApplicationController
   before_action :set_district_effect, only: [:show]
   load_and_authorize_resource
 
- # GET /district_effects/1
+  # GET /district_effects/1
   # GET /district_effects/1.json
   def show
   end

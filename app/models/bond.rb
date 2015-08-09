@@ -45,4 +45,8 @@ class Bond < ActiveRecord::Base
 			self.matures_on = Global::YEAR_OF_TURNS * 10
 		end
 	end
+
+	def turn_update!
+		# TODO
+	end
 end

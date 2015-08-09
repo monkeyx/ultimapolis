@@ -10,7 +10,7 @@ class LoansController < ApplicationController
   # GET /loans/new
   def new
     @breadcrumbs = [["Home", root_url], [current_user.citizen,"/citizens/#{current_user.citizen.id}?tab=finances"]]
-    @loan = Loan.new
+    @loan = Loan.new(value: current_user.citizen.maximum_loan)
   end
 
   # POST /loans

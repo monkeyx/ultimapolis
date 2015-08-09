@@ -43,4 +43,8 @@ class Loan < ActiveRecord::Base
 			self.matures_on = Global::YEAR_OF_TURNS * 5
 		end
 	end
+
+	def turn_update!
+		# TODO
+	end
 end

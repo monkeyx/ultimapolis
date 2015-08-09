@@ -31,6 +31,8 @@ class Event < ActiveRecord::Base
 	has_many :projects
 	has_one :previous_event, foreign_key: 'trigger_after_event_id', class_name: 'Event'
 
+	scope :current, -> { where(current: true )}
+
 	def self.current_opportunity
 		@@current_opportunity ||= Event.where(event_type: 'Opportunity', current: true).first
 	end

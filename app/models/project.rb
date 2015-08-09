@@ -64,4 +64,8 @@ class Project < ActiveRecord::Base
 			end
 		end
 	end
+
+	def turn_update!
+		# TODO
+	end
 end

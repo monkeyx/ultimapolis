@@ -1,5 +1,5 @@
 # Initial Admin
-admin = User.create!(email: 'admin@ultimapolis.com', password: 'password', password_confirmation: 'password', role: 'admin')
+admin_user = User.create!(email: 'admin@ultimapolis.com', password: 'password', password_confirmation: 'password', role: 'admin')
 
 # Global
 
@@ -48,7 +48,6 @@ gangster = Profession.create_new!("Gangster", "Rogue", "The legion that belong t
 professor = Profession.create_new!("Professor", "Scientist", "Boffins who work in the Universal Foundation teaching and publishing thesis")
 doctor = Profession.create_new!("Doctor", "Scientist", "Scientist that specialises in medicine")
 
-
 # Skills
 
 admin = Skill.create_new!("Admin", "Business", "Managing bureaucracies, planning, tracking inventories, manifests and other records", management, retailer, civic)
@@ -93,20 +92,18 @@ craft = Skill.create_new!("Craft", "Business", "Producing useful goods or servic
 
 # Districts
 
-district1 = District.create_new!("District 1", "The administration centre and home to the technoracy that governs Ultimapolis", leadership, {total_land: 1000, free_land: 1000, health: 100, policing: 100, environment: 90, education: 75, community: 10, creativity: 90, aesthetics: 100, crime: 0, corruption: 50})
-district2 = District.create_new!("District 2", "The financial district and home to the MegaCorporation HQ", admin, {total_land: 1000, free_land: 1000, health: 100, policing: 100, environment: 80, education: 75, community: 10, creativity: 75, aesthetics: 50, crime: 5, corruption: 50})
-district3 = District.create_new!("District 3", "The campus of the Universal Foundation of Higher Learning", advocacy, {total_land: 3000, free_land: 3000, health: 100, environment: 75, education: 100, creativity: 100, aesthetics: 75})
-district4 = District.create_new!("District 4", "The great exurbs where the vast majority of the population live", steward, {transport_capacity: 1000, civilians: 1000, housing: 1000, creativity: 10, aesthetics: 25})
-district5 = District.create_new!("District 5", "The light industrial district where finished consumer goods are produced", craft, {automatons: 500, social: 5, education: 25, community: 10, creativity: 25})
-district6 = District.create_new!("District 6", "The heavy manufacturing district where raw goods are made into useful components", engineering, {automatons: 2500, social: 5, environment: 30, education: 25, community: 10, creativity: 5})
-district7 = District.create_new!("District 7", "The outskirt district which is home to power generation and dirty polluting industries", mechanics, {total_land: 15000, free_land: 15000, automatons: 5000, health: 10, social: 0, environment: 10, education: 10, community: 10, aesthetics: 0})
-district8 = District.create_new!("District 8", "The far district which is home to the automated farmlands that feeds Ultimapolis", farming, {total_land: 10000, free_land: 10000, automatons: 5000, health: 75, social: 5, environment: 60, education: 10, aesthetics: 5})
-district9 = District.create_new!("District 9", "The remote district which is home to the mining and excavation industries", demolitions, {total_land: 10000, free_land: 10000, automatons: 5000, health: 25, social: 0, environment: 30, education: 10, community: 10, aesthetics: 5, crime: 25})
-wastelands = District.create_new!("Wastelands", "Beyond the borders of Ultimapolis", combat, {total_land: 0, free_land: 0, automatons: 0, health: 0, social: 0, environment: 0, education: 0, community: 0, aesthetics: 0, crime: 100})
+district1 = District.create_new!("District 1", "The administration centre and home to the technoracy that governs Ultimapolis", leadership, {total_land: 100, free_land: 100, health: 100, policing: 100, environment: 90, education: 75, community: 10, creativity: 90, aesthetics: 100, crime: 0, corruption: 50})
+district2 = District.create_new!("District 2", "The financial district and home to the MegaCorporation HQ", admin, {total_land: 100, free_land: 100, health: 100, policing: 100, environment: 80, education: 75, community: 10, creativity: 75, aesthetics: 50, crime: 5, corruption: 50})
+district3 = District.create_new!("District 3", "The campus of the Universal Foundation of Higher Learning", advocacy, {total_land: 100, free_land: 100, health: 100, environment: 75, education: 100, creativity: 100, aesthetics: 75})
+district4 = District.create_new!("District 4", "The great exurbs where the vast majority of the population live", steward, {transport_capacity: 1000, housing: 1000, creativity: 10, aesthetics: 25})
+district5 = District.create_new!("District 5", "The light industrial district where finished consumer goods are produced", craft, {social: 5, education: 25, community: 10, creativity: 25})
+district6 = District.create_new!("District 6", "The heavy manufacturing district where raw goods are made into useful components", engineering, {social: 5, environment: 30, education: 25, community: 10, creativity: 5})
+district7 = District.create_new!("District 7", "The outskirt district which is home to power generation and dirty polluting industries", mechanics, {total_land: 500, free_land: 500, health: 10, social: 0, environment: 10, education: 10, community: 10, aesthetics: 0})
+district8 = District.create_new!("District 8", "The far district which is home to the automated farmlands that feeds Ultimapolis", farming, {total_land: 1000, free_land: 1000, health: 75, social: 5, environment: 60, education: 10, aesthetics: 5})
+district9 = District.create_new!("District 9", "The remote district which is home to the mining and excavation industries", demolitions, {total_land: 1000, free_land: 1000, health: 25, social: 0, environment: 30, education: 10, community: 10, aesthetics: 5, crime: 25})
+wastelands = District.create_new!("Wastelands", "Beyond the borders of Ultimapolis", combat, {total_land: 0, free_land: 0, housing: 0, health: 0, social: 0, environment: 0, education: 0, community: 0, aesthetics: 0, crime: 100})
 
-# Facility Types
-
-# Trade Goods
+# Facility Types / Trade Goods
 
 ## Wastelands
 
@@ -267,3 +264,34 @@ EquipmentType.create_new!("Charisma Glands", "Implanted artificial glands that e
 EquipmentType.create_new!("Personality Suppressant", "Self-worth depressants", biolab, steward, 2, [[pharma, 1]])
 EquipmentType.create_new!("Reality Simulator", "Holo simulator with n-dimensional probability matrix", techlab, tactics, 2, [[advanced_electronics, 1]])
 EquipmentType.create_new!("Specialised Tools", "Multi-purpose crafting tools", advanced_factory, craft, 2, [[advanced_manufactured, 1]])
+
+#
+# Citizens
+#
+
+# Aristocrats 
+
+(1..25).each do
+	c = Citizen.create!(credits: 1000000, home_district: district1, current_profession: politico, user: admin_user)
+	Facility.create!(citizen: c, facility_type: dense_housing, level: 10)
+	Facility.create!(citizen: c, facility_type: basic_housing, level: 5)
+	puts c
+end
+
+CAPITAL_DISTRICTS = [district5, district6, district7, district8, district9]
+# Capitalists
+(1..50).each do
+	c = Citizen.create!(credits: 1000000, home_district: district2, current_profession: management, user: admin_user)
+	(1..3).each do |n|
+		ft = FacilityType.buildable.in_districts(CAPITAL_DISTRICTS).to_a.sample
+		Facility.create!(citizen: c, facility_type: ft, level: (n * 5))
+	end
+	puts c
+end
+
+# Academics
+(1..25).each do
+	puts Citizen.create!(credits: 1000000, home_district: district3, current_profession: professor, user: admin_user)
+end
+
+

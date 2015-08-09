@@ -10,5 +10,9 @@ class CitizenCareer < ActiveRecord::Base
 	scope :current, -> { where(current: true )}
 
 	default_scope ->{ includes(:profession).order('career_index DESC') }
+
+	def turn_update!
+		# TODO
+	end
 	
 end

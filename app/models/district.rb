@@ -37,17 +37,17 @@ class District < ActiveRecord::Base
 			description: description,
 			skill: skill,
 			icon: "/icons/districts/#{name.gsub(' ', '_').downcase}.png",
-			total_land: 100000,
-			free_land: 100000,
-			transport_capacity: 1000,
-			civilians: 1000,
-			automatons: 1000,
+			total_land: 1000,
+			free_land: 1000,
+			transport_capacity: 500,
+			civilians: 0,
+			automatons: 0,
 			unrest: 0,
 			health: 50,
 			policing: 50,
 			social: 25,
 			environment: 50,
-			housing: 1000,
+			housing: 500,
 			education: 50,
 			community: 50,
 			creativity: 0,
@@ -71,7 +71,7 @@ class District < ActiveRecord::Base
 	end
 
 	def free_land_ratio
-		@free_land_ratio ||= (total_land == 0 ? 0 : (free_land / total_land))
+		@free_land_ratio ||= (total_land == 0 ? 0 : (free_land.to_f / total_land.to_f))
 	end
 
 	def land_usage
@@ -106,13 +106,18 @@ class District < ActiveRecord::Base
 	end
 
 	def turn_update!
-		# Population / automatons
-		self.civilians = 0
-		self.automatons = 0
-		Facility.for_district(self).each do |f|
-			self.civilians += (f.facility_type.employees * f.level)
-			self.automatons += (f.facility_type.automation * f.level)
+		transaction do
+			# TODO Create snapshot
+			# Population / automatons
+			self.civilians = 0
+			self.automatons = 0
+			Facility.for_district(self).each do |f|
+				self.civilians += (f.facility_type.employees * f.level)
+				self.automatons += (f.facility_type.automation * f.level)
+			end
+
+			# TODO District effects
+			save!
 		end
-		save!
 	end
 end

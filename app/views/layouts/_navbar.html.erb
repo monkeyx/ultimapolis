@@ -34,6 +34,7 @@
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
               <% if current_citizen %>
+                <li><a><%=format_currency(current_citizen.credits) %></a></li>
                 <li class="<% if is_navigation_active?('Users') %>active<% end %> dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=current_citizen %> <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
