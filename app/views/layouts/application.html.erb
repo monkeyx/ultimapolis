@@ -6,6 +6,24 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <link rel="shortcut icon" type="image/png" href="/images/favicon.png"/>
+  <meta name="ROBOTS" content="NOODP">
+  <meta charset="utf-8">
+  <meta name="description" content="Ultimapolis is a persistent browser-based game which sumulates the workings of a single futuristic city. Citizens run by players compete and collaborate to deal with new crisis and opportunities whilst expanding their own pool of knowledge (skills) and resources. The simulation is the foundation for a roleplaying game. There is no final objective to achieve and different citizens will have different ideas about what is the best for their city."/>
+  <link rel="author" href="https://github.com/monkeyx" />
+  <link rel="canonical" href="<%="http://#{request.host + request.fullpath}"%>" />
+  <meta property="og:url" content="<%="http://#{request.host + request.fullpath}"%>">
+  <meta property="og:image" content="/images/share.png">
+  <meta property="og:description" content="Ultimapolis is a persistent browser-based game which sumulates the workings of a single futuristic city. Citizens run by players compete and collaborate to deal with new crisis and opportunities whilst expanding their own pool of knowledge (skills) and resources. The simulation is the foundation for a roleplaying game. There is no final objective to achieve and different citizens will have different ideas about what is the best for their city.">
+  <meta property="og:title" content="<%=content_for(:title)%>">
+  <meta property="og:site_name" content="Ultimapolis: The Future City Simulation">
+  <meta property="og:see_also" content="<%="http://#{request.host}"%>">
+  <meta itemprop="name" content="<%=content_for(:title)%>">
+  <meta itemprop="image" content="/images/share.png">
+  <meta name="twitter:card" content="Ultimapolis: The Future City Simulation">
+  <meta name="twitter:url" content="<%="http://#{request.host + request.fullpath}"%>">
+  <meta name="twitter:title" content="<%=content_for(:title)%>">
+  <meta name="twitter:description" content="Ultimapolis is a persistent browser-based game which sumulates the workings of a single futuristic city. Citizens run by players compete and collaborate to deal with new crisis and opportunities whilst expanding their own pool of knowledge (skills) and resources. The simulation is the foundation for a roleplaying game. There is no final objective to achieve and different citizens will have different ideas about what is the best for their city.">
+  <meta name="twitter:image" content="/images/share.png">
 </head>
 <body>
 	<div class="container">
