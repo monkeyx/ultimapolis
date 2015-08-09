@@ -18,9 +18,11 @@ class Facility < ActiveRecord::Base
     before_save :choose_default_producing
     before_save :deduct_costs!
     after_destroy :recoup_value!
-
+    
     scope :for_citizen, ->(citizen) { where(citizen_id: citizen.id )}
+    scope :with_facility_types, ->(facility_types) { where(["facility_type_id in (?)", facility_types.map{|ft| ft.id }])}
     scope :for_facility_type, ->(facility_type) { where(facility_type_id: facility_type.id )}
+    scope :for_district, ->(district) { with_facility_types(FacilityType.for_district(district)) }
 
     default_scope ->{ includes(:facility_type).order('facility_types.name ASC') }
 
@@ -35,6 +37,18 @@ class Facility < ActiveRecord::Base
     		level: 1,
             build_for_free: build_for_free
     	)
+    end
+
+    def rent_income
+        @rent_income ||= self.facility_type.rent_income * self.level
+    end
+
+    def housing_mod
+        @housing_mod ||= self.facility_type.housing_mod * self.level
+    end
+
+    def power_generation_income
+        @power_generation_income ||= self.facility_type.power_generation_income * self.level
     end
 
     def value

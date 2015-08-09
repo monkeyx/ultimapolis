@@ -6,7 +6,7 @@ module GlobalStatus
 	end
 
 	def status_grid_overpowered?
-		power > grid
+		grid < 50
 	end
 
 	def status_instability?

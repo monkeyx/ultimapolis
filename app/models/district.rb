@@ -104,4 +104,15 @@ class District < ActiveRecord::Base
 		@metrics = @metrics.sort{|a,b| a[0] <=> b[0]}
 		@metrics
 	end
+
+	def turn_update!
+		# Population / automatons
+		self.civilians = 0
+		self.automatons = 0
+		Facility.for_district(self).each do |f|
+			self.civilians += (f.facility_type.employees * f.level)
+			self.automatons += (f.facility_type.automation * f.level)
+		end
+		save!
+	end
 end

@@ -17,10 +17,12 @@ class FacilityType < ActiveRecord::Base
 	has_many :trade_goods
 	has_many :facilities
 
-	scope :for_district, ->(district) { where(district_id: district.id )}
-
+	scope :for_district, ->(district) { where(district_id: district.id ) }
 	scope :buildable, -> { where(["district_id in (?)", District.has_free_land.select{|d| d.land_cost > 0 }.map{|d| d.id}]) }
 	scope :build_cost_less_or_equal_to, ->(credits) { where(["build_cost <= ?", credits])}
+	scope :power_generator, -> { where("power_generation > 0")}
+	scope :power_consumer, -> { where("power_consumption > 0")}
+	scope :housing, -> { where("housing_mod > 0")}
 
 	default_scope ->{ order('name ASC') }
 
@@ -45,6 +47,14 @@ class FacilityType < ActiveRecord::Base
 
 	def self.buildable_and_affordable(credits)
 		FacilityType.buildable.build_cost_less_or_equal_to(credits).select{|ft| credits >= (ft.build_cost + ft.district.land_cost)}
+	end
+
+	def rent_income
+		@rent_income ||= (Global.singleton.rent_income * self.housing_mod)
+	end
+
+	def power_generation_income
+		@power_generation_income ||= (Global.singleton.power_generation_income * self.power_generation)
 	end
 
 	def defaultable_trade_goods

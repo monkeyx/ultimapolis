@@ -38,6 +38,12 @@
           <% if facility.producing_equipment_type %>
           <%=link_to facility.producing_equipment_type.to_s, facility.producing_equipment_type %><br/>
           <% end %>
+          <% if facility.facility_type.power_generation > 0 %>
+          <%= format_currency(facility.power_generation_income) %>
+          <% end %>
+          <% if facility.facility_type.housing_mod > 0 %>
+          <%= format_currency(facility.rent_income) %>
+          <% end %>
         </td>
         <% if current_citizen && current_citizen.owns_facility?(facility) %>
         <td><%= link_to 'Manage', edit_facility_path(facility), class: 'btn btn-primary' %></td>
