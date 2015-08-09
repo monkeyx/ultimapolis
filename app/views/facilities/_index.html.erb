@@ -19,6 +19,7 @@
       <th>Maintained</th>
       <th>Level</th>
       <th>Producing</th>
+      <th>Maintaineance</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -44,6 +45,9 @@
           <% if facility.facility_type.housing_mod > 0 %>
           <%= format_currency(facility.rent_income) %>
           <% end %>
+        </td>
+        <td>
+          <%= format_currency(facility.maintenance_cost) %>
         </td>
         <% if current_citizen && current_citizen.owns_facility?(facility) %>
         <td><%= link_to 'Manage', edit_facility_path(facility), class: 'btn btn-primary' %></td>

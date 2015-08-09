@@ -9,6 +9,10 @@ module GlobalStatus
 		grid < 50
 	end
 
+	def status_power_shortage?
+		powered_chance < 100
+	end
+
 	def status_instability?
 		stability < 25
 	end
@@ -34,6 +38,7 @@ module GlobalStatus
 		@notes = []
 		@notes << "Poor infrastructure" if status_poor_infrastructure?
 		@notes << "Grid black outs" if status_grid_overpowered?
+		@notes << "Power shortages (#{100 - powered_chance} %)" if status_power_shortage?
 		@notes << "Rioting" if status_instability?
 		@notes << "Climate change" if status_climate_change?
 		@notes << "Revolution" if status_revolution?

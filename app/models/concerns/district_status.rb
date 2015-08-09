@@ -81,6 +81,10 @@ module DistrictStatus
 		Global.singleton.status_invasion?
 	end
 
+	def status_power_shortage?
+		Global.singleton.status_power_shortage?
+	end
+
 	def notes
 		return @notes if defined?(@notes)
 		@notes = []
