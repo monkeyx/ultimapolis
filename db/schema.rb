@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806204107) do
+ActiveRecord::Schema.define(version: 20150809073659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,16 @@ ActiveRecord::Schema.define(version: 20150806204107) do
   end
 
   add_index "blogit_posts", ["blogger_type", "blogger_id"], name: "index_blogit_posts_on_blogger_type_and_blogger_id", using: :btree
+
+  create_table "bonds", force: :cascade do |t|
+    t.integer  "citizen_id"
+    t.integer  "value",      limit: 8
+    t.integer  "issued_on"
+    t.integer  "matures_on"
+    t.integer  "interest"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
   create_table "citizen_careers", force: :cascade do |t|
     t.integer  "citizen_id"
@@ -87,18 +97,18 @@ ActiveRecord::Schema.define(version: 20150806204107) do
   add_index "citizen_trade_goods", ["citizen_id", "trade_good_id"], name: "index_citizen_trade_goods_on_citizen_id_and_trade_good_id", using: :btree
 
   create_table "citizens", force: :cascade do |t|
-    t.boolean  "email_notifications",   default: true
-    t.boolean  "daily_updates",         default: false
-    t.boolean  "instant_updates",       default: true
-    t.integer  "credits",               default: 0
+    t.boolean  "email_notifications",             default: true
+    t.boolean  "daily_updates",                   default: false
+    t.boolean  "instant_updates",                 default: true
+    t.integer  "credits",               limit: 8, default: 0
     t.integer  "home_district_id"
     t.integer  "current_profession_id"
-    t.integer  "profession_rank",       default: 0
+    t.integer  "profession_rank",                 default: 0
     t.integer  "current_project_id"
     t.string   "icon"
     t.integer  "user_id"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   add_index "citizens", ["current_project_id"], name: "index_citizens_on_current_project_id", using: :btree
@@ -136,6 +146,32 @@ ActiveRecord::Schema.define(version: 20150806204107) do
 
   add_index "district_effects", ["district_id", "active"], name: "index_district_effects_on_district_id_and_active", using: :btree
   add_index "district_effects", ["district_id", "started_on", "expires_on"], name: "district_effects_turn", using: :btree
+
+  create_table "district_snapshots", force: :cascade do |t|
+    t.integer  "district_id"
+    t.integer  "turn"
+    t.integer  "total_land",         default: 0
+    t.integer  "free_land",          default: 0
+    t.integer  "transport_capacity", default: 0
+    t.integer  "civilians",          default: 0
+    t.integer  "automatons",         default: 0
+    t.integer  "unrest",             default: 0
+    t.integer  "health",             default: 0
+    t.integer  "policing",           default: 0
+    t.integer  "social",             default: 0
+    t.integer  "environment",        default: 0
+    t.integer  "housing",            default: 0
+    t.integer  "education",          default: 0
+    t.integer  "community",          default: 0
+    t.integer  "creativity",         default: 0
+    t.integer  "aesthetics",         default: 0
+    t.integer  "crime",              default: 0
+    t.integer  "corruption",         default: 0
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "district_snapshots", ["district_id", "turn"], name: "index_district_snapshots_on_district_id_and_turn", using: :btree
 
   create_table "districts", force: :cascade do |t|
     t.string   "name"
@@ -300,21 +336,42 @@ ActiveRecord::Schema.define(version: 20150806204107) do
   add_index "global_effects", ["active"], name: "index_global_effects_on_active", using: :btree
   add_index "global_effects", ["started_on", "expires_on"], name: "index_global_effects_on_started_on_and_expires_on", using: :btree
 
+  create_table "global_snapshots", force: :cascade do |t|
+    t.integer  "infrastructure",           default: 0
+    t.integer  "grid",           limit: 8, default: 0
+    t.integer  "power",          limit: 8, default: 0
+    t.integer  "stability",                default: 0
+    t.integer  "climate",                  default: 0
+    t.integer  "liberty",                  default: 0
+    t.integer  "security",                 default: 0
+    t.integer  "borders",                  default: 0
+    t.integer  "turn",                     default: 0
+    t.integer  "inflation",                default: 0
+    t.integer  "citizens",                 default: 0
+    t.integer  "gdp",            limit: 8, default: 0
+    t.integer  "interest",                 default: 0
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "global_snapshots", ["turn"], name: "index_global_snapshots_on_turn", using: :btree
+
   create_table "globals", force: :cascade do |t|
-    t.integer  "infrastructure", default: 0
-    t.integer  "grid",           default: 0
-    t.integer  "power",          default: 0
-    t.integer  "stability",      default: 0
-    t.integer  "climate",        default: 0
-    t.integer  "liberty",        default: 0
-    t.integer  "security",       default: 0
-    t.integer  "borders",        default: 0
-    t.integer  "turn",           default: 0
-    t.integer  "inflation",      default: 0
-    t.integer  "citizens",       default: 0
-    t.integer  "gdp",            default: 0
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "infrastructure",           default: 0
+    t.integer  "grid",           limit: 8, default: 0
+    t.integer  "power",          limit: 8, default: 0
+    t.integer  "stability",                default: 0
+    t.integer  "climate",                  default: 0
+    t.integer  "liberty",                  default: 0
+    t.integer  "security",                 default: 0
+    t.integer  "borders",                  default: 0
+    t.integer  "turn",                     default: 0
+    t.integer  "inflation",                default: 0
+    t.integer  "citizens",                 default: 0
+    t.integer  "gdp",            limit: 8, default: 0
+    t.integer  "interest",                 default: 0
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   create_table "help_topics", force: :cascade do |t|
@@ -324,6 +381,16 @@ ActiveRecord::Schema.define(version: 20150806204107) do
     t.text     "body"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "loans", force: :cascade do |t|
+    t.integer  "citizen_id"
+    t.integer  "value",      limit: 8
+    t.integer  "issued_on"
+    t.integer  "matures_on"
+    t.integer  "interest"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "professions", force: :cascade do |t|

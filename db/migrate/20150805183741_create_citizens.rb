@@ -4,7 +4,7 @@ class CreateCitizens < ActiveRecord::Migration
       t.boolean :email_notifications, default: true
       t.boolean :daily_updates, default: false
       t.boolean :instant_updates, default: true
-      t.integer :credits, default: 0
+      t.bigint :credits, default: 0
       t.integer :home_district_id
       t.integer :current_profession_id
       t.integer :profession_rank, default: 0

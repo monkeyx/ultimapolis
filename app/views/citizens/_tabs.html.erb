@@ -3,6 +3,7 @@
   <li class="<%=(current_tab == 'inventory' ? 'active' : '')%>"><a href="#inventory" data-toggle="tab" aria-expanded="true">Inventory</a></li>
   <li class="<%=(current_tab == 'facilities' ? 'active' : '')%>"><a href="#facilities" data-toggle="tab" aria-expanded="true">Facilities</a></li>
   <li class="<%=(current_tab == 'projects' ? 'active' : '')%>"><a href="#projects" data-toggle="tab" aria-expanded="true">Projects</a></li>
+  <li class="<%=(current_tab == 'finances' ? 'active' : '')%>"><a href="#finances" data-toggle="tab" aria-expanded="true">Finances</a></li>
   <% if can?(:edit, @citizen)%>
   <li class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -11,6 +12,9 @@
     <ul class="dropdown-menu">
       <li><%= link_to 'Build Facility', new_facility_path %></li>
       <li><%= link_to 'Change Profession', edit_citizen_path(@citizen)%></li>
+      <li class="divider"></li>
+      <li><%= link_to 'Buy a Bond', new_bond_path %></li>
+      <li><%= link_to 'Take a Loan', new_loan_path %></li>
     </ul>
   </li>
   <% end %>
@@ -27,5 +31,8 @@
   </div>
   <div class="tab-pane fade <%=(current_tab == 'projects' ? 'active in' : '')%>" id="projects">
     <%=render partial: '/projects/index' %>
+  </div>
+  <div class="tab-pane fade <%=(current_tab == 'finances' ? 'active in' : '')%>" id="finances">
+    <%=render partial: '/citizens/finances' %>
   </div>
 </div>

@@ -14,6 +14,7 @@ class Facility < ActiveRecord::Base
 
     before_save :choose_default_producing
     before_save :deduct_costs!
+    after_destroy :recoup_value!
 
     scope :for_citizen, ->(citizen) { where(citizen_id: citizen.id )}
     scope :for_facility_type, ->(facility_type) { where(facility_type_id: facility_type.id )}
@@ -33,6 +34,15 @@ class Facility < ActiveRecord::Base
     	)
     end
 
+    def value
+        return @total_value if defined?(@total_value)
+        @total_value = build_cost
+        self.level.times do |n|
+            @total_value += upgrade_cost(1, n) if n > 1
+        end
+        @total_value
+    end
+
     def producer?
         @is_producer ||= facility_type && facility_type.produceable.count > 0
     end
@@ -45,11 +55,11 @@ class Facility < ActiveRecord::Base
         @build_cost ||= (facility_type.build_cost + facility_type.district.land_cost)
     end
 
-    def upgrade_cost(levels=1)
+    def upgrade_cost(levels=1, from_level=self.level)
         cost = 0
-        target_level = self.level + levels
-        level = self.level
-        while level <= target_level do 
+        target_level = from_level + levels
+        level = from_level
+        while level < target_level do 
             cost += (facility_type.build_cost * level)
             level += 1
         end 
@@ -95,5 +105,10 @@ class Facility < ActiveRecord::Base
             citizen.credits -= upgrade_cost(level - level_was)
             citizen.save!
         end
+    end
+
+    def recoup_value!
+        citizen.credits += value 
+        citizen.save!
     end
 end

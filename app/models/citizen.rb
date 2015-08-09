@@ -20,12 +20,27 @@ class Citizen < ActiveRecord::Base
 	has_many :facilities
 	has_many :projects, foreign_key: 'leader_id'
 	has_many :project_members
+	has_many :bonds
+	has_many :loans
 
 	after_create :set_initial_skills!
 	after_create :create_free_facility!
 	after_create :increment_citizen_count!
 	after_save :check_careers!
 	after_destroy :decrease_citizen_count!
+
+	def maximum_loan
+		net_worth - self.credits
+	end
+
+	def net_worth
+		@net_worth ||= (self.credits + 
+			citizen_equipment.to_a.sum{|e| e.value} +
+			citizen_trade_goods.to_a.sum{|tg| tg.value } +
+			facilities.to_a.sum{|f| f.value } + 
+			bonds.to_a.sum{|b| b.total_value}) -
+			loans.to_a.sum{|l| l.total_value }
+	end
 
 	def dealing_with_event?(event)
 		Project.for_event(event).for_citizen(self).count > 0

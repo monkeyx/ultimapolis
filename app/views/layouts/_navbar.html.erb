@@ -41,9 +41,13 @@
                     <li><%=link_to 'Inventory', "#{main_app.citizen_path(current_citizen)}?tab=inventory" %></li>
                     <li><%=link_to 'Facilities', "#{main_app.citizen_path(current_citizen)}?tab=facilities" %></li>
                     <li><%=link_to 'Projects', "#{main_app.citizen_path(current_citizen)}?tab=projects" %></li>
+                    <li><%=link_to 'Finances', "#{main_app.citizen_path(current_citizen)}?tab=finances" %></li>
                     <li class="divider"></li>
                     <li><%= link_to 'Build Facility', main_app.new_facility_path %></li>
                     <li><%= link_to 'Change Profession', main_app.edit_citizen_path(current_citizen)%></li>
+                    <li class="divider"></li>
+                    <li><%= link_to 'Buy a Bond', main_app.new_bond_path %></li>
+                    <li><%= link_to 'Take a Loan', main_app.new_loan_path %></li>
                     <li class="divider"></li>
                     <li><%=link_to 'Sign Out', main_app.destroy_user_session_path, :method => :delete %></li>
                   </ul>

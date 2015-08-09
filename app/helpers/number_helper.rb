@@ -20,7 +20,7 @@ module NumberHelper
 		if n.nil? || n < 0
 			"Never"
 		else
-			y = 2300 + (n / 4).to_i
+			y = 2300 + (n / 12).to_i
 			s = case (n % 12)
 			when 0
 				"Undember"

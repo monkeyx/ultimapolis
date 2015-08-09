@@ -1,7 +1,4 @@
-class Global < ActiveRecord::Base
-	include GlobalStatus
-
-	YEAR_OF_TURNS = 12
+class GlobalSnapshot < ActiveRecord::Base
 	
 	validates :infrastructure, numericality: {only_integer: true}
 	validates :grid, numericality: {only_integer: true}
@@ -15,10 +12,5 @@ class Global < ActiveRecord::Base
 	validates :inflation, numericality: {only_integer: true}
 	validates :citizens, numericality: {only_integer: true}
 	validates :gdp, numericality: {only_integer: true}
-	validates :interest, numericality: {only_integer: true}
-
-	def self.singleton
-		@singleton ||= Global.first
-	end	
 
 end

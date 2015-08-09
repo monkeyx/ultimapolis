@@ -1,0 +1,17 @@
+<h2>Finances</h2>
+
+<h3>Net Worth</h3>
+<p>
+  <%= format_currency @citizen.net_worth %>
+</p>
+
+<% if current_citizen && current_citizen.id == @citizen.id %>
+<h3>Credits</h3>
+<p>
+  <%= format_currency @citizen.credits %>
+</p>
+
+<%=render partial: '/loans/index' %>
+<%=render partial: '/bonds/index' %>
+<% end %>
+

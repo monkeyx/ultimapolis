@@ -5,7 +5,7 @@ module ApplicationHelper
 
 	def current_citizen_path(tab='profile')
 		@current_citizen_path ||= if current_citizen
-			"#{citizen_path(current_citizen)}?tab=profile"
+			"#{citizen_path(current_citizen)}?tab=#{tab}"
 		else
 			root_url
 		end

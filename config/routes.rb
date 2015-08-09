@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :projects, except: [:index, :show]
   resources  :project_members, only: [:new, :create, :destroy]
   resources :facilities, except: [:index]
+  resources :loans, except: [:index, :edit, :update, :show]
+  resources :bonds, except: [:index, :edit, :update, :show]
   
   resources :districts, only: [:index, :show] do 
     resources :district_effects, only: [:show]
