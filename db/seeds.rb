@@ -275,6 +275,7 @@ EquipmentType.create_new!("Specialised Tools", "Multi-purpose crafting tools", a
 	c = Citizen.create!(credits: 1000000, home_district: district1, current_profession: politico, user: admin_user)
 	Facility.create!(citizen: c, facility_type: dense_housing, level: 10)
 	Facility.create!(citizen: c, facility_type: basic_housing, level: 5)
+	c.citizen_skills.each{|skill| skill.rank = skill.rank + rand(4); skill.save! }
 	puts c
 end
 
@@ -286,12 +287,15 @@ CAPITAL_DISTRICTS = [district5, district6, district7, district8, district9]
 		ft = FacilityType.buildable.in_districts(CAPITAL_DISTRICTS).to_a.sample
 		Facility.create!(citizen: c, facility_type: ft, level: (n * 5))
 	end
+	c.citizen_skills.each{|skill| skill.rank = skill.rank + rand(4); skill.save! }
 	puts c
 end
 
 # Academics
 (1..25).each do
-	puts Citizen.create!(credits: 1000000, home_district: district3, current_profession: professor, user: admin_user)
+	c = Citizen.create!(credits: 1000000, home_district: district3, current_profession: professor, user: admin_user)
+	c.citizen_skills.each{|skill| skill.rank = skill.rank + rand(4); skill.save! }
+	puts c
 end
 
 
