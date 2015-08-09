@@ -10,8 +10,11 @@ class Facility < ActiveRecord::Base
 	belongs_to :producing_trade_good, class_name: 'TradeGood'
     belongs_to :producing_equipment_type, class_name: 'EquipmentType'
 
+    attr_accessor :levels
+
     validate :validate_facility
 
+    before_validation :increase_levels
     before_save :choose_default_producing
     before_save :deduct_costs!
     after_destroy :recoup_value!
@@ -38,7 +41,7 @@ class Facility < ActiveRecord::Base
         return @total_value if defined?(@total_value)
         @total_value = build_cost
         self.level.times do |n|
-            @total_value += upgrade_cost(1, n) if n > 1
+            @total_value += upgrade_cost(1, n)
         end
         @total_value
     end
@@ -87,6 +90,12 @@ class Facility < ActiveRecord::Base
                     errors.add(:level, "is too expensive to upgrade to #{level} (need #{upgrade_cost((level - level_was))} credits)")
                 end
             end
+        end
+    end
+
+    def increase_levels
+        if self.levels
+            self.level += levels.to_i
         end
     end
 

@@ -208,8 +208,8 @@ advanced_education = TradeGood.create_new!("Advanced Education", "Education for 
 
 ## District 2 (finance / business)
 
-small_bank = FacilityType.create_new!("Small Bank", "Small commercial bank", district2, {})
-large_bank = FacilityType.create_new!("Large Bank", "Major investment bank", district2, {})
+small_bank = FacilityType.create_new!("Small Bank", "Small commercial bank", district2, {maintenance_cost: 500})
+large_bank = FacilityType.create_new!("Large Bank", "Major investment bank", district2,  {build_cost: 10000, maintenance_cost: 5000})
 
 basic_infrastructure = TradeGood.create_new!("Basic Infrastructure", "Wiring, piping and structural infastructure", small_bank, [[robots, 10],[vehicles, 5],[alloys, 100],[polymers, 100],[bio_chems, 100], [wood, 100]])
 advanced_infrastructure = TradeGood.create_new!("Advanced Infrastructure", "High density infrastructure", large_bank, [[robots, 50],[vehicles, 25],[alloys, 500],[polymers, 500],[bio_chems, 500], [wood, 500], [radioactives, 10]])

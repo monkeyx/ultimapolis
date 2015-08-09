@@ -44,11 +44,9 @@ class FacilitiesController < ApplicationController
   # PATCH/PUT /facilities/1
   # PATCH/PUT /facilities/1.json
   def update
-    levels = params[:levels].blank? ? nil : params[:levels].to_i
-    @facility.level += levels
     respond_to do |format|
       if @facility.update(facility_params)
-        if levels > 0
+        if @facility.levels && @facility.levels.to_i > 0
           notice = 'Facility was successfully upgraded.'
         else
           notice = 'Facility was successfully managed.'
@@ -67,7 +65,7 @@ class FacilitiesController < ApplicationController
   def destroy
     @facility.destroy
     respond_to do |format|
-      format.html { redirect_to @facility.citizen, notice: 'Facility was successfully demolished.' }
+      format.html { redirect_to "/citizens/#{@facility.citizen.id}?tab=facilities", notice: 'Facility was successfully sold.' }
       format.json { head :no_content }
     end
   end
@@ -80,6 +78,6 @@ class FacilitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def facility_params
-      params.require(:facility).permit(:facility_type_id, :producing_trade_good_id, :producing_equipment_type_id)
+      params.require(:facility).permit(:facility_type_id, :producing_trade_good_id, :producing_equipment_type_id, :levels)
     end
 end
