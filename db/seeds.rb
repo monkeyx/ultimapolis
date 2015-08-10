@@ -298,4 +298,10 @@ end
 	puts c
 end
 
+#
+# Start the game
+#
+
+TurnEngine.turn!
+
 
