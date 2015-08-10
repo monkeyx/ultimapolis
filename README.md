@@ -1,6 +1,6 @@
 # Ultimapolis: The Future City Simulation
 
-[Website][http://www.ultimapolis.com]
+[Website](http://www.ultimapolis.com)
 
 ## Description
 
@@ -12,7 +12,7 @@ Pre-alpha development
 
 ## What's New
 
-See [commit log][https://github.com/monkeyx/ultimapolis/commits/master]
+See [commit log](https://github.com/monkeyx/ultimapolis/commits/master)
 
 ## ToDos
 
@@ -29,13 +29,13 @@ See [commit log][https://github.com/monkeyx/ultimapolis/commits/master]
 
 ## Issues
 
-See [issue tracker][https://github.com/monkeyx/ultimapolis/issues]
+See [issue tracker](https://github.com/monkeyx/ultimapolis/issues)
 
 ## Contributing
 
-See [contributing guidelines][https://github.com/monkeyx/ultimapolis/blob/master/CONTRIBUTING.md]
+See [contributing guidelines](https://github.com/monkeyx/ultimapolis/blob/master/CONTRIBUTING.md)
 
 ## License
 
-Distributed under the [MIT License (MIT)][https://raw.githubusercontent.com/monkeyx/ultimapolis/master/LICENSE]
+Distributed under the [MIT License (MIT)](https://raw.githubusercontent.com/monkeyx/ultimapolis/master/LICENSE)
 
