@@ -23,3 +23,8 @@
 <h2>Exchange Sale Listings</h2>
 <%= @equipment_type.for_sale %> @ <%= format_currency @equipment_type.exchange_price %>
 <% end %>
+
+<% content_for :help_title, "How do you use equipment?" %>
+<% content_for :help_body do %>
+Equipment is obtained by citizens either by buying it from the Exchange or producing it in one of their own facilities. Occassionally, the project leader who successfully handled a crisis or seized an opportunity will be awarded one as a sign of gratitude from the City Core Government. Equipment is used automatically if possessed whenever the relevant skill is needed. 
+<% end %>

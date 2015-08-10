@@ -62,3 +62,10 @@
   </fieldset>
 
 <% end %>
+
+<% if @facility.producer? %>
+  <% content_for :help_title, "Production" %>
+  <% content_for :help_body do %>
+  Most facilities are capable of producing trade goods and / or equipment. They can only produce one type of trade good and one type of equipment at a time. As long as the citizen has the raw materials (if any are required) to produce the item in question, the <%=@facility.facility_type%> will continue to produce the item at the rate of 1 per level of the facility.
+  <% end %>
+<% end %>

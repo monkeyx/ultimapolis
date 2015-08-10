@@ -1,0 +1,11 @@
+<% help_title = content_for(:help_title) %>
+<% if help_title %>
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%=help_title.html_safe%></h3>
+  </div>
+  <div class="panel-body">
+    <%=content_for(:help_body).html_safe%>
+  </div>
+</div>
+<% end %>

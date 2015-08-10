@@ -2,3 +2,8 @@
 <% content_for :lead, "<p class=\"lead\">You can borrow credits from the Central Bank up to your current net worth excluding credits in the bank. New loans require interest payments to be paid at the rate of #{format_rating(Global.singleton.interest)}. You can pay loans back early but all interest payments due must be paid along with the principal sum borrowed.</p>".html_safe %>
 
 <%= render 'form' %>
+
+<% content_for :help_title, "What are loans?" %>
+<% content_for :help_body do %>
+Loans are a way of borrowing credits against your other assets in return for interest paid on the principal sum borrowed. Interest rates are adjusted by the City Core Government to speed up or slow the economy. Higher rates benefit bond holders whilst lower rates benefit those wishing to take a loan.
+<% end %>

@@ -2,3 +2,8 @@
 <% content_for :lead, "<p class=\"lead\">#{@event.summary.html_safe}</p>".html_safe %>
 
 <%=render partial: '/events/table', locals: {event: @event} %>
+
+<% content_for :help_title, "What is a #{@event.event_type}?" %>
+<% content_for :help_body do %>
+The nature of life is that unforeseen events will cross the path of mortals. Some bring opportunities to be seized. Others test our souls. If we are found worthy or wanting, the collective well-being of Ultimapolis is changed for good or for ill. In trying times, great citizens are called to lead the efforts to deal with each <%=@event.event_type.downcase%>.
+<% end %>

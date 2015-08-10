@@ -2,3 +2,8 @@
 <% content_for :lead, "<p class=\"lead\">You are about to take your first steps into a wider world.</p>".html_safe %>
 
 <%= render 'form' %>
+
+<% content_for :help_title, "What happens next?" %>
+<% content_for :help_body do %>
+Becoming a citizen of Ultimapolis is just the first crucial step in taking part of life in the great city. As a citizen you can run <%=link_to 'facilities', facility_types_path, target: '_new' %> and take part in projects to deal with the transformative events that bedevil the city. You will earn wages and hope to gain new skills in your chosen profession. You may try to buy, build or be awarded valuable <%=link_to 'equipment', equipment_types_path, target: '_new' %>. You can take part in the many discussions that is the right of every citizen. How far you go in the ranks of the city's great and worthy citizenry is entirely up to you.
+<% end %>

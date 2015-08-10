@@ -7,14 +7,12 @@ Rails.application.routes.draw do
   end
   
   resources :projects, except: [:index, :show]
-  resources  :project_members, only: [:create, :destroy]
+  resources :project_members, only: [:create, :destroy]
   resources :facilities, except: [:index]
   resources :loans, except: [:index, :edit, :update, :show]
   resources :bonds, except: [:index, :edit, :update, :show]
   
-  resources :districts, only: [:index, :show] do 
-    resources :district_effects, only: [:show]
-  end
+  resources :districts, only: [:index, :show]
 
   resources :equipment_types, only: [:index, :show]
   
@@ -29,8 +27,6 @@ Rails.application.routes.draw do
   resources :help_topics, only: [:index, :show]
   
   resources :events, only: [:show]
-
-  resource :global_effects, only: [:index, :show]
   
   devise_for :users
   root 'welcome#index'

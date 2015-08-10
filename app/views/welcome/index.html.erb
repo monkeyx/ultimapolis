@@ -65,11 +65,7 @@
 		</div>
 	</div>
 </div>
-<div class="panel panel-info">
-  <div class="panel-heading">
-    <h3 class="panel-title">What is this?</h3>
-  </div>
-  <div class="panel-body">
-    Ultimapolis is a persistent browser-based game which sumulates the workings of a single futuristic city. Citizens run by players compete and collaborate to deal with new crisis and opportunities whilst expanding their own pool of knowledge (skills) and resources. The simulation is the foundation for a roleplaying game. There is no final objective to achieve and different citizens will have different ideas about what is the best for their city.
-  </div>
-</div>
+<% content_for :help_title, "What is this?" %>
+<% content_for :help_body do %>
+Ultimapolis is a persistent browser-based game which sumulates the workings of a single futuristic city. Citizens run by players compete and collaborate to deal with new crisis and opportunities whilst expanding their own pool of knowledge (skills) and resources. The simulation is the foundation for a roleplaying game. There is no final objective to achieve and different citizens will have different ideas about what is the best for their city.
+<% end %>

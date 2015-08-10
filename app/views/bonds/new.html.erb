@@ -2,3 +2,8 @@
 <% content_for :lead, "<p class=\"lead\">You can invest large sums of credits into the City's Treasury Bonds. Bonds will generate interest payments at the rate of #{format_rating(Global.singleton.interest)}.</p>".html_safe %>
 
 <%= render 'form' %>
+
+<% content_for :help_title, "What are bonds?" %>
+<% content_for :help_body do %>
+Bonds are a way of putting away large amounts of credits that would otherwise do nothing for you and earn a bit of interest. There's very little risk associated with them and the rewards can be meagre too. Its almost always better to invest the credits in more risky ventures like facilities or projects. Interest rates are adjusted by the City Core Government to speed up or slow the economy. Higher rates benefit bond holders whilst lower rates benefit those wishing to take a loan.
+<% end %>
