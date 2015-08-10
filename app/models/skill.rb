@@ -1,4 +1,5 @@
 class Skill < ActiveRecord::Base
+	
 	validates :name, presence: true
 	validates :skill_group, presence: true
 	# t.text :description
