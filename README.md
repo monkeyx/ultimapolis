@@ -14,18 +14,19 @@ Pre-alpha development
 
 See [commit log](https://github.com/monkeyx/ultimapolis/commits/master)
 
-## ToDos
+## To Dos
 
 * Event summaries / descriptions
 * Exchange price setting
 * Buy / sell trade goods
 * Buy / sell equipment
+* District discussions
 * Caching
 * News blog generation
 * Admin
 * Retire citizen
 * Petitions
-# Graphs
+* Graphs
 
 ## Issues
 

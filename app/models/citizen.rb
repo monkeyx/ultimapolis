@@ -100,7 +100,7 @@ class Citizen < ActiveRecord::Base
 	def add_trade_good!(trade_good, quantity)
 		return unless trade_good && quantity
 		mapping = trade_good_mapping(trade_good)
-		quantity = if mapping
+		new_quantity = if mapping
 			mapping.quantity += quantity
 			mapping.save!
 			mapping.quantity
@@ -108,14 +108,14 @@ class Citizen < ActiveRecord::Base
 			mapping = citizen_trade_goods.create!(trade_good: trade_good, quantity: quantity)
 			mapping.quantity
 		else
-			0
+			quantity = 0
 		end
 		if quantity > 0
 			add_report!("Gained #{quantity} x #{trade_good}")
 		elsif quantity < 0
 			add_report!("Lost #{quantity.abs} x #{trade_good}")
 		end
-		quantity
+		new_quantity
 	end
 
 	def remove_trade_good!(trade_good, quantity)
@@ -125,7 +125,7 @@ class Citizen < ActiveRecord::Base
 	def add_equipment!(equipment_type, quantity=1)
 		return unless equipment_type && quantity
 		mapping = equipment_mapping(equipment_type)
-		quantity = if mapping
+		new_quantity = if mapping
 			mapping.quantity += quantity
 			mapping.save!
 			mapping.quantity
@@ -133,14 +133,14 @@ class Citizen < ActiveRecord::Base
 			mapping = citizen_equipment.create!(equipment_type: equipment_type, quantity: quantity)
 			mapping.quantity
 		else
-			0
+			quantity = 0
 		end
 		if quantity > 0
 			add_report!("Gained #{quantity} x #{equipment_type}")
 		elsif quantity < 0
 			add_report!("Lost #{quantity.abs} x #{equipment_type}")
 		end
-		quantity
+		new_quantity
 	end
 
 	def remove_equipment!(equipment_type, quantity=1)
