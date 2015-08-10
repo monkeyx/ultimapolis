@@ -45,6 +45,7 @@
                     <li><%=link_to 'Facilities', "#{main_app.citizen_path(current_citizen)}?tab=facilities" %></li>
                     <li><%=link_to 'Projects', "#{main_app.citizen_path(current_citizen)}?tab=projects" %></li>
                     <li><%=link_to 'Finances', "#{main_app.citizen_path(current_citizen)}?tab=finances" %></li>
+                    <li><%=link_to 'Report', "#{main_app.citizen_path(current_citizen)}?tab=report" %></li>
                     <li class="divider"></li>
                     <li><%= link_to 'Build Facility', main_app.new_facility_path %></li>
                     <li><%= link_to 'Change Profession', main_app.edit_citizen_path(current_citizen)%></li>

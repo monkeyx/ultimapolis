@@ -181,9 +181,11 @@ class Facility < ActiveRecord::Base
             if self.citizen.credits < maintenance_cost
                 self.maintained = false
             else
+                self.maintained = true
                 self.citizen.remove_credits!(maintenance_cost, "Maintain #{self}")
             end
-            self.powered = rand(100) < Global.singleton.powered_chance
+            self.powered = Global.singleton.powered_chance == 100 ? true : rand(100) < Global.singleton.powered_chance
+            save!
 
             if self.powered && self.maintained
                 self.citizen.add_credits!(rent_income,"Rent from #{self}") if rent_income
@@ -196,7 +198,6 @@ class Facility < ActiveRecord::Base
                 end
             end
             self.citizen.save!
-            save!
         end
     end
 end
