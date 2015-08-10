@@ -2,7 +2,7 @@
   <% if @project.errors.any? %>
     <div id="error_explanation" class="alert alert-dismissible alert-warning">
       <button type="button" class="close" data-dismiss="alert">×</button>
-      <h4><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h4>
+      <h4><%= pluralize(@project.errors.count, "error") %> prohibited this project from being <%=@project.new_record? ? "started" : "updated"%>:</h4>
 
       <ul>
       <% @project.errors.full_messages.each do |message| %>
@@ -13,6 +13,7 @@
   <% end %>
   <%=f.hidden_field :event_id %>
   <%=hidden_field_tag :event_type, params[:event_type] %>
+  <%=content_for :event_details %>
   <fieldset>
     <div class="form-group">
       <label for="wages" class="col-lg-2 control-label">Wages Offered</label>

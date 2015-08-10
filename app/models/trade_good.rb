@@ -11,6 +11,8 @@ class TradeGood < ActiveRecord::Base
 
 	has_many :trade_good_raw_materials
 
+	scope :named, ->(name) {where(name: name)}
+
 	default_scope ->{ order('name ASC') }
 	
 	def self.create_new!(name, description, facility_type, raw_materials=[])

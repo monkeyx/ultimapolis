@@ -23,14 +23,14 @@ class ProjectMember < ActiveRecord::Base
 	def add_join_report!
 		unless self.citizen_id == self.project.leader_id
 			self.citizen.add_report!("Joined Project #{self.project}") 
-			self.leader.add_report!("#{self.citizen} joined Project #{self.project}")
+			self.project.leader.add_report!("#{self.citizen} joined Project #{self.project}")
 		end
 	end
 
 	def add_leave_report!
 		unless self.citizen_id == self.project.leader_id
 			self.citizen.add_report!("Left Project #{self.project}") 
-			self.leader.add_report!("#{self.citizen} left Project #{self.project}")
+			self.project.leader.add_report!("#{self.citizen} left Project #{self.project}")
 		end
 	end
 end

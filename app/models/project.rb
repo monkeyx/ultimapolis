@@ -16,12 +16,15 @@ class Project < ActiveRecord::Base
 	  	scope "#{project_status.downcase}".to_sym, -> { where(status: project_status)}
     end
 
+    validate :validate_project
+
 	has_many :project_members
 	has_many :project_resources
 	has_many :project_skill_points
 
 	before_save :set_began_on
 	after_create :add_leader_as_member!
+	after_create :add_resources!
 	before_save :wage_change_membership_adjustment!
 	after_destroy :return_resources!
 	after_create :add_create_report!
@@ -32,6 +35,8 @@ class Project < ActiveRecord::Base
 	scope :not_for_citizen, ->(citizen) { where(["leader_id <> ? AND id NOT IN (?)",citizen.id, ProjectMember.for_citizen(citizen).map{|pm| pm.project_id}]) }	
 	
 	default_scope ->{ order('began_on ASC') }
+
+	attr_accessor :skip_resource_costs
 
 	def has_member?(citizen)
 		project_members.where(citizen_id: citizen.id).count > 0
@@ -93,7 +98,7 @@ class Project < ActiveRecord::Base
     	has_resources? && has_skill_points?
     end
 
-    def add_resource!(trade_good, quantity)
+    def add_resource!(trade_good, quantity, free_cost=false)
     	return unless trade_good && quantity && self.leader.trade_good_count(trade_good) >= quantity
     	transaction do
     		mapping = resource_mapping(trade_good)
@@ -103,7 +108,7 @@ class Project < ActiveRecord::Base
     		else
     			project_resources.create!(trade_good: trade_good, quantity: quantity)
     		end
-    		self.leader.remove_trade_good!(trade_good, quantity)
+    		self.leader.remove_trade_good!(trade_good, quantity) unless free_cost
     	end
     end
 
@@ -168,6 +173,27 @@ class Project < ActiveRecord::Base
 		end
 	end
 
+	def validate_project
+		if new_record?
+			unless self.leader 
+				errors.add(:leader, "not set")
+				return
+			end
+			unless skip_resource_costs
+				has_resources = true
+		    	event_resource_costs.each do |resource_cost|
+		    		unless self.leader.trade_good_count(resource_cost.trade_good) >= resource_cost.cost
+		    			has_resources = false 
+		    			break
+		    		end
+		    	end
+		    	unless has_resources
+		    		errors.add(:leader, "doesn't have resources to start project")
+		    	end
+		    end
+		end
+	end
+
 	def set_began_on
 		self.began_on ||= Global.singleton.turn
 	end
@@ -177,13 +203,29 @@ class Project < ActiveRecord::Base
 	end
 
 	def wage_change_membership_adjustment!
+		if wages_changed?
+			self.leader.add_report!("Changed wages on #{self} to #{wages}")
+		end
 		if wages_changed? && wages_was && wages < wages_was
 			project_members.each do |member|
 				unless member.citizen_id == leader.id
+					member.citizen.add_report!("Project #{self} lowered wages")
 					member.destroy
 				end
 			end
 		end
+	end
+
+	def add_resources!
+		unless skip_resource_costs
+			event_resource_costs.each do |resource_cost|
+				add_resource!(resource_cost.trade_good, resource_cost.cost)
+	    	end
+	    else
+	    	event_resource_costs.each do |resource_cost|
+				add_resource!(resource_cost.trade_good, resource_cost.cost, true)
+	    	end
+	    end
 	end
 
 	def return_resources!

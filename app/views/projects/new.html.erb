@@ -1,5 +1,18 @@
 <% content_for :title, @event.name %>
+<% content_for(:event_details) do %>
 <%=render partial: '/events/briefing', locals: {event: @project.event, no_button: true} %>
+<% if @event.event_resource_costs.count > 0 %>
+	<p>You need to have the following resources to start this project. They will be taken out of your inventory and only returned if you cancel the project before it completes.</p>
+	<ul class="list-group">
+		<% @event.event_resource_costs.each do |resource_cost| %>
+		<li class="list-group-item">
+			<%=link_to resource_cost.trade_good.to_s, resource_cost.trade_good, target: '_new' %>
+			<span class="badge"><%=resource_cost.cost%></span>
+		</li>
+		<% end %>
+	</ul>
+<% end %>
+<% end %>
 <% projects = current_citizen ? @event.suitable_projects(current_citizen) : [] %>
 <% if projects.empty? %>
 <% content_for :lead, "<p class=\"lead\">You can organise a project to #{@event.crisis? ? 'handle this crisis' : 'tacke this opportunity'} but you will need to offer wages for other citizens to assist you. Furthermore, you will be responsible for providing all the resources required to tackle the project. If you should succeed all the rewards are yours alone.</p>".html_safe %>

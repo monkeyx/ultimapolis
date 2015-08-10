@@ -53,11 +53,13 @@ class TurnEngine
 		unless Event.current_crisis
 			puts ">>> GENERATING CRISIS"
 			EventTypes.generate_crisis! 
+			Citizen.find((rand(100) + 1)).start_project!(Event.current_crisis, 1, true)
 		end
 
 		unless Event.current_opportunity
 			puts ">>> GENERATING OPPORTUNITY"
 			EventTypes.generate_opportunity! 
+			Citizen.find((rand(100) + 1)).start_project!(Event.current_opportunity, 1, true)
 		end
 
 		# TODO Calculate Exchange Prices

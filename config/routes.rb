@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
   
   resources :projects, except: [:index, :show]
-  resources  :project_members, only: [:new, :create, :destroy]
+  resources  :project_members, only: [:create, :destroy]
   resources :facilities, except: [:index]
   resources :loans, except: [:index, :edit, :update, :show]
   resources :bonds, except: [:index, :edit, :update, :show]
