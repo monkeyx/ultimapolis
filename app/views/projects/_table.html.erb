@@ -15,10 +15,12 @@
         <td><%= project.status %></td>
         <td><%=format_currency  project.wages %></td>
         <td>
-          <%= form_for(ProjectMember.new(project: project, citizen: current_citizen)) do |f| %>
-          <%=f.hidden_field :project_id %>
-          <%=f.hidden_field :citizen_id %>
-          <%=f.submit "Join", class: "btn btn-primary" %>
+          <% can?(:edit, @citizen) do %>
+            <%= form_for(ProjectMember.new(project: project, citizen: current_citizen)) do |f| %>
+            <%=f.hidden_field :project_id %>
+            <%=f.hidden_field :citizen_id %>
+            <%=f.submit "Join", class: "btn btn-primary" %>
+            <% end %>
           <% end %>
         </td>
       </tr>

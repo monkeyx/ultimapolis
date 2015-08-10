@@ -67,7 +67,7 @@
           <% end %>
         </td>
         <td><%=format_currency  project.wages %></td>
-        <% if current_citizen %>
+        <% if can?(:edit, @citizen) %>
           <% if current_citizen.id == project.leader.id %>
         <td>
           <%= link_to 'Cancel Project', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>

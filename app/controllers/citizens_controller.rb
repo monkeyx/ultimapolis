@@ -25,6 +25,7 @@ class CitizensController < ApplicationController
   def create
 
     @citizen = Citizen.new(citizen_params)
+    @citizen.credits = 1000
 
     unless current_user
       @user = User.new(email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
