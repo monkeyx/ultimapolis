@@ -1,4 +1,4 @@
 desc "Turn processor"
 task :next_turn => :environment do
-  TurnEngine.turn!
+  TurnEngine.delay.turn!
 end

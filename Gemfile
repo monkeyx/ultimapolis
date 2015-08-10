@@ -21,6 +21,7 @@ gem 'bootswatch-rails'
 gem 'acts-as-taggable-on'
 gem 'blogit'
 gem 'ruby-progressbar'
+gem 'delayed_job_active_record'
 
 group :development, :test do
   gem 'byebug'
