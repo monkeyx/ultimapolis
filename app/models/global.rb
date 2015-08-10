@@ -18,7 +18,7 @@ class Global < ActiveRecord::Base
 	validates :interest, numericality: {only_integer: true}
 
 	def self.singleton
-		@@singleton ||= Global.first
+		Global.first
 	end	
 
 	def total_housing
