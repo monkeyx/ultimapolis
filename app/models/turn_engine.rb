@@ -26,6 +26,7 @@ class TurnEngine
 				project.turn_update!
 				progressbar.increment
 			end
+			event.turn_update!
 		end
 
 		puts ">>> LOANS UPDATES"
@@ -58,6 +59,8 @@ class TurnEngine
 			puts ">>> GENERATING OPPORTUNITY"
 			EventTypes.generate_opportunity! 
 		end
+
+		# TODO Calculate Exchange Prices
 
 		puts ">> TURN COMPLETE"
 	end

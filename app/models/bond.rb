@@ -13,7 +13,11 @@ class Bond < ActiveRecord::Base
 
 	before_validation :setup
 	after_create :deduct_cost!
+	after_create :add_buy_report!
 	after_destroy :return_value!
+	after_destroy :add_sold_report!
+
+	default_scope ->{ order('issued_on ASC') }
 
 	def validate_bond
 		if new_record?
@@ -27,15 +31,15 @@ class Bond < ActiveRecord::Base
 	end
 
 	def pay_interest!
-		self.citizen.update_attributes!(credits: self.citizen.credits + interest_value_per_turn)
+		self.citizen.add_credits!(interest_value_per_turn,"Bond Interest")
 	end
 
 	def deduct_cost!
-		self.citizen.update_attributes!(credits: self.citizen.credits - self.value)
+		self.citizen.remove_credits!(self.value, "Buy Bond")
 	end
 
 	def return_value!
-		self.citizen.update_attributes!(credits: self.citizen.credits + self.value)
+		self.citizen.add_credits!(self.value, "Bond Matures")
 	end
 
 	def setup
@@ -46,7 +50,18 @@ class Bond < ActiveRecord::Base
 		end
 	end
 
+	def add_buy_report!
+		self.citizen.add_report!("Bought bond #{self.value}")
+	end
+
+	def add_sold_report!
+		self.citizen.add_report!("Sold bond #{self.value}")
+	end
+
 	def turn_update!
-		# TODO
+		transaction do
+			pay_interest!
+			return_value! if matures?
+		end
 	end
 end

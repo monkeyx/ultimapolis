@@ -1,12 +1,9 @@
 class ProjectSkillPoint < ActiveRecord::Base
-# t.integer :project_id
-# t.integer :skill_id
-# t.integer :points
 
 	belongs_to :project
 	belongs_to :skill
 	validates :points, numericality: {only_integer: true}
 
-	
-
+	scope :for_project, ->(project) { where(project_id: project.id )}	
+	scope :for_skill, ->(skill) { where(skill_id: skill.id )}
 end

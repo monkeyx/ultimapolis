@@ -5,6 +5,7 @@
   <li class="<%=(current_tab == 'projects' ? 'active' : '')%>"><a href="#projects" data-toggle="tab" aria-expanded="true">Projects</a></li>
   <li class="<%=(current_tab == 'finances' ? 'active' : '')%>"><a href="#finances" data-toggle="tab" aria-expanded="true">Finances</a></li>
   <% if can?(:edit, @citizen)%>
+  <li class="<%=(current_tab == 'report' ? 'active' : '')%>"><a href="#report" data-toggle="tab" aria-expanded="true">Report</a></li>
   <li class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
       Actions <span class="caret"></span>
@@ -34,5 +35,8 @@
   </div>
   <div class="tab-pane fade <%=(current_tab == 'finances' ? 'active in' : '')%>" id="finances">
     <%=render partial: '/citizens/finances' %>
+  </div>
+  <div class="tab-pane fade <%=(current_tab == 'report' ? 'active in' : '')%>" id="report">
+    <%=render partial: '/citizens/report' %>
   </div>
 </div>

@@ -5,7 +5,7 @@
   <%= format_currency @citizen.net_worth %>
 </p>
 
-<% if current_citizen && current_citizen.id == @citizen.id %>
+<% if can?(:edit, @citizen) %>
 <h3>Credits</h3>
 <p>
   <%= format_currency @citizen.credits %>
@@ -13,5 +13,33 @@
 
 <%=render partial: '/loans/index' %>
 <%=render partial: '/bonds/index' %>
+
+<h3>Recent Transactions</h3>
+
+<% if FinancialTransaction.for_citizen(@citizen).count > 0 %>
+<table class="table table-striped table-hover ">
+	<tbody>
+	<% FinancialTransaction.for_citizen(@citizen).limit(20).each do |transaction| %>
+	<tr>
+		<td>
+			<span class="badge"><%=format_turn(transaction.turn)%></span>
+		</td>
+		<td class="text-justify">
+			<%=transaction.reason%>
+			<% if transaction.other_party %>
+			&nbso; (<%=link_to transaction.other_party.to_s, transaction.other_party %>)
+			<% end %>
+		</td>
+		<td class="text-right">
+			<%=format_currency(transaction.amount)%>
+		</td>
+	</tr>
+	<% end %>
+	</tbody>
+</table>
+<% else %>
+<p>No recent transactions</p>
+<% end %>
+
 <% end %>
 

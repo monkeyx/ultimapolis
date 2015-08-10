@@ -1,15 +1,7 @@
-<% unless defined?(no_button) && no_button %>
-<h2><%=event.name%></h2>
-<% end %>
+<p class="summary"><%=event.summary.html_safe %></p>
 
-<div class="row">
-	<div class="col-lg-4">
-		<%=event.summary.html_safe %>
-	</div>
-	<div class="col-lg-8">
-		<%=render partial: '/events/table', locals: {event: event} %>
-	</div>
-</div>
+<%=render partial: '/events/table', locals: {event: event} %>
+
 <% unless defined?(no_button) && no_button %>
 	<% if current_citizen %>
 		<% if current_citizen.dealing_with_event?(event) %>

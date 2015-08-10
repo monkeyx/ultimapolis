@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150809073659) do
+ActiveRecord::Schema.define(version: 20150810104716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -312,6 +312,19 @@ ActiveRecord::Schema.define(version: 20150809073659) do
 
   add_index "facility_types", ["district_id"], name: "index_facility_types_on_district_id", using: :btree
 
+  create_table "financial_transactions", force: :cascade do |t|
+    t.integer  "citizen_id"
+    t.integer  "turn"
+    t.integer  "amount"
+    t.string   "reason"
+    t.integer  "other_party_id"
+    t.string   "other_party_class"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "financial_transactions", ["citizen_id", "turn"], name: "index_financial_transactions_on_citizen_id_and_turn", using: :btree
+
   create_table "global_effects", force: :cascade do |t|
     t.integer  "event_id"
     t.integer  "started_on"
@@ -513,6 +526,19 @@ ActiveRecord::Schema.define(version: 20150809073659) do
   end
 
   add_index "trade_goods", ["facility_type_id"], name: "index_trade_goods_on_facility_type_id", using: :btree
+
+  create_table "turn_reports", force: :cascade do |t|
+    t.integer  "turn"
+    t.integer  "citizen_id"
+    t.integer  "district_id"
+    t.text     "summary"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "turn_reports", ["turn", "citizen_id"], name: "index_turn_reports_on_turn_and_citizen_id", using: :btree
+  add_index "turn_reports", ["turn", "district_id"], name: "index_turn_reports_on_turn_and_district_id", using: :btree
+  add_index "turn_reports", ["turn"], name: "index_turn_reports_on_turn", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",       null: false

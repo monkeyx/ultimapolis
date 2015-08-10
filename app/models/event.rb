@@ -44,6 +44,57 @@ class Event < ActiveRecord::Base
 	def event_type?(event_type)
     	self.event_type == event_type
     end
+
+    def chain_next_event!
+    	self.trigger_after_event && self.trigger_after_event.update_attributes!(active: true, started_on: Global.singleton.turn)
+    end
+
+    def cancel_projects_except_winning!
+    	projects.each do |project|
+    		unless project.winning_project_id == project.id 
+    			project.destroy
+    		end
+    	end
+    end
+
+    def resolved!(project)
+    	transaction do
+	    	self.winning_project = project 
+	    	self.current = false 
+	    	self.success = true 
+	    	if opportunity?
+	    		district_effects.each do |effect|
+	    			effect.apply!
+	    		end
+	    		global_effects.each do |effect|
+	    			effect.apply!
+	    		end
+	    	end
+	    	self.finished_on = Global.singleton.turn 
+	    	save!
+	    	chain_next_event! if opportunity?
+	    	cancel_projects_except_winning!
+	    end
+    end
+
+    def expired!
+    	transaction do
+	    	self.current = false
+	    	self.success = false
+	    	if crisis?
+	    		district_effects.each do |effect|
+	    			effect.apply!
+	    		end
+	    		global_effects.each do |effect|
+	    			effect.apply!
+	    		end
+	    	end
+	    	self.finished_on = Global.singleton.turn 
+	    	save!
+	    	chain_next_event! if crisis?
+	    	cancel_projects_except_winning!
+	    end
+    end
 	
 	def add_district_effect!(options={})
 		district_effects.create!(options)
@@ -85,11 +136,19 @@ class Event < ActiveRecord::Base
 		name 
 	end
 
-	def expires
+	def expires_on
 		if max_duration > 0
 			started_on + max_duration
 		else
 			-1
 		end
+	end
+
+	def expires?
+		Global.singleton.turn == expires_on
+	end
+
+	def turn_update!
+		expired! if expires?
 	end
 end

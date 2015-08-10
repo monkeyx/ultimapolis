@@ -53,7 +53,7 @@ private
 
 	def self.create_event!(district, template)
 		event = Event.create!(
-			name: template['name'],
+			name: "#{district}: #{template['name']}",
 			event_type: template['event_type'],
 			started_on: Global.singleton.turn,
 			max_duration: template['max_duration'],
@@ -75,7 +75,7 @@ private
 			template['resource_costs'].each do |resource_cost_entry|
 				trade_good = TradeGood.where(name: resource_cost_entry['name']).first
 				if trade_good
-					event.add_resource_cost!(trade_good, resource_cost_entry['cost'].to_i)
+					event.add_resource_cost!(trade_good, resource_cost_entry['cost'].to_i * EventTypes.random_multiplier)
 				end
 			end
 		end
@@ -83,7 +83,7 @@ private
 			template['skill_costs'].each do |skill_cost_entry|
 				skill = Skill.where(name: skill_cost_entry['name']).first
 				if skill
-					event.add_skill_cost!(skill, skill_cost_entry['cost'].to_i)
+					event.add_skill_cost!(skill, skill_cost_entry['cost'].to_i * EventTypes.random_multiplier)
 				end
 			end
 		end
@@ -91,7 +91,7 @@ private
 			template['reward_trade_goods'].each do |reward_entry|
 				trade_good = TradeGood.where(name: reward_entry['name']).first
 				if trade_good
-					event.add_trade_goods_reward!(trade_good, reward_entry['quantity'].to_i)
+					event.add_trade_goods_reward!(trade_good, reward_entry['quantity'].to_i * EventTypes.random_multiplier)
 				end
 			end
 		end
@@ -111,8 +111,10 @@ private
 				end
 			end
 		end
-		event.add_credit_reward!(template['reward_credts'].to_i) unless template['reward_credts'].blank?
+		event.add_credit_reward!(template['reward_credts'].to_i * EventTypes.random_multiplier) unless template['reward_credts'].blank?
 	end
 
-
+	def self.random_multiplier
+		1 + rand(Global.singleton.citizens)
+	end
 end

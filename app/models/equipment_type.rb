@@ -11,6 +11,8 @@ class EquipmentType < ActiveRecord::Base
 	
 	has_many :equipment_raw_materials
 
+	scope :for_facility_type, ->(facility_type) { where(facility_type_id: facility_type.id )}
+	scope :for_skill, ->(skill) { where(skill_id: skill.id )}
 	default_scope ->{ order('name ASC') }
 
 	def self.create_new!(name, description, facility_type, skill, modifier, raw_materials=[])

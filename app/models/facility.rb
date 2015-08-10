@@ -24,6 +24,8 @@ class Facility < ActiveRecord::Base
     scope :with_facility_types, ->(facility_types) { where(["facility_type_id in (?)", facility_types.map{|ft| ft.id }])}
     scope :for_facility_type, ->(facility_type) { where(facility_type_id: facility_type.id )}
     scope :for_district, ->(district) { with_facility_types(FacilityType.for_district(district)) }
+    scope :powered, -> { where(powered: true )}
+    scope :maintained, -> { where(maintained: true )}
 
     default_scope ->{ includes(:facility_type).order('facility_types.name ASC') }
 
@@ -38,6 +40,35 @@ class Facility < ActiveRecord::Base
     		level: 1,
             build_for_free: build_for_free
     	)
+    end
+
+    def quantity_trade_good_produced
+        return 0 unless self.powered && self.maintained
+        @quantity_trade_good_produced ||= if self.producing_trade_good
+            self.citizen.max_trade_good_produced(producing_trade_good)
+        else
+            0
+        end
+        @quantity_trade_good_produced < 0 ? self.level : @quantity_trade_good_produced
+    end
+
+    def quantity_equipment_produced
+        return 0 unless self.powered && self.maintained
+        @quantity_equipment_produced ||= if self.producing_equipment_type
+            self.citizen.max_equipment_produced(producing_equipment_type)
+        else
+            0
+        end
+        @quantity_equipment_produced < 0 ? self.level : @quantity_equipment_produced
+    end
+
+    def gdp_contribution
+        gdp = 0
+        gdp += power_generation_income
+        gdp += rent_income
+        gdp += (self.producing_trade_good.exchange_price * quantity_trade_good_produced) if self.producing_trade_good && self.producing_trade_good.exchange_price && quantity_trade_good_produced
+        gdp += (self.producing_equipment_type.exchange_price * quantity_equipment_produced) if self.producing_equipment_type && self.producing_equipment_type.exchange_price && quantity_equipment_produced
+        gdp
     end
 
     def rent_income
@@ -128,17 +159,17 @@ class Facility < ActiveRecord::Base
     def deduct_costs!
         return if build_for_free
         if new_record?
-            citizen.credits -= build_cost
-            citizen.save!
+            self.citizen.remove_credits!(build_cost, "Built #{self.facility_type}")
+            self.citizen.add_report!("Built #{self.facility_type}")
         elsif level_changed? && (diff = (level - level_was)) > 0
-            citizen.credits -= upgrade_cost(diff, level_was)
-            citizen.save!
+            self.citizen.remove_credits!(upgrade_cost(diff, level_was), "Upgraded #{self}")
+            self.citizen.add_report!("Upgraded #{self}")
         end
     end
 
     def recoup_value!
-        citizen.credits += value 
-        citizen.save!
+        self.citizen.add_credits!(value, "Sold #{self}")
+        self.citizen.add_report!("Sold #{self}")
     end
 
     def use_free_land!
@@ -150,14 +181,21 @@ class Facility < ActiveRecord::Base
             if self.citizen.credits < maintenance_cost
                 self.maintained = false
             else
-                self.citizen.credits -= maintenance_cost
+                self.citizen.remove_credits!(maintenance_cost, "Maintain #{self}")
             end
             self.powered = rand(100) < Global.singleton.powered_chance
 
             if self.powered && self.maintained
-                # TODO do production
+                self.citizen.add_credits!(rent_income,"Rent from #{self}") if rent_income
+                self.citizen.add_credits!(power_generation_income, "Power sales from #{self}") if power_generation_income
+                if quantity_trade_good_produced && quantity_trade_good_produced > 0
+                    self.citizen.add_trade_good!(self.producing_trade_good, quantity_trade_good_produced)
+                end
+                if quantity_equipment_produced && quantity_equipment_produced > 0
+                    self.citizen.add_equipment!(self.producing_equipment_type, quantity_equipment_produced)
+                end
             end
-
+            self.citizen.save!
             save!
         end
     end

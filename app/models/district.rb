@@ -26,6 +26,7 @@ class District < ActiveRecord::Base
 	has_many :district_effects
 	has_many :facility_types
 	has_many :facilities, through: :facility_types
+	has_many :turn_reports
 
 	scope :has_free_land, ->{ where("free_land > 0")}
 
@@ -105,18 +106,43 @@ class District < ActiveRecord::Base
 		@metrics
 	end
 
+	def add_report!(summary)
+		turn_reports.create!(summary: summary, turn: Global.singleton.turn)
+	end
+
 	def turn_update!
 		transaction do
-			# TODO Create snapshot
+			DistrictSnapshot.create!(
+				district: self, 
+				turn: Global.singleton.turn,
+				total_land: total_land,
+				free_land: free_land,
+				transport_capacity: transport_capacity,
+				civilians: civilians,
+				automatons: automatons,
+				unrest: unrest,
+				health: health,
+				policing: policing,
+				social: social,
+				environment: environment,
+				housing: housing,
+				education: education,
+				community: community,
+				creativity: creativity,
+				aesthetics: aesthetics,
+				crime: crime,
+				corruption: corruption
+			)
 			# Population / automatons
 			self.civilians = 0
 			self.automatons = 0
-			Facility.for_district(self).each do |f|
+			Facility.for_district(self).find_each do |f|
 				self.civilians += (f.facility_type.employees * f.level)
 				self.automatons += (f.facility_type.automation * f.level)
 			end
-
-			# TODO District effects
+			DistrictEffect.for_district(self).active.expires_on(Global.singleton.turn).find_each do |effect|
+				effect.destroy
+			end
 			save!
 		end
 	end

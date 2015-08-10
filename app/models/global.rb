@@ -54,15 +54,39 @@ class Global < ActiveRecord::Base
 		((power_available.to_f / power_demand.to_f) * 100).to_i
 	end
 
+	def set_gdp
+		self.gdp = 0
+		Facility.powered.maintained.find_each do |facility|
+			self.gdp += facility.gdp_contribution
+		end
+	end
+
 	def turn_update!
 		transaction do
-			# TODO Create snapshot
+			set_gdp
+			GlobalSnapshot.create!(
+				infrastructure: infrastructure,
+				grid: grid,
+				power: power,
+				stability: stability,
+				climate: climate,
+				liberty: liberty,
+				security: security,
+				borders: borders,
+				turn: turn,
+				inflation: inflation,
+				citizens: citizens,
+				gdp: gdp
+			)
 			self.turn += 1
 			# Power
-			self.power = Facility.with_facility_types(FacilityType.power_generator).to_a.sum do |f|
-				f.level * f.facility_type.power_generation
+			self.power = 0
+			Facility.with_facility_types(FacilityType.power_generator).find_each do |facility|
+				self.power += facility.level * facility.facility_type.power_generation
 			end
-			# TODO Global Effects
+			GlobalEffect.active.expires_on(self.turn).find_each do |effect|
+				effect.destroy
+			end
 			save!
 		end
 	end

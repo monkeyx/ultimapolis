@@ -32,6 +32,10 @@ class Ability
             can :destroy, Project, leader_id: user.citizen.id
 
             can :destroy, ProjectMember, citizen_id: user.citizen.id 
+
+            can :read, FinancialTransaction, citizen_id: user.citizen.id
+            can :read, TurnReport, citizen_id: user.citizen.id
+            can :read, TurnReport, citizen_id: nil
         end
     end
 

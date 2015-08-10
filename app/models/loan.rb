@@ -13,6 +13,8 @@ class Loan < ActiveRecord::Base
 	after_create :add_credits!
 	after_destroy :pay_off_loan!
 
+	default_scope ->{ order('issued_on ASC') }
+
 	def validate_loan
 		if new_record?
 			unless self.citizen
@@ -25,15 +27,15 @@ class Loan < ActiveRecord::Base
 	end
 
 	def pay_interest!
-		self.citizen.update_attributes!(credits: self.citizen.credits - interest_value_per_turn)
+		self.citizen.remove_credits!(interest_value_per_turn, "Loan Interest")
 	end
 
 	def add_credits!
-		self.citizen.update_attributes!(credits: self.citizen.credits + self.value)
+		self.citizen.add_credits!(value, "New Loan")
 	end
 
 	def pay_off_loan!
-		self.citizen.update_attributes!(credits: self.citizen.credits - self.total_value)
+		self.citizen.remove_credits!(total_value, "Loan Repayment")
 	end
 
 	def setup
@@ -45,6 +47,9 @@ class Loan < ActiveRecord::Base
 	end
 
 	def turn_update!
-		# TODO
+		transaction do
+			pay_interest!
+			pay_off_loan! if matures?
+		end
 	end
 end

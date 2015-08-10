@@ -5,7 +5,7 @@
   trigger: 
   name: Education 
   event_type: Opportunity
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -35,7 +35,7 @@
   trigger: 
   name: Infrastructure 
   event_type: Opportunity
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -65,7 +65,7 @@
   trigger: 
   name: Artworks 
   event_type: Opportunity
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -95,7 +95,7 @@
   trigger: 
   name: BorderSecurity 
   event_type: Opportunity
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -125,7 +125,7 @@
   trigger: 
   name: CommunitySpirit 
   event_type: Opportunity
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -155,7 +155,7 @@
   trigger: 
   name: BroadcastEntertainment 
   event_type: Opportunity
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -185,7 +185,7 @@
   trigger: 
   name: GridUpgrade 
   event_type: Opportunity
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -215,7 +215,7 @@
   trigger: 
   name: Elections 
   event_type: Opportunity
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -245,7 +245,7 @@
   trigger: 
   name: EnvironmentCleanUp 
   event_type: Opportunity
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -275,7 +275,7 @@
   trigger: 
   name: SecurityUpgrade 
   event_type: Opportunity
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -305,7 +305,7 @@
   trigger: 
   name: BigBrother 
   event_type: Opportunity
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -335,7 +335,7 @@
   trigger: 
   name: LandClaim 
   event_type: Opportunity
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -365,7 +365,7 @@
   trigger: 
   name: MassTransit 
   event_type: Opportunity
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -395,7 +395,7 @@
   trigger: 
   name: Pacification 
   event_type: Opportunity
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -425,7 +425,7 @@
   trigger: 
   name: Policing 
   event_type: Opportunity
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -455,7 +455,37 @@
   trigger: 
   name: Housing 
   event_type: Opportunity
-  max_duration: 7
+  max_duration: 24
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: Health 
+  event_type: Opportunity
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -485,7 +515,7 @@
   trigger: 
   name: Festival 
   event_type: Opportunity
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -515,7 +545,37 @@
   trigger: 
   name: CorruptionProbe 
   event_type: Opportunity
-  max_duration: 7
+  max_duration: 24
+  summary: Summary
+  description: Description
+  district_effects:
+    -
+      name: District Effect
+  global_effects:
+    -
+      name: Global Effect
+  resource_costs:
+    -
+      name: Basic Ore
+      cost: 1
+  skill_costs:
+    -
+      name: Engineering
+      cost: 1
+  reward_trade_goods:
+    -
+      name: Processed Metals
+      quantity: 2
+  reward_equipment:
+    - Jammer
+  reward_facility:
+    - Mine
+  reward_credts: 100
+-
+  trigger: 
+  name: Rejuvenation 
+  event_type: Opportunity
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -548,7 +608,7 @@
   trigger: status_transport_crisis?
   name: DistrictTransportCrisis 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -578,7 +638,7 @@
   trigger: status_disorder?
   name: DistrictDisorder 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -608,7 +668,7 @@
   trigger: status_lawlessness?
   name: DistrictLawlessness 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -638,7 +698,7 @@
   trigger: status_urban_decay?
   name: DistrictUrbanDecay 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -668,7 +728,7 @@
   trigger: status_homelessness?
   name: DistrictHomelessness 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -698,7 +758,7 @@
   trigger: status_hazardous_environment?
   name: DistrictHazardousEnvironment 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -728,7 +788,7 @@
   trigger: status_poor_schools?
   name: DistrictPoorSchools 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -758,7 +818,7 @@
   trigger: status_ethnic_tensions?
   name: DistrictEthnicTensions 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -788,7 +848,7 @@
   trigger: status_stifling?
   name: DistrictStifling 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -818,7 +878,7 @@
   trigger: status_ugly?
   name: DistrictUgly 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -848,7 +908,7 @@
   trigger: status_organised_crime?
   name: DistrictOrganisedCrime 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -878,7 +938,7 @@
   trigger: status_corrupt?
   name: DistrictCorrupt 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -908,7 +968,7 @@
   trigger: status_poor_infrastructure?
   name: GlobalPoorInfrastructure 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -938,7 +998,7 @@
   trigger: status_grid_overpowered?
   name: GlobalGridOverloaded 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -968,7 +1028,7 @@
   trigger: status_instability?
   name: GlobalInstability 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -998,7 +1058,7 @@
   trigger: status_climate_change?
   name: GlobalClimateChange 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -1028,7 +1088,7 @@
   trigger: status_revolution?
   name: GlobalRevolution 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -1058,7 +1118,7 @@
   trigger: status_terrorism?
   name: GlobalTerrorism 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -1088,7 +1148,7 @@
   trigger: status_invasion?
   name: GlobalInvasion 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -1118,7 +1178,7 @@
   trigger: status_poor_public_health?
   name: DistrictPlague 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:
@@ -1148,7 +1208,7 @@
   trigger: status_power_shortage?
   name: GlobalPowerShortage 
   event_type: Crisis
-  max_duration: 7
+  max_duration: 24
   summary: Summary
   description: Description
   district_effects:

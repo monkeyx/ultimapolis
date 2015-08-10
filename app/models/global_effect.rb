@@ -16,4 +16,43 @@ class GlobalEffect < ActiveRecord::Base
 	validates :security_mod, numericality: {only_integer: true}
 	validates :borders_mod, numericality: {only_integer: true}
 	validates :inflation_mod, numericality: {only_integer: true}
+
+	scope :active, -> { where(active: true )}
+	scope :expires_on, ->(turn) { where(expires_on: turn )}
+
+	after_destroy :unapply!
+
+	def apply!
+		transaction do 
+			update_attributes!(active: true)
+			g = Global.singleton
+			g.infrastructure += self.inflation_mod
+			g.grid += self.grid_mod
+			g.power += self.power_mod
+			g.stability += self.stability_mod
+			g.climate += self.climate_mod
+			g.liberty += self.liberty_mod
+			g.security += self.security_mod
+			g.borders += self.borders_mod
+			g.inflation += self.inflation_mod
+			g.save!
+		end
+	end
+
+	def unapply!
+		if self.active 
+			g = Global.singleton
+			g.infrastructure -= self.inflation_mod
+			g.grid -= self.grid_mod
+			g.power -= self.power_mod
+			g.stability -= self.stability_mod
+			g.climate -= self.climate_mod
+			g.liberty -= self.liberty_mod
+			g.security -= self.security_mod
+			g.borders -= self.borders_mod
+			g.inflation -= self.inflation_mod
+			g.save!
+		end
+	end
+
 end
