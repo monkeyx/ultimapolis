@@ -1,8 +1,8 @@
 <h2>Report</h2>
 
-<% t = Global.singleton.turn 
-  report_entries = TurnReport.for_turn_range(t - 1, t).for_citizen_or_any(@citizen)
-  %>
+<% 
+report_entries = TurnReport.for_citizen_or_any(@citizen).limit(50)
+%>
 <% if report_entries.count > 0 %>
 <ul class="list-group">
   <% report_entries.each do |report| %>
