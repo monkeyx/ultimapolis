@@ -30,9 +30,9 @@ class Project < ActiveRecord::Base
 	after_create :add_create_report!
 	after_destroy :add_cancel_report!
 
-	scope :for_citizen, ->(citizen) { where(["leader_id = ? OR id IN (?)",citizen.id, ProjectMember.for_citizen(citizen).map{|pm| pm.project_id}]) }	
+	scope :for_citizen, ->(citizen) { where(["leader_id = ? OR id IN (?)",citizen.id, [0] + ProjectMember.for_citizen(citizen).map{|pm| pm.project_id}]) }	
 	scope :for_event, ->(event) { where(event_id: event.id ) }
-	scope :not_for_citizen, ->(citizen) { where(["leader_id <> ? AND id NOT IN (?)",citizen.id, ProjectMember.for_citizen(citizen).map{|pm| pm.project_id}]) }	
+	scope :not_for_citizen, ->(citizen) { where(["leader_id <> ? AND id NOT IN (?)",citizen.id, [0] + ProjectMember.for_citizen(citizen).map{|pm| pm.project_id}]) }	
 	
 	default_scope ->{ order('began_on ASC') }
 
@@ -177,6 +177,10 @@ class Project < ActiveRecord::Base
 		if new_record?
 			unless self.leader 
 				errors.add(:leader, "not set")
+				return
+			end
+			if self.leader.on_a_project?
+				errors.add(:leader, "already on a project")
 				return
 			end
 			unless skip_resource_costs

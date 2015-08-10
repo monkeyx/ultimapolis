@@ -9,7 +9,7 @@ class ProjectMembersController < ApplicationController
 		if @project_member.save
 		  	redirect_to "/citizens/#{current_user.citizen.id}?tab=projects", notice: 'Successfully joined project.'
 		else
-			redirect_to "/citizens/#{current_user.citizen.id}?tab=projects", notice: "Failed to join project."
+			redirect_to "/citizens/#{current_user.citizen.id}?tab=projects", alert: "Failed to join project because #{@project_member.errors.full_messages.join("\n")}"
 		end
 	end
 

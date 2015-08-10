@@ -21,7 +21,7 @@ class Facility < ActiveRecord::Base
     after_create :use_free_land!
     
     scope :for_citizen, ->(citizen) { where(citizen_id: citizen.id )}
-    scope :with_facility_types, ->(facility_types) { where(["facility_type_id in (?)", facility_types.map{|ft| ft.id }])}
+    scope :with_facility_types, ->(facility_types) { where(["facility_type_id in (?)", [0] + facility_types.map{|ft| ft.id }])}
     scope :for_facility_type, ->(facility_type) { where(facility_type_id: facility_type.id )}
     scope :for_district, ->(district) { with_facility_types(FacilityType.for_district(district)) }
     scope :powered, -> { where(powered: true )}

@@ -8,6 +8,8 @@ class ProjectMember < ActiveRecord::Base
 	validates :contribution, numericality: {only_integer: true}
 	validates :wages, numericality: {only_integer: true}
 
+	validate :validate_member
+
 	before_create :set_joined_on
 	after_create :add_join_report!
 	after_destroy :add_leave_report!
@@ -31,6 +33,12 @@ class ProjectMember < ActiveRecord::Base
 		unless self.citizen_id == self.project.leader_id
 			self.citizen.add_report!("Left Project #{self.project}") 
 			self.project.leader.add_report!("#{self.citizen} left Project #{self.project}")
+		end
+	end
+
+	def validate_member
+		if new_record? && self.citizen && self.citizen.on_a_project?
+			errors.add(:citizen, "already on a project")
 		end
 	end
 end

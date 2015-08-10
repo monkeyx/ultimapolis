@@ -210,6 +210,10 @@ class Citizen < ActiveRecord::Base
 	# Projects
 	#
 
+	def on_a_project?
+		@on_a_project ||= ProjectMember.for_citizen(self).count > 0
+	end
+
 	def start_project!(event, wages, skip_resource_costs=false)
 		self.projects.create!(event: event, wages: wages, skip_resource_costs: skip_resource_costs)
 	end
