@@ -329,21 +329,21 @@ ActiveRecord::Schema.define(version: 20150810104716) do
     t.integer  "event_id"
     t.integer  "started_on"
     t.integer  "expires_on"
-    t.boolean  "active",             default: true
+    t.boolean  "active",         default: true
     t.string   "name"
     t.text     "description"
     t.string   "icon"
-    t.integer  "infrastructure_mod", default: 0
-    t.integer  "grid_mod",           default: 0
-    t.integer  "power_mod",          default: 0
-    t.integer  "stability_mod",      default: 0
-    t.integer  "climate_mod",        default: 0
-    t.integer  "liberty_mod",        default: 0
-    t.integer  "security_mod",       default: 0
-    t.integer  "borders_mod",        default: 0
-    t.integer  "inflation_mod",      default: 0
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.integer  "infrastructure", default: 0
+    t.integer  "grid",           default: 0
+    t.integer  "power",          default: 0
+    t.integer  "stability",      default: 0
+    t.integer  "climate",        default: 0
+    t.integer  "liberty",        default: 0
+    t.integer  "security",       default: 0
+    t.integer  "borders",        default: 0
+    t.integer  "inflation",      default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   add_index "global_effects", ["active"], name: "index_global_effects_on_active", using: :btree
@@ -546,11 +546,6 @@ ActiveRecord::Schema.define(version: 20150810104716) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,        null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
     t.integer  "failed_attempts",        default: 0,        null: false
     t.string   "unlock_token"
     t.datetime "locked_at"

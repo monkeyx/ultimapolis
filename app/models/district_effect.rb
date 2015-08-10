@@ -37,7 +37,7 @@ class DistrictEffect < ActiveRecord::Base
 
 	def apply!
 		transaction do 
-			update_attributes!(active: true)
+			update_attributes!(active: true, started_on: Global.singleton.turn, expired_on: Global.singleton.turn + 60)
 			district.total_land += self.total_land
 			district.transport_capacity += self.transport_capacity
 			district.civilians += self.civilians

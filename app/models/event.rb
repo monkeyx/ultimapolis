@@ -96,12 +96,12 @@ class Event < ActiveRecord::Base
 	    end
     end
 	
-	def add_district_effect!(options={})
-		district_effects.create!(options)
+	def add_district_effect!(district, field, value)
+		district_effects.create!(:district => district, field => value, :name => "#{self.name} Effect")
 	end
 
-	def add_global_effect!(options={})
-		global_effects.create!(options)
+	def add_global_effect!(field, value)
+		global_effects.create!(field => value, :name => "#{self.name} Effect")
 	end
 
 	def add_resource_cost!(trade_good, cost)

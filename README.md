@@ -16,7 +16,7 @@ See [commit log][https://github.com/monkeyx/ultimapolis/commits/master]
 
 ## ToDos
 
-* Event templates
+* Event summaries / descriptions
 * Exchange price setting
 * Buy / sell trade goods
 * Buy / sell equipment

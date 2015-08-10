@@ -7,15 +7,15 @@ class GlobalEffect < ActiveRecord::Base
 	validates :name, presence: true
 	# t.text :description
 	# t.string :icon
-	validates :infrastructure_mod, numericality: {only_integer: true}
-	validates :grid_mod, numericality: {only_integer: true}
-	validates :power_mod, numericality: {only_integer: true}
-	validates :stability_mod, numericality: {only_integer: true}
-	validates :climate_mod, numericality: {only_integer: true}
-	validates :liberty_mod, numericality: {only_integer: true}
-	validates :security_mod, numericality: {only_integer: true}
-	validates :borders_mod, numericality: {only_integer: true}
-	validates :inflation_mod, numericality: {only_integer: true}
+	validates :infrastructure, numericality: {only_integer: true}
+	validates :grid, numericality: {only_integer: true}
+	validates :power, numericality: {only_integer: true}
+	validates :stability, numericality: {only_integer: true}
+	validates :climate, numericality: {only_integer: true}
+	validates :liberty, numericality: {only_integer: true}
+	validates :security, numericality: {only_integer: true}
+	validates :borders, numericality: {only_integer: true}
+	validates :inflation, numericality: {only_integer: true}
 
 	scope :active, -> { where(active: true )}
 	scope :expires_on, ->(turn) { where(expires_on: turn )}
@@ -24,17 +24,17 @@ class GlobalEffect < ActiveRecord::Base
 
 	def apply!
 		transaction do 
-			update_attributes!(active: true)
+			update_attributes!(active: true, started_on: Global.singleton.turn, expired_on: Global.singleton.turn + 60)
 			g = Global.singleton
-			g.infrastructure += self.inflation_mod
-			g.grid += self.grid_mod
-			g.power += self.power_mod
-			g.stability += self.stability_mod
-			g.climate += self.climate_mod
-			g.liberty += self.liberty_mod
-			g.security += self.security_mod
-			g.borders += self.borders_mod
-			g.inflation += self.inflation_mod
+			g.infrastructure += self.inflation
+			g.grid += self.grid
+			g.power += self.power
+			g.stability += self.stability
+			g.climate += self.climate
+			g.liberty += self.liberty
+			g.security += self.security
+			g.borders += self.borders
+			g.inflation += self.inflation
 			g.save!
 		end
 	end
@@ -42,15 +42,15 @@ class GlobalEffect < ActiveRecord::Base
 	def unapply!
 		if self.active 
 			g = Global.singleton
-			g.infrastructure -= self.inflation_mod
-			g.grid -= self.grid_mod
-			g.power -= self.power_mod
-			g.stability -= self.stability_mod
-			g.climate -= self.climate_mod
-			g.liberty -= self.liberty_mod
-			g.security -= self.security_mod
-			g.borders -= self.borders_mod
-			g.inflation -= self.inflation_mod
+			g.infrastructure -= self.inflation
+			g.grid -= self.grid
+			g.power -= self.power
+			g.stability -= self.stability
+			g.climate -= self.climate
+			g.liberty -= self.liberty
+			g.security -= self.security
+			g.borders -= self.borders
+			g.inflation -= self.inflation
 			g.save!
 		end
 	end

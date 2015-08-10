@@ -1,0 +1,42 @@
+Name,Type,Trigger,Summary,Description,District Effect +,District Effect -,Global Effect +,Global Effect -,Resource x 3,Resource x 2,Resource x 1,Skills x 3,Skills x 2,Skills x 1,Rewards,Reward Credits
+Education,Opportunity,,This is an opportunity,This opportunity was seized,education,,,,Basic Education,,Advanced Education,Holography,Computers,Admin,Neural Assistant,1000
+Infrastructure,Opportunity,,This is an opportunity,This opportunity was seized,,,infrastructure,inflation,Basic Infrastructure,,Advanced Infrastructure,Economics,Admin,Demolitions,Nanite Repair Kit,1000
+Artworks,Opportunity,,This is an opportunity,This opportunity was seized,aesthetics,,,,Art Objects,,,Gambling,Craft,Carouse,Crystal Synth,1000
+BorderSecurity,Opportunity,,This is an opportunity,This opportunity was seized,,,borders,,,,Border Post,Flying,Gunnery,Demolitions,Combat Armour,1000
+CommunitySpirit,Opportunity,,This is an opportunity,This opportunity was seized,community,,,,Communal Goods,,,Persuasion,Advocacy,Craft,Field Medic Kit,1000
+BroadcastEntertainment,Opportunity,,This is an opportunity,This opportunity was seized,community,crime,,,Holovids,,,Holography,Acting,Investigation,Holocam Drone,1000
+GridUpgrade,Opportunity,,This is an opportunity,This opportunity was seized,,,grid,,,,Power Relay,Engineering,Mechanics,Computers,Advanced Machine Parts,1000
+Elections,Opportunity,,This is an opportunity,This opportunity was seized,,,liberty,,Public Discourse,,Holovids,Economics,Advocacy,Holography,Empathy Glands,1000
+EnvironmentCleanUp,Opportunity,,This is an opportunity,This opportunity was seized,environment,,,,,,Scrubbers,Physics,Engineering,Biology,Auto-Tractor,1000
+SecurityUpgrade,Opportunity,,This is an opportunity,This opportunity was seized,,crime,security,,,,Security Bot,Comms,Computers,Electronics,Muscle Mesh,1000
+BigBrother,Opportunity,,This is an opportunity,This opportunity was seized,,,security,liberty,,,Surveillance Network,Comms,Computers,Electronics,Artificial Intelligence,1000
+LandClaim,Opportunity,,This is an opportunity,This opportunity was seized,total_land,,,inflation,Basic Infrastructure,,Scrubbers,Economics,Demolitions,Broker,Nano-Charges,1000
+MassTransit,Opportunity,,This is an opportunity,This opportunity was seized,transport_capacity,,,,,,,Engineering,Mechanics,Broker,Motion Implant,1000
+Pacification,Opportunity,,This is an opportunity,This opportunity was seized,,unrest,stability,,Security Bot,Holovids,Public Discourse,Psychology,Diplomacy,Farming,Babel Fish,1000
+Policing,Opportunity,,This is an opportunity,This opportunity was seized,policing,crime,,,,Surveillance Network,Security Bot,Steward,Flying,Investigation,Exo-Skeletal Suit,1000
+Housing,Opportunity,,This is an opportunity,This opportunity was seized,housing,,,,Basic Infrastructure,Communal Goods,Basic Education,Economics,Craft,Demolitions,Communal Goods,1000
+Festival,Opportunity,,This is an opportunity,This opportunity was seized,creativity,,,,Public Art,Luxury Consumables,Holovids,Dance,Carouse,Music,Art Objects,1000
+Health,Opportunity,,This is an opportunity,This opportunity was seized,health,,,,,Health Kit,Nurse Bot,Medic,Psychology,Biology,Exotic Luxuries,1000
+Rejuvenation,Opportunity,,This is an opportunity,This opportunity was seized,social,,,,Basic Infrastructure,Public Art,Luxury Goods,Sculpting,Craft,Broker,Specialised Tools,1000
+CorruptionProbe,Opportunity,,This is an opportunity,This opportunity was seized,,corruption,,,,Public Discourse,Security Bot,Gambling,Investigation,Holography,Forensic Kit,1000
+DistrictTransportCrisis,Crisis,status_transport_crisis?,This is a crisis,This crisis happened,,environment,inflation,,,Basic Manufactured Goods,,Engineering,Driving,Flying,Trading Bot,1000
+DistrictDisorder,Crisis,status_disorder?,This is a crisis,This crisis happened,crime,social,,stability,Basic Consumables,Basic Manufactured Goods,,Persuasion,Deception,Holography,Performance Drugs,1000
+DistrictLawlessness,Crisis,status_lawlessness?,This is a crisis,This crisis happened,corruption,community,,security,Basic Consumables,Basic Manufactured Goods,,Steward,Deception,Gambling,Wikiliner,1000
+DistrictUrbanDecay,Crisis,status_urban_decay?,This is a crisis,This crisis happened,crime,transport_capacity,,infrastructure,Basic Manufactured Goods,Luxury Consumables,,Sculpting,Economics,Music,Precision Chisel,1000
+DistrictHomelessness,Crisis,status_homelessness?,This is a crisis,This crisis happened,crime,social,,,Basic Consumables,Basic Manufactured Goods,,,Psychology,Economics,Stimulant,1000
+DistrictHazardousEnvironment,Crisis,status_hazardous_environment?,This is a crisis,This crisis happened,,health,,climate,,Basic Manufactured Goods,Health Kit,Physics,Chemistry,Medic,Exotic Biochemicals,1000
+DistrictPoorSchools,Crisis,status_poor_schools?,This is a crisis,This crisis happened,,creativity,,,Basic Manufactured Goods,Basic Consumables,,Writing,Psychology,Economics,Public Art,1000
+DistrictEthnicTensions,Crisis,status_ethnic_tensions?,This is a crisis,This crisis happened,unrest,aesthetics,,borders,,Communal Goods,Basic Manufactured Goods,Languages,Deception,Persuasion,Pleasure Android,1000
+DistrictStifling,Crisis,status_stifling?,This is a crisis,This crisis happened,,community,,,,Luxury Consumables,Holovids,Music,Gambling,,Exotic Drugs,1000
+DistrictUgly,Crisis,status_ugly?,This is a crisis,This crisis happened,,creativity,,,,Art Objects,Luxury Goods,Sculpting,Psychology,Music,Personality Suppressant,1000
+DistrictOrganisedCrime,Crisis,status_organised_crime?,This is a crisis,This crisis happened,corruption,,,security,,Surveillance Network,Security Bot,Investigation,Gambling,Psychology,Reactive Implant,1000
+DistrictCorrupt,Crisis,status_corrupt?,This is a crisis,This crisis happened,,policing,inflation,liberty,,Surveillance Network,Public Discourse,Investigation,Gambling,Electronics,Reality Simulator,1000
+GlobalPoorInfrastructure,Crisis,status_poor_infrastructure?,This is a crisis,This crisis happened,corruption,housing,inflation,grid,Basic Infrastructure,Basic Manufactured Goods,,Engineering,Electronics,Driving,Neural Interface,1000
+GlobalGridOverloaded,Crisis,status_grid_overpowered?,This is a crisis,This crisis happened,,,inflation,infrastructure,,Basic Manufactured Goods,Power Relay,Mechanics,Electronics,Engineering,Advanced Electronics,1000
+GlobalInstability,Crisis,status_instability?,This is a crisis,This crisis happened,unrest,,,infrastructure,Basic Consumables,Holovids,Public Discourse,Persuasion,Psychology,Writing,Profiler,1000
+GlobalClimateChange,Crisis,status_climate_change?,This is a crisis,This crisis happened,,environment,,,Basic Manufactured Goods,,Scrubbers,Physics,Mechanics,Farming,Luck Serum,1000
+GlobalRevolution,Crisis,status_revolution?,This is a crisis,This crisis happened,unrest,education,,stability,Basic Consumables,Public Discourse,Luxury Goods,Holography,Combat,Tactics,Charisma Glands,1000
+GlobalTerrorism,Crisis,status_terrorism?,This is a crisis,This crisis happened,crime,community,,liberty,Basic Manufactured Goods,Surveillance Network,Security Bot,Languages,Deception,Tactics,Jammer,1000
+GlobalInvasion,Crisis,status_invasion?,This is a crisis,This crisis happened,,housing,,stability,Basic Manufactured Goods,Border Post,Basic Infrastructure,Combat,Gunnery,Leadership,Presence Hormones,1000
+DistrictPlague,Crisis,status_poor_public_health?,This is a crisis,This crisis happened,,aesthetics,,stability,Health Kit,Basic Consumables,Nurse Bot,Medic,Psychology,Chemistry,Animal Biotics,1000
+GlobalPowerShortage,Crisis,status_power_shortage?,This is a crisis,This crisis happened,crime,,inflation,security,Basic Manufactured Goods,,Power Relay,Mechanics,Electronics,Engineering,Personal Computer,1000
