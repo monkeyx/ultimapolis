@@ -35,13 +35,9 @@ class CreateProjects < ActiveRecord::Migration
       t.integer :project_id
       t.integer :citizen_id
       t.integer :joined_on
-      t.integer :left_on
-      t.boolean :active, default: true
-      t.integer :contribution, default: 0
-      t.integer :wages, default: 0
-
+      
       t.timestamps null: false
     end
-    add_index :project_members, [:project_id, :citizen_id, :active]
+    add_index :project_members, [:project_id, :citizen_id]
   end
 end

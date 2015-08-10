@@ -421,15 +421,11 @@ ActiveRecord::Schema.define(version: 20150810104716) do
     t.integer  "project_id"
     t.integer  "citizen_id"
     t.integer  "joined_on"
-    t.integer  "left_on"
-    t.boolean  "active",       default: true
-    t.integer  "contribution", default: 0
-    t.integer  "wages",        default: 0
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "project_members", ["project_id", "citizen_id", "active"], name: "index_project_members_on_project_id_and_citizen_id_and_active", using: :btree
+  add_index "project_members", ["project_id", "citizen_id"], name: "index_project_members_on_project_id_and_citizen_id", using: :btree
 
   create_table "project_resources", force: :cascade do |t|
     t.integer  "project_id"

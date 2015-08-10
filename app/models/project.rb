@@ -203,7 +203,7 @@ class Project < ActiveRecord::Base
 	end
 
 	def add_leader_as_member!
-		project_members.create!(citizen: leader, active: true)
+		project_members.create!(citizen: leader)
 	end
 
 	def wage_change_membership_adjustment!
