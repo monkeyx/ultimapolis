@@ -1,0 +1,62 @@
+<% content_for :title, 'Buy / Sell Trade Goods' %>
+<% content_for :lead, "<p class=\"lead\">You can buy the trade goods you can't produce in facilities or sell those which you produce.</p>".html_safe %>
+
+<%= form_for(@exchange_trade_good, html: {class: "form-horizontal"}) do |f| %>
+  <% if @exchange_trade_good.errors.any? %>
+    <div id="error_explanation" class="alert alert-dismissible alert-warning">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <h4><%= pluralize(@exchange_trade_good.errors.count, "error") %> prohibited this trade good being bought:</h4>
+
+      <ul>
+      <% @exchange_trade_good.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+  	<legend>Trade Good</legend>
+  	<div class="form-group">
+  	  <label for="trade_good_id" class="col-lg-2 control-label">Trade Good</label>
+      <div class="col-lg-10">
+      	<%=f.collection_select :trade_good_id, TradeGood.all, :id, :name_with_price, {}, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="quantity" class="col-lg-2 control-label">Quantity</label>
+      <div class="col-lg-10">
+        <%= f.number_field :quantity, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="buy_or_sell" class="col-lg-2 control-label">Buy / Sell</label>
+      <div class="col-lg-10">
+        <div class="radio">
+          <label>
+            <input type="radio" name="buy_or_sell" id="buyOrSellRadio1" value="buy" <%=params[:buy_or_sell] == 'buy' ? 'checked' : '' %>>
+            Buy
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="buy_or_sell" id="buyOrSellRadio1" value="sell" <%=params[:buy_or_sell] == 'sell' ? 'checked' : '' %>>
+            Sell
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-2 text-left">
+        <%= link_to 'Cancel', current_citizen_path('inventory'), class: 'btn-lg btn-default' %>
+      </div>
+
+      <div class="col-lg-offset-8 col-lg-2 text-right">
+        <%= f.submit "Trade", class: "btn-lg btn-primary" %>
+      </div>
+    </div>
+  </fieldset>
+<% end %>

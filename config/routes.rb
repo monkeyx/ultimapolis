@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   resources :help_topics, only: [:index, :show]
   
   resources :events, only: [:show]
+
+  resources :exchange_equipments, only: [:new, :create]
+  resources :exchange_trade_goods, only: [:new, :create]
   
   devise_for :users
   root 'welcome#index'

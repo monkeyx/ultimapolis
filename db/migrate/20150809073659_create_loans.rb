@@ -9,5 +9,6 @@ class CreateLoans < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_index :loans, [:citizen_id, :issued_on, :matures_on], name: 'idx_loans'
   end
 end

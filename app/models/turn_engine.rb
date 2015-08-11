@@ -62,7 +62,21 @@ class TurnEngine
 			Citizen.find((rand(100) + 1)).start_project!(Event.current_opportunity, 1, true)
 		end
 
-		# TODO Calculate Exchange Prices
+		puts ">>> EXCHANGE PRICES > TRADE GOODS"
+		progressbar = ProgressBar.create(:total => TradeGood.all.count)
+		TradeGood.all.each do |tg|
+			tg.touch
+			tg.save
+			progressbar.increment
+		end
+
+		puts ">>> EXCHANGE PRICES > EQUIPMENT TYPES"
+		progressbar = ProgressBar.create(:total => EquipmentType.all.count)
+		EquipmentType.all.each do |et|
+			et.touch
+			et.save
+			progressbar.increment
+		end
 
 		puts ">> TURN COMPLETE"
 	end

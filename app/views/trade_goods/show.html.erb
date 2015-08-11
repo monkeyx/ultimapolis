@@ -21,10 +21,8 @@
 </table>
 <% end %>
 
-<% unless @trade_good.for_sale < 1 %>
-<h2>Exchange Sale Listings</h2>
-<%= @trade_good.for_sale %> @ <%=format_currency @trade_good.exchange_price %>
-<% end %>
+<h2>Exchange Price</h2>
+<p><%=format_currency @trade_good.exchange_price %></p>
 
 <% content_for :help_title, "Trade Goods" %>
 <% content_for :help_body do %>

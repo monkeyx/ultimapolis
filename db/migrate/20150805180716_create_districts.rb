@@ -57,7 +57,7 @@ class CreateDistricts < ActiveRecord::Migration
       t.timestamps null: false
     end
     add_index :district_effects, [:district_id, :active]
-    add_index :district_effects, [:district_id, :started_on, :expires_on], name: 'district_effects_turn'
+    add_index :district_effects, [:district_id, :started_on, :expires_on], name: 'idx_district_effects_turn'
 
     create_table :district_snapshots do |t|
       t.integer :district_id

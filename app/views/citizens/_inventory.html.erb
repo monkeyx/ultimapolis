@@ -7,6 +7,8 @@
 	  <% @citizen.citizen_equipment.each do |equipment| %>
 	  <li class="list-group-item">
 	    <%=link_to equipment.equipment_type.name, equipment.equipment_type %> x <%=equipment.quantity %>
+	    <span class="badge"><%=equipment.equipment_type.skill%> +<%=(equipment.equipment_type.skill_modifier * equipment.quantity)%>
+	    </span>
 	  </li>
 	  <% end %>
 	</ul>
@@ -18,6 +20,9 @@
 	  <% @citizen.citizen_trade_goods.each do |trade_good| %>
 	  <li class="list-group-item">
 	    <%=link_to trade_good.trade_good.name, trade_good.trade_good %> x <%=trade_good.quantity %>
+	    <span class="badge">
+	    	<%=format_currency((trade_good.trade_good.exchange_price * trade_good.quantity))%>
+	    </span>
 	  </li>
 	  <% end %>
 	</ul>
@@ -32,3 +37,18 @@
   <% end %>
 </div>
 <% end %>
+
+<div class="row">
+  <div class="col-lg-3 text-left">
+<% if can?(:create, ExchangeTradeGood) %>
+    <%=link_to 'Buy / Sell Trade Goods', new_exchange_trade_good_path, class: 'btn-lg btn-primary' %>
+<% end %>
+  </div>
+  <div class="col-lg-offset-6 col-lg-3 text-right">
+<% if can?(:create, ExchangeEquipment) %>
+    <%=link_to 'Buy / Sell Equipment', new_exchange_equipment_path, class: 'btn-lg btn-primary' %>
+<% end %>
+  </div>
+</div>
+
+<hr class="clear"/>

@@ -14,7 +14,7 @@
 
 <%=render partial: '/facility_types/show', locals: {facility_type: @facility.facility_type, producing_trade_good: @facility.producing_trade_good, producing_equipment_type: @facility.producing_equipment_type} %>
 
-<% if current_citizen && current_citizen.owns_facility?(@facility) %>
+<% if can?(:edit, @facility) %>
 <div class="row">
   <div class="col-lg-1 text-left">
     <%=link_to 'Sell', @facility, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn-lg btn-danger' %>

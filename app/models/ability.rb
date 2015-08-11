@@ -23,7 +23,7 @@ class Ability
         
         if user.citizen
             can :read, [Facility, Project]
-            can :create, [Facility, Project, ProjectMember]
+            can :create, [Facility, Project, ProjectMember, ExchangeEquipment, ExchangeTradeGood]
 
             can :update, Facility, citizen_id: user.citizen.id
             can :update, Project, leader_id: user.citizen.id

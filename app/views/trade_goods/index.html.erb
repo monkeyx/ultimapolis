@@ -8,7 +8,7 @@
       <th>Name</th>
       <th>Produced In</th>
       <th>Raw Materials</th>
-      <th>For Sale</th>
+      <th>Exchange Price</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -25,11 +25,7 @@
           <% end %>
         </td>
         <td>
-          <% if trade_good.for_sale > 0 %>
-          <%= trade_good.for_sale %> @ <%=format_currency trade_good.exchange_price %>
-          <% else %>
-          N/A
-          <% end %>
+          <%=format_currency trade_good.exchange_price %>
         </td>
       </tr>
     <% end %>

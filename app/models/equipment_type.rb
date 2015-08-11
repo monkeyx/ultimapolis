@@ -1,5 +1,6 @@
 class EquipmentType < ActiveRecord::Base
-	
+	include ExchangeItem
+
 	validates :name, presence: true
 	belongs_to :facility_type
 	# t.text :description
@@ -7,10 +8,9 @@ class EquipmentType < ActiveRecord::Base
 	belongs_to :skill 
 	validates :skill_modifier, numericality: {only_integer: true}
 	validates :exchange_price, numericality: {only_integer: true}
-	validates :for_sale, numericality: {only_integer: true}
 	
 	has_many :equipment_raw_materials
-
+	
 	scope :named, ->(name) {where(name: name)}
 	scope :for_facility_type, ->(facility_type) { where(facility_type_id: facility_type.id )}
 	scope :for_skill, ->(skill) { where(skill_id: skill.id )}
@@ -18,6 +18,8 @@ class EquipmentType < ActiveRecord::Base
 
 	acts_as_commontable
 
+	alias_method :raw_materials, :equipment_raw_materials
+	
 	def self.create_new!(name, description, facility_type, skill, modifier, raw_materials=[])
 		et = create!(
 			name: name,
@@ -36,5 +38,13 @@ class EquipmentType < ActiveRecord::Base
 
 	def to_s
 		name
+	end
+
+	def name_with_price
+		"#{name} (#{exchange_price} credits)"
+	end
+
+	def exchange_class
+		ExchangeEquipment
 	end
 end

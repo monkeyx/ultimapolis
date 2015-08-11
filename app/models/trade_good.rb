@@ -1,11 +1,9 @@
 class TradeGood < ActiveRecord::Base
+	include ExchangeItem
 
 	validates :name, presence: true
 	belongs_to :facility_type
 	validates :exchange_price, numericality: {only_integer: true}
-	validates :total, numericality: {only_integer: true}
-	validates :produced_last_turn, numericality: {only_integer: true}
-	validates :for_sale, numericality: {only_integer: true}
 	# t.text :description
 	# t.string :icon
 
@@ -16,6 +14,8 @@ class TradeGood < ActiveRecord::Base
 	default_scope ->{ order('name ASC') }
 
 	acts_as_commontable
+
+	alias_method :raw_materials, :trade_good_raw_materials
 	
 	def self.create_new!(name, description, facility_type, raw_materials=[])
 		tg = create!(
@@ -38,5 +38,13 @@ class TradeGood < ActiveRecord::Base
 
 	def to_s
 		name
+	end
+
+	def name_with_price
+		"#{name} (#{exchange_price} credits)"
+	end
+
+	def exchange_class
+		ExchangeTradeGood
 	end
 end

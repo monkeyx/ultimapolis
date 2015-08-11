@@ -9,5 +9,6 @@ class CreateBonds < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_index :bonds, [:citizen_id, :issued_on, :matures_on], name: 'idx_bonds'
   end
 end

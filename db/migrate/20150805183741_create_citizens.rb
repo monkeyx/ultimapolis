@@ -54,7 +54,7 @@ class CreateCitizens < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :citizen_careers, [:citizen_id, :profession_id, :career_index], name: 'career_mapping'
+    add_index :citizen_careers, [:citizen_id, :profession_id, :career_index], name: 'idx_career_mapping'
     add_index :citizen_careers, [:citizen_id, :current]
   end
 end

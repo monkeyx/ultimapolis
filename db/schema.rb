@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811073623) do
+ActiveRecord::Schema.define(version: 20150811085003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,8 @@ ActiveRecord::Schema.define(version: 20150811073623) do
     t.datetime "updated_at",           null: false
   end
 
+  add_index "bonds", ["citizen_id", "issued_on", "matures_on"], name: "idx_bonds", using: :btree
+
   create_table "citizen_careers", force: :cascade do |t|
     t.integer  "citizen_id"
     t.integer  "profession_id"
@@ -64,7 +66,7 @@ ActiveRecord::Schema.define(version: 20150811073623) do
   end
 
   add_index "citizen_careers", ["citizen_id", "current"], name: "index_citizen_careers_on_citizen_id_and_current", using: :btree
-  add_index "citizen_careers", ["citizen_id", "profession_id", "career_index"], name: "career_mapping", using: :btree
+  add_index "citizen_careers", ["citizen_id", "profession_id", "career_index"], name: "idx_career_mapping", using: :btree
 
   create_table "citizen_equipments", force: :cascade do |t|
     t.integer  "citizen_id"
@@ -203,7 +205,7 @@ ActiveRecord::Schema.define(version: 20150811073623) do
   end
 
   add_index "district_effects", ["district_id", "active"], name: "index_district_effects_on_district_id_and_active", using: :btree
-  add_index "district_effects", ["district_id", "started_on", "expires_on"], name: "district_effects_turn", using: :btree
+  add_index "district_effects", ["district_id", "started_on", "expires_on"], name: "idx_district_effects_turn", using: :btree
 
   create_table "district_snapshots", force: :cascade do |t|
     t.integer  "district_id"
@@ -267,7 +269,7 @@ ActiveRecord::Schema.define(version: 20150811073623) do
     t.datetime "updated_at",                    null: false
   end
 
-  add_index "equipment_raw_materials", ["equipment_type_id", "trade_good_id"], name: "erm_mapping", using: :btree
+  add_index "equipment_raw_materials", ["equipment_type_id", "trade_good_id"], name: "idx_erm_mapping", using: :btree
 
   create_table "equipment_types", force: :cascade do |t|
     t.string   "name"
@@ -277,7 +279,6 @@ ActiveRecord::Schema.define(version: 20150811073623) do
     t.integer  "skill_id"
     t.integer  "skill_modifier",   default: 0
     t.integer  "exchange_price",   default: 0
-    t.integer  "for_sale",         default: 0
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end
@@ -336,6 +337,30 @@ ActiveRecord::Schema.define(version: 20150811073623) do
 
   add_index "events", ["event_type", "current"], name: "index_events_on_event_type_and_current", using: :btree
   add_index "events", ["started_on", "finished_on", "success"], name: "index_events_on_started_on_and_finished_on_and_success", using: :btree
+
+  create_table "exchange_equipments", force: :cascade do |t|
+    t.integer  "equipment_type_id"
+    t.integer  "citizen_id"
+    t.integer  "turn"
+    t.integer  "price"
+    t.integer  "quantity"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "exchange_equipments", ["equipment_type_id", "citizen_id", "turn"], name: "idx_exchange_equipment", using: :btree
+
+  create_table "exchange_trade_goods", force: :cascade do |t|
+    t.integer  "trade_good_id"
+    t.integer  "citizen_id"
+    t.integer  "turn"
+    t.integer  "price"
+    t.integer  "quantity"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "exchange_trade_goods", ["trade_good_id", "citizen_id", "turn"], name: "idx_exchange_goods", using: :btree
 
   create_table "facilities", force: :cascade do |t|
     t.integer  "citizen_id"
@@ -464,6 +489,8 @@ ActiveRecord::Schema.define(version: 20150811073623) do
     t.datetime "updated_at",           null: false
   end
 
+  add_index "loans", ["citizen_id", "issued_on", "matures_on"], name: "idx_loans", using: :btree
+
   create_table "professions", force: :cascade do |t|
     t.string   "name"
     t.string   "profession_group"
@@ -564,19 +591,16 @@ ActiveRecord::Schema.define(version: 20150811073623) do
     t.datetime "updated_at",                  null: false
   end
 
-  add_index "trade_good_raw_materials", ["trade_good_id", "raw_material_id"], name: "tgrm_mapping", using: :btree
+  add_index "trade_good_raw_materials", ["trade_good_id", "raw_material_id"], name: "idx_tgrm_mapping", using: :btree
 
   create_table "trade_goods", force: :cascade do |t|
     t.string   "name"
     t.integer  "facility_type_id"
-    t.integer  "exchange_price",     default: 0
-    t.integer  "total",              default: 0
-    t.integer  "produced_last_turn", default: 0
-    t.integer  "for_sale",           default: 0
+    t.integer  "exchange_price",   default: 0
     t.text     "description"
     t.string   "icon"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   add_index "trade_goods", ["facility_type_id"], name: "index_trade_goods_on_facility_type_id", using: :btree
