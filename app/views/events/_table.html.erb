@@ -19,7 +19,7 @@
 		</td>
 	</tr>
 	<tr>
-		<th>Rewards</th>
+		<th>Rewards *</th>
 		<td>
 			<% event.event_rewards.each do |reward| %>
 				<%=reward.to_s.html_safe%>
@@ -28,7 +28,7 @@
 		</td>
 	</tr>
 	<tr>
-		<th>Effects*</th>
+		<th>Effects *</th>
 		<td>
 			<% (event.district_effects.to_a + event.global_effects.to_a).each do |effect| %>
 			<%=effect%>

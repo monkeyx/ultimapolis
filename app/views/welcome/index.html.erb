@@ -47,6 +47,15 @@
         		<% end %>
         	</ul>
         	<% end %>
+        	<p>
+        		<strong>GDP:</strong> <%=format_currency(Global.singleton.gdp)%>
+        	</p>
+        	<p>
+        		<strong>Inflation:</strong> <%=format_rating(Global.singleton.inflation)%>
+        	</p>
+        	<p>
+        		<strong>Interest Rates:</strong> <%=format_rating(Global.singleton.interest)%>
+        	</p>
 		  </div>
 		</div>
 	</div>
