@@ -3,7 +3,11 @@ class ExchangeTradeGoodsController < ApplicationController
   def new
     @breadcrumbs = [["Home", root_url], [current_user.citizen,"/citizens/#{current_user.citizen.id}?tab=inventory"]]
     @exchange_trade_good = ExchangeTradeGood.new
-    params[:buy_or_sell] = 'buy'
+    unless params[:trade_good].blank?
+      @trade_good = TradeGood.find(params[:trade_good])
+      @exchange_trade_good.trade_good = @trade_good
+    end
+    params[:buy_or_sell] ||= 'buy'
   end
 
   # POST /exchange_trade_goods

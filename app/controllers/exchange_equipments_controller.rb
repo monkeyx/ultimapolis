@@ -4,7 +4,11 @@ class ExchangeEquipmentsController < ApplicationController
   def new
     @breadcrumbs = [["Home", root_url], [current_user.citizen,"/citizens/#{current_user.citizen.id}?tab=inventory"]]
     @exchange_equipment = ExchangeEquipment.new
-    params[:buy_or_sell] = 'buy'
+    unless params[:equipment_type].blank?
+      @equipment_type = EquipmentType.find(params[:equipment_type])
+      @exchange_equipment.equipment_type = @equipment_type
+    end
+    params[:buy_or_sell] ||= 'buy'
   end
 
   # POST /exchange_equipments

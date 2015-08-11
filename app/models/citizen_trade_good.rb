@@ -9,6 +9,8 @@ class CitizenTradeGood < ActiveRecord::Base
 
 	default_scope ->{ includes(:trade_good).order('trade_goods.name ASC') }
 
+	after_save :destroy_if_empty
+
 	def to_s
 		"#{trade_good} x #{quantity}"
 	end
@@ -16,5 +18,11 @@ class CitizenTradeGood < ActiveRecord::Base
 	def value
 		return 0 unless self.trade_good
 		@value ||= (self.quantity * self.trade_good.exchange_price)
+	end
+
+	def destroy_if_empty
+		if self.quantity < 1
+			destroy
+		end
 	end
 end
