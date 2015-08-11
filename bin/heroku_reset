@@ -1,0 +1,1 @@
+heroku maintenance:on && git push && git push heroku master && heroku pg:reset DATABASE_URL --confirm ultimapolis && heroku run rake db:migrate && heroku run rake db:seed && heroku maintenance:off
