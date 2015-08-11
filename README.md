@@ -17,9 +17,7 @@ See [commit log](https://github.com/monkeyx/ultimapolis/commits/master)
 ## To Dos
 
 * Event summaries / descriptions
-* Exchange price setting
-* Buy / sell trade goods
-* Buy / sell equipment
+* Pollution effects
 * Caching
 * News blog generation
 * Admin
