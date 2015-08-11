@@ -1,9 +1,13 @@
 module GlyphHelper
 	def glyph_check_or_cross(boolfield)
- 		return glyph = (if boolfield
- 			"<span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\"></span>"
- 		else
- 			"<span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>"
- 		end).html_safe
+		if boolfield
+			glyph_icon('ok')
+		else
+			glyph_icon('remove')
+		end
+ 	end
+
+ 	def glyph_icon(icon, text=nil)
+ 		"<span class=\"glyphicon glyphicon-#{icon}\" aria-hidden=\"true\">#{text}</span>".html_safe
  	end
 end

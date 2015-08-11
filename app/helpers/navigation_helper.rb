@@ -3,6 +3,7 @@ module NavigationHelper
   		@navigation_items ||= [
   			['Districts', main_app.districts_path, nil],
         ['News', '/news', nil],
+        ['Petitions', '/petitions', nil],
         ['Databank',nil,
           [
             ['Equipment', main_app.equipment_types_path],

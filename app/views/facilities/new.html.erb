@@ -1,5 +1,5 @@
 <% content_for :title, 'Build a new facility' %>
-<% content_for :lead, "<p class=\"lead\">Facilities allow you to produce #{link_to('trade goods', trade_goods_path)} and #{link_to('equipment', equipment_types_path)}. They cost credits to build and maintain.</p>".html_safe %>
+<% content_for :lead, "Facilities allow you to produce #{link_to('trade goods', trade_goods_path)} and #{link_to('equipment', equipment_types_path)}. They cost credits to build and maintain.".html_safe %>
 
 <%= form_for(@facility, html: {class: "form-horizontal"}) do |f| %>
   <% if @facility.errors.any? %>

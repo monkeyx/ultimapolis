@@ -1,5 +1,5 @@
 <% content_for :title, "Forgot your password?" %>
-<% content_for :lead, "<p class=\"lead\">Careless citizen let me help you recover what was forgotten.</p>".html_safe %>
+<% content_for :lead, "Careless citizen let me help you recover what was forgotten.".html_safe %>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "form-horizontal" }) do |f| %>
   <%= devise_error_messages! %>

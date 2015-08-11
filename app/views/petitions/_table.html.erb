@@ -1,0 +1,33 @@
+<% if petitions.empty? %>
+  <p>No petitions</p>
+<% else %>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Proposer</th>
+        <th>For</th>
+        <th>Against</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% petitions.each do |petition| %>
+        <tr>
+          <td><%= link_to petition.name, petition %></td>
+          <td><%= link_to petition.citizen.to_s, petition.citizen %></td>
+          <td><%= petition.cached_votes_up %></td>
+          <td><%= petition.cached_votes_down %></td>
+          <% if can?(:edit, petition) && !petition.accepted? %>
+            <td><%= link_to 'Cancel', petition, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+            <td><%= link_to 'Edit', edit_petition_path(petition), class: 'btn btn-primary' %></td>
+          <% elsif can?(:vote_for, petition) %>
+            <td><%= link_to glyph_icon('thumbs-down','Against'), vote_against_petition_path(petition), method: :post, class: 'btn btn-danger' %></td>
+            <td><%= link_to glyph_icon('thumbs-up','For'), vote_for_petition_path(petition), method: :post, class: 'btn btn-success' %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

@@ -1,5 +1,5 @@
 <% content_for :title, 'Buy / Sell Trade Goods' %>
-<% content_for :lead, "<p class=\"lead\">You can buy the trade goods you can't produce in facilities or sell those which you produce.</p>".html_safe %>
+<% content_for :lead, "You can buy the trade goods you can't produce in facilities or sell those which you produce.".html_safe %>
 
 <%= form_for(@exchange_trade_good, html: {class: "form-horizontal"}) do |f| %>
   <% if @exchange_trade_good.errors.any? %>
@@ -59,4 +59,9 @@
       </div>
     </div>
   </fieldset>
+<% end %>
+
+<% content_for :help_title, "Trading with the Exchange" %>
+<% content_for :help_body do %>
+The Exchange is a useful system of trade within Ultimapolis. There is always some supply and demand in trade goods and equipment. Prices are set based on the costs of production and will increase as demand outstrips supply and vice versa. There is also an undercurrent of inflation that impacts prices.
 <% end %>

@@ -5,7 +5,7 @@ class Ability
 
     user ||= User.new
 
-    can :read, [Citizen, District, DistrictEffect, EquipmentType, FacilityType, GlobalEffect, Profession, Skill, TradeGood]
+    can :read, [Citizen, District, DistrictEffect, EquipmentType, FacilityType, GlobalEffect, Petition, Profession, Skill, TradeGood]
     
     can :read, Event, current: true
 
@@ -23,13 +23,17 @@ class Ability
         
         if user.citizen
             can :read, [Facility, Project]
-            can :create, [Facility, Project, ProjectMember, ExchangeEquipment, ExchangeTradeGood]
+            can :vote_for, Petition
+            can :vote_against, Petition
+            can :create, [Facility, Petition, Project, ProjectMember, ExchangeEquipment, ExchangeTradeGood]
 
             can :update, Facility, citizen_id: user.citizen.id
             can :update, Project, leader_id: user.citizen.id
+            can :update, Petition, citizen_id: user.citizen.id, accepted: false
 
             can :destroy, Facility, citizen_id: user.citizen.id
             can :destroy, Project, leader_id: user.citizen.id
+            can :destroy, Petition, citizen_id: user.citizen.id, accepted: false
 
             can :destroy, ProjectMember, citizen_id: user.citizen.id 
 

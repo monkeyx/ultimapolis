@@ -1,5 +1,5 @@
 <% content_for :title, "#{@event.event_type}: #{@event.name}" %>
-<% content_for :lead, "<p class=\"lead\">#{@event.summary.html_safe}</p>".html_safe %>
+<% content_for :lead, "#{@event.summary.html_safe}".html_safe %>
 
 <%=render partial: '/events/table', locals: {event: @event} %>
 

@@ -1,6 +1,7 @@
 class BondsController < ApplicationController
   before_action :set_bond, only: [:destroy]
-
+  load_and_authorize_resource
+  
   # GET /bonds/1
   # GET /bonds/1.json
   def show

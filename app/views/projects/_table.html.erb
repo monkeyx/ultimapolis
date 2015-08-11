@@ -16,16 +16,16 @@
         <td><%= project.status %></td>
         <td><%=format_currency  project.wages %></td>
         <td>
-            <%= form_for(ProjectMember.new(project: project)) do |f| %>
-            <%=f.hidden_field :project_id %>
-            <%=f.submit "Help", class: "btn btn-primary" %>
-            <% end %>
-        </td>
-        <td>
             <%= form_for(ProjectMember.new(project: project, sabotaging: true)) do |f| %>
             <%=f.hidden_field :project_id %>
             <%=f.hidden_field :sabotaging %>
             <%=f.submit "Sabotage", class: "btn btn-danger" %>
+            <% end %>
+        </td>
+        <td>
+            <%= form_for(ProjectMember.new(project: project)) do |f| %>
+            <%=f.hidden_field :project_id %>
+            <%=f.submit "Help", class: "btn btn-primary" %>
             <% end %>
         </td>
       </tr>

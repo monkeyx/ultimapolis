@@ -1,2 +1,2 @@
 <% content_for :title, @help_topic.name %>
-<% content_for :lead, "<p class=\"lead\">#{@help_topic.body}.</p>".html_safe %>
+<%=@help_topic.body.html_safe %>

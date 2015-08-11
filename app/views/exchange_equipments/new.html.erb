@@ -1,5 +1,5 @@
 <% content_for :title, 'Buy / Sell Equipment' %>
-<% content_for :lead, "<p class=\"lead\">There are many useful items that can be bought to enhance a citizen's skills. You can also sell these items to make some credits.</p>".html_safe %>
+<% content_for :lead, "There are many useful items that can be bought to enhance a citizen's skills. You can also sell these items to make some credits.".html_safe %>
 
 <%= form_for(@exchange_equipment, html: {class: "form-horizontal"}) do |f| %>
   <% if @exchange_equipment.errors.any? %>
@@ -60,4 +60,9 @@
     </div>
   </fieldset>
 
+<% end %>
+
+<% content_for :help_title, "Trading with the Exchange" %>
+<% content_for :help_body do %>
+The Exchange is a useful system of trade within Ultimapolis. There is always some supply and demand in trade goods and equipment. Prices are set based on the costs of production and will increase as demand outstrips supply and vice versa. There is also an undercurrent of inflation that impacts prices.
 <% end %>

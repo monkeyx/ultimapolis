@@ -30,6 +30,13 @@ Rails.application.routes.draw do
   resources :exchange_equipments, only: [:new, :create]
   resources :exchange_trade_goods, only: [:new, :create]
   
+  resources :petitions do 
+    member do 
+      post :vote_for
+      post :vote_against
+    end
+  end
+
   devise_for :users
   root 'welcome#index'
 end

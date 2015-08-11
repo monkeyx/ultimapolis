@@ -1,4 +1,6 @@
 class ExchangeTradeGoodsController < ApplicationController
+  load_and_authorize_resource
+  
   # GET /exchange_trade_goods/new
   def new
     @breadcrumbs = [["Home", root_url], [current_user.citizen,"/citizens/#{current_user.citizen.id}?tab=inventory"]]

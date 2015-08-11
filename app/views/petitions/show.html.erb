@@ -1,0 +1,40 @@
+<% content_for :title, "Petition to #{@petition.name}" %>
+<%
+  if @petition.cached_votes_up > 0 || @petition.cached_votes_down > 0
+    lead_text = "#{pluralize(@petition.cached_votes_up, 'vote')} for and #{@petition.cached_votes_down} against."
+  else
+    lead_text = "Be the first to vote for this petition."
+  end
+%>
+<% content_for :lead, lead_text %>
+<blockquote>
+  <p>
+    <%=@petition.summary%>
+  </p>
+  <small><cite title="Source Title"><%=link_to(@petition.citizen.to_s, @petition.citizen)%></cite></small>
+</blockquote>
+
+<% if can?(:vote_for, @petition) %>
+<div class="row">
+  <div class="col-lg-4 text-left">
+    <%= link_to glyph_icon('thumbs-down','Against'), vote_against_petition_path(@petition), method: :post, class: 'btn-lg btn-danger' %>
+  </div>
+  <div class="col-lg-4 text-center">
+  <% if current_user %>
+  <% if current_user.voted_up_on?(@petition) %>
+    You have voted in favour of this petition.
+  <% elsif current_user.voted_down_on?(@petition) %>
+    You have voted against this petition.
+  <% end %>
+  </div>
+<% end %>
+  <div class="col-lg-4 text-right">
+    <%= link_to glyph_icon('thumbs-up','For'), vote_for_petition_path(@petition), method: :post, class: 'btn-lg btn-success' %>
+  </div>
+</div>
+<% end %>
+
+<% content_for :help_title, "Petitions" %>
+<% content_for :help_body do %>
+Petitions are special requests submitted to the City Core Government. These could be new features to be added to the simulation or special actions that impact the simulation in a one-off basis. The exact nature of petitions is left to the imagination of the citizenry. The City Core Government will seriously consider the weighted opinions of the citizens but is not obliged to action them.
+<% end %>

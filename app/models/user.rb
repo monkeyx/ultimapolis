@@ -8,9 +8,10 @@ class User < ActiveRecord::Base
     validates :role, inclusion: {in:  USER_ROLES}
 
     has_one :citizen
-
+    
     blogs
     acts_as_commontator
+    acts_as_voter
 
     USER_ROLES.each do |role|
     	define_method("#{role}?") do

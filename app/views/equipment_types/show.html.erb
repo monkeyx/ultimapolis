@@ -1,5 +1,5 @@
 <% content_for :title, @equipment_type.name %>
-<% content_for :lead, "<p class=\"lead\">#{@equipment_type.description}. Gives +#{@equipment_type.skill_modifier} to #{link_to @equipment_type.skill.name, @equipment_type.skill} skill. Produced in a #{link_to @equipment_type.facility_type.name, @equipment_type.facility_type}.</p>".html_safe %>
+<% content_for :lead, "#{@equipment_type.description}. Gives +#{@equipment_type.skill_modifier} to #{link_to @equipment_type.skill.name, @equipment_type.skill} skill. Produced in a #{link_to @equipment_type.facility_type.name, @equipment_type.facility_type}.".html_safe %>
 
 <h2>Production Cost</h2>
 <table class="table table-striped table-hover">

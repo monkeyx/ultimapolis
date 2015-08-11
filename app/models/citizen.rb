@@ -24,6 +24,7 @@ class Citizen < ActiveRecord::Base
 	has_many :loans, dependent: :delete_all
 	has_many :financial_transactions, dependent: :delete_all
 	has_many :turn_reports, dependent: :delete_all
+	has_many :petitions, dependent: :nullify
 
 	after_create :set_initial_skills!
 	after_create :create_free_facility!

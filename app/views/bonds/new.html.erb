@@ -1,5 +1,5 @@
 <% content_for :title, 'Buy a Bond' %>
-<% content_for :lead, "<p class=\"lead\">You can invest large sums of credits into the City's Treasury Bonds. Bonds will generate interest payments at the rate of #{format_rating(Global.singleton.interest)}.</p>".html_safe %>
+<% content_for :lead, "You can invest large sums of credits into the City's Treasury Bonds. Bonds will generate interest payments at the rate of #{format_rating(Global.singleton.interest)}.".html_safe %>
 
 <%= render 'form' %>
 

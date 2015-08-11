@@ -1,4 +1,5 @@
 class ExchangeEquipmentsController < ApplicationController
+  load_and_authorize_resource
   
   # GET /exchange_equipments/new
   def new

@@ -1,5 +1,5 @@
 <% content_for :title, "Manage #{@facility}" %>
-<% content_for :lead, "<p class=\"lead\">It will cost #{format_currency(@facility.upgrade_cost)} to upgrade this facility by one level.</p>".html_safe %>
+<% content_for :lead, "It will cost #{format_currency(@facility.upgrade_cost)} to upgrade this facility by one level.".html_safe %>
 
 <%= form_for(@facility, html: {class: "form-horizontal"}) do |f| %>
   <% if @facility.errors.any? %>
