@@ -23,12 +23,12 @@ class Event < ActiveRecord::Base
 	  	scope "#{event_type.downcase.pluralize}".to_sym, -> { where(event_type: event_type)}
     end
 
-	has_many :district_effects
-	has_many :global_effects
-	has_many :event_resource_costs
-	has_many :event_rewards
-	has_many :event_skill_costs
-	has_many :projects
+	has_many :district_effects, dependent: :destroy
+	has_many :global_effects, dependent: :destroy
+	has_many :event_resource_costs, dependent: :delete_all
+	has_many :event_rewards, dependent: :delete_all
+	has_many :event_skill_costs, dependent: :delete_all
+	has_many :projects, dependent: :destroy
 	has_one :previous_event, foreign_key: 'trigger_after_event_id', class_name: 'Event'
 
 	scope :current, -> { where(current: true )}

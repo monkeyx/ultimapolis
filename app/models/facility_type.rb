@@ -15,7 +15,7 @@ class FacilityType < ActiveRecord::Base
 	
 	has_many :equipment_types
 	has_many :trade_goods
-	has_many :facilities
+	has_many :facilities, dependent: :delete_all
 
 	scope :named, ->(name) {where(name: name)}
 	scope :for_district, ->(district) { where(district_id: district.id ) }

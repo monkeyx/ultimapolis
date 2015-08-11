@@ -18,9 +18,9 @@ class Project < ActiveRecord::Base
 
     validate :validate_project
 
-	has_many :project_members
-	has_many :project_resources
-	has_many :project_skill_points
+	has_many :project_members, dependent: :destroy
+	has_many :project_resources, dependent: :delete_all
+	has_many :project_skill_points, dependent: :delete_all
 
 	before_save :set_began_on
 	after_create :add_leader_as_member!

@@ -69,7 +69,12 @@ class CitizensController < ApplicationController
     end
   end
 
-  def inventory
+  def destroy
+    @citizen.destroy
+    respond_to do |format|
+      format.html { redirect_to root_url, notice: 'Citizen was retired.' }
+      format.json { head :no_content }
+    end
   end
 
  private

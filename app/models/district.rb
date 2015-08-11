@@ -23,10 +23,10 @@ class District < ActiveRecord::Base
 	# t.text :description
 	# t.string :icon
 
-	has_many :district_effects
+	has_many :district_effects, dependent: :delete_all
 	has_many :facility_types
-	has_many :facilities, through: :facility_types
-	has_many :turn_reports
+	has_many :facilities, through: :facility_types, dependent: :delete_all
+	has_many :turn_reports, dependent: :delete_all
 
 	scope :has_free_land, ->{ where("free_land > 0")}
 

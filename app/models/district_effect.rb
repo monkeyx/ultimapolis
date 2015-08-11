@@ -46,7 +46,7 @@ class DistrictEffect < ActiveRecord::Base
 		if self.transport_capacity > 0
 			@summary << "Increased transport capacity in #{district}"
 		elsif self.transport_capacity < 0
-			@summary << "Transport system broke down in #{district}"
+			@summary << "Transport disruptions in #{district}"
 		end
 		if self.civilians > 0
 			@summary << "Population in #{district} increased"

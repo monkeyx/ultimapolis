@@ -7,7 +7,7 @@ class TradeGood < ActiveRecord::Base
 	# t.text :description
 	# t.string :icon
 
-	has_many :trade_good_raw_materials
+	has_many :trade_good_raw_materials, dependent: :delete_all
 
 	scope :named, ->(name) {where(name: name)}
 

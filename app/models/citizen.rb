@@ -13,17 +13,17 @@ class Citizen < ActiveRecord::Base
 	# t.integer :credits
 	# t.string :icon
 
-	has_many :citizen_careers
-	has_many :citizen_equipment
-	has_many :citizen_skills
-	has_many :citizen_trade_goods
-	has_many :facilities
-	has_many :projects, foreign_key: 'leader_id'
-	has_many :project_members
-	has_many :bonds
-	has_many :loans
-	has_many :financial_transactions
-	has_many :turn_reports
+	has_many :citizen_careers, dependent: :delete_all
+	has_many :citizen_equipment, dependent: :delete_all
+	has_many :citizen_skills, dependent: :delete_all
+	has_many :citizen_trade_goods, dependent: :delete_all
+	has_many :facilities, dependent: :delete_all
+	has_many :projects, foreign_key: 'leader_id', dependent: :destroy
+	has_many :project_members, dependent: :destroy
+	has_many :bonds, dependent: :delete_all
+	has_many :loans, dependent: :delete_all
+	has_many :financial_transactions, dependent: :delete_all
+	has_many :turn_reports, dependent: :delete_all
 
 	after_create :set_initial_skills!
 	after_create :create_free_facility!

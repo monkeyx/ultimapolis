@@ -3,9 +3,7 @@ Rails.application.routes.draw do
   mount Blogit::Engine => "/news"
   mount Commontator::Engine => '/vox-populi'
   
-  resources :citizens, except: [:index, :destroy] do 
-    get :inventory
-  end
+  resources :citizens, except: [:index]
   
   resources :projects, except: [:index, :show]
   resources :project_members, only: [:create, :destroy]

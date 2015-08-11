@@ -25,7 +25,10 @@
     </div>
 
     <div class="form-group">
-      <div class="col-lg-2 col-lg-offset-10">
+      <div class="col-lg-2">
+        <%=link_to "Become a Citizen", new_citizen_path, class: 'btn-lg btn-primary' %>
+      </div>
+      <div class="col-lg-2 col-lg-offset-8 text-right">
         <%= f.submit "Sign In", class: "btn-lg btn-primary" %>
       </div>
     </div>

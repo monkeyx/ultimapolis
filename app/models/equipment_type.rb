@@ -9,7 +9,7 @@ class EquipmentType < ActiveRecord::Base
 	validates :skill_modifier, numericality: {only_integer: true}
 	validates :exchange_price, numericality: {only_integer: true}
 	
-	has_many :equipment_raw_materials
+	has_many :equipment_raw_materials, dependent: :delete_all
 	
 	scope :named, ->(name) {where(name: name)}
 	scope :for_facility_type, ->(facility_type) { where(facility_type_id: facility_type.id )}

@@ -3,6 +3,14 @@
 
 <%=render partial: '/citizens/tabs', locals: {current_tab: params[:tab] || 'profile'} %>
 
+<% if can?(:destroy, @citizen) %>
+<div class="row">
+  <div class="col-lg-12 text-center">
+  	<%= link_to 'Retire', @citizen, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn-lg btn-danger' %>
+  </div>
+</div>
+<% end %>
+
 <% content_for :help_title, "About Citizens" %>
 <% content_for :help_body do %>
 Citizens are the lifeblood of the city. The society of Ultimapolis is very open, the archaic norms of privacy having been relegated to the dustbin of history in preference for an egalitarian utopia. So most information about a citizen is well-known to all. However, a few things are kept private (e.g. financial transactions). Another thing that is kept private is a citizen's name. Only they and their loved ones know and use their true names in private. In city discussions, everybody refers to each other by their citizen identifier only and this is used exclusively in all public reports. In this way, any prejudice that may come from cultural identification by name is removed from the discourse of the city. All citizens are equal in the eyes of Ultimapolis.
