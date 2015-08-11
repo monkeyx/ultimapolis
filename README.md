@@ -17,7 +17,6 @@ See [commit log](https://github.com/monkeyx/ultimapolis/commits/master)
 ## To Dos
 
 * Event summaries / descriptions
-* Pollution effects
 * Caching
 * News blog generation
 * Retire citizen

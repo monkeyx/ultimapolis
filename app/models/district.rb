@@ -85,6 +85,10 @@ class District < ActiveRecord::Base
 		end
 	end
 
+	def total_pollution
+		@total_pollution ||= Facility.for_district(self).to_a.sum{|f| f.level * f.facility_type.pollution }
+	end
+
 	def metrics
 		return @metrics if defined?(@metrics)
 		@metrics = []
@@ -104,6 +108,7 @@ class District < ActiveRecord::Base
 		@metrics << ['Aesthetics', "#{aesthetics}%"]
 		@metrics << ['Crime', "#{crime}%"]
 		@metrics << ['Corruption', "#{corruption}%"]
+		@metrics << ['Pollution', "#{total_pollution}"]
 		@metrics = @metrics.sort{|a,b| a[0] <=> b[0]}
 		@metrics
 	end
@@ -144,6 +149,11 @@ class District < ActiveRecord::Base
 			end
 			DistrictEffect.for_district(self).active.expires_on(Global.singleton.turn).find_each do |effect|
 				effect.destroy
+			end
+			# Pollution
+			if total_land < total_pollution
+				add_report!("Pollution worsed environment")
+				self.environment -= 1
 			end
 			save!
 		end

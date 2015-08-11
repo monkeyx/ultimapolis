@@ -1,6 +1,19 @@
 <% content_for :title, @district.name %>
 <% content_for :lead, "<p class=\"lead\">#{@district.description}</p>".html_safe %>
 
+<% reports = TurnReport.district_new(@district).limit(10) %>
+<% unless reports.empty? %>
+<h2>News</h2>
+<ul class="list-group">
+  <% reports.each do |report| %>
+  <li class="list-group-item">
+    <%=report.to_s.html_safe%>
+    <span class="badge"><%=format_turn(report.turn)%></span>
+  </li>
+  <% end %>
+</ul>
+<% end%>
+
 <h2>Facilities</h2>
 <% i = 0 %>
 <% @district.facility_types.order("name ASC").each do |facility_type| %>
