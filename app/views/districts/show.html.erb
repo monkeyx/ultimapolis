@@ -1,9 +1,9 @@
 <% content_for :title, @district.name %>
 <% content_for :lead, "<p class=\"lead\">#{@district.description}</p>".html_safe %>
 
-<% reports = TurnReport.district_new(@district).limit(10) %>
+<% reports = TurnReport.district_news(@district).limit(10) %>
 <% unless reports.empty? %>
-<h2>News</h2>
+<h2>News from <%=@district%></h2>
 <ul class="list-group">
   <% reports.each do |report| %>
   <li class="list-group-item">

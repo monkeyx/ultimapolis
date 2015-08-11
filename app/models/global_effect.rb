@@ -23,18 +23,65 @@ class GlobalEffect < ActiveRecord::Base
 	after_destroy :unapply!
 
 	def to_s
-		name
+		summary
 	end
 
 	def summary
-		# TODO
+		return @summary if defined?(@summary)
+		@summary = []
+		if self.infrastructure > 0
+			@summary << "Infrastructure upgraded"
+		elsif self.infrastructure < 0
+			@summary << "Infrastructure degrades"
+		end
+		if self.grid > 0
+			@summary << "Grid upgraded"
+		elsif self.grid < 0
+			@summary << "Grid deteriotes"
+		end
+		if self.power > 0
+			@summary << "New energy sources discovered"
+		elsif self.power < 0
+			@summary << "Unknown power drain"
+		end
+		if self.stability > 0
+			@summary << "Stability on the rise"
+		elsif self.stability < 0
+			@summary << "Instability grips city"
+		end
+		if self.climate > 0
+			@summary << "Climate improves"
+		elsif self.climate < 0
+			@summary << "Climate worsens"
+		end
+		if self.liberty > 0
+			@summary << "Freedom"
+		elsif self.liberty < 0
+			@summary << "Tyranny"
+		end
+		if self.security > 0
+			@summary << "Improved security"
+		elsif self.security < 0
+			@summary << "Decreasing security"
+		end
+		if self.borders > 0
+			@summary << "Borders more secure"
+		elsif self.borders < 0
+			@summary << "Borders undefended"
+		end
+		if self.inflation > 0
+			@summary << "Inflation"
+		elsif self.inflation < 0
+			@summary << "Deflation"
+		end
+		@summary.join(", ")
 	end
 
 	def apply!
 		transaction do 
-			update_attributes!(active: true, started_on: Global.singleton.turn, expired_on: Global.singleton.turn + 60)
+			update_attributes!(active: true, started_on: Global.singleton.turn, expires_on: Global.singleton.turn + 60)
 			g = Global.singleton
-			g.infrastructure += self.inflation
+			g.infrastructure += self.infrastructure
 			g.grid += self.grid
 			g.power += self.power
 			g.stability += self.stability
@@ -50,7 +97,7 @@ class GlobalEffect < ActiveRecord::Base
 	def unapply!
 		if self.active 
 			g = Global.singleton
-			g.infrastructure -= self.inflation
+			g.infrastructure -= self.infrastructure
 			g.grid -= self.grid
 			g.power -= self.power
 			g.stability -= self.stability

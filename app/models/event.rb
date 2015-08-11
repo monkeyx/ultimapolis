@@ -57,7 +57,7 @@ class Event < ActiveRecord::Base
 
     def cancel_projects_except_winning!
     	projects.each do |project|
-    		unless project.winning_project_id == project.id 
+    		unless self.winning_project_id == project.id 
     			project.destroy
     		end
     	end
@@ -69,11 +69,17 @@ class Event < ActiveRecord::Base
 	    	self.current = false 
 	    	self.success = true 
 	    	if opportunity?
+	    		districts = []
 	    		district_effects.each do |effect|
 	    			effect.apply!
+	    			districts << effect.district
 	    		end
 	    		global_effects.each do |effect|
 	    			effect.apply!
+	    		end
+	    		districts.uniq!
+	    		districts.each do |district|
+	    			district.add_report!(self.description)
 	    		end
 	    	end
 	    	self.finished_on = Global.singleton.turn 
@@ -88,11 +94,18 @@ class Event < ActiveRecord::Base
 	    	self.current = false
 	    	self.success = false
 	    	if crisis?
+	    		districts = []
 	    		district_effects.each do |effect|
 	    			effect.apply!
+	    			districts << effect.district
 	    		end
 	    		global_effects.each do |effect|
 	    			effect.apply!
+	    		end
+	    		districts.uniq!
+	    		districts.each do |district|
+	    			puts "#{self.description}"
+	    			district.add_report!(self.description)
 	    		end
 	    	end
 	    	self.finished_on = Global.singleton.turn 

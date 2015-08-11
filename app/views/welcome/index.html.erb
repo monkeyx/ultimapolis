@@ -65,6 +65,19 @@
 		</div>
 	</div>
 </div>
+<% reports = TurnReport.global_news.limit(5) %>
+<% unless reports.empty? %>
+<h2>News Headlines</h2>
+<ul class="list-group">
+  <% reports.each do |report| %>
+  <li class="list-group-item">
+    <%=link_to(report.to_s.html_safe, report.district)%>
+    <span class="badge"><%=format_turn(report.turn)%></span>
+  </li>
+  <% end %>
+</ul>
+<% end%>
+
 <% content_for :help_title, "What is this?" %>
 <% content_for :help_body do %>
 Ultimapolis is a persistent browser-based game which sumulates the workings of a single futuristic city. Citizens run by players compete and collaborate to deal with new crisis and opportunities whilst expanding their own pool of knowledge (skills) and resources. The simulation is the foundation for a roleplaying game. There is no final objective to achieve and different citizens will have different ideas about what is the best for their city.

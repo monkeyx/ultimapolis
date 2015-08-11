@@ -22,6 +22,8 @@ See [commit log](https://github.com/monkeyx/ultimapolis/commits/master)
 * Retire citizen
 * Petitions
 * Graphs
+* Custom error / maintenance pages
+* Emails
 
 ## Issues
 

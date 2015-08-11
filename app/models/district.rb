@@ -151,8 +151,8 @@ class District < ActiveRecord::Base
 				effect.destroy
 			end
 			# Pollution
-			if total_land < total_pollution
-				add_report!("Pollution worsed environment")
+			if total_land < total_pollution && rand(100) < 50
+				add_report!("Pollution worsened environment")
 				self.environment -= 1
 			end
 			save!
