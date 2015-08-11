@@ -239,6 +239,10 @@ class Citizen < ActiveRecord::Base
 	# Skills
 	#
 
+	def known_skills
+		@known_skills ||= (self.citizen_skills.map{|cs| cs.skill } + self.citizen_equipment.map{|ce| ce.equipment_type.skill }).uniq.sort{|a,b| a.name <=> b.name }
+	end
+
 	def skill_mapping(skill)
 		return unless skill 
 		CitizenSkill.for_citizen(self).for_skill(skill).first

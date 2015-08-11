@@ -1,11 +1,11 @@
 <h2>Profile</h2>
 
-<% if @citizen.citizen_skills.count > 0 %>
+<% if @citizen.known_skills.count > 0 %>
 <h3>Skills</h3>
 <ul class="list-group">
-  <% @citizen.citizen_skills.each do |skill| %>
+  <% @citizen.known_skills.each do |skill| %>
   <li class="list-group-item">
-    <%=link_to skill.skill.name, skill.skill %> <span class="badge"><%=skill.rank %></span>
+    <%=link_to skill.name, skill %> <span class="badge"><%=@citizen.skill_rank(skill) %></span>
   </li>
   <% end %>
 </ul>
