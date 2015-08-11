@@ -47,7 +47,7 @@ class ExchangeEquipment < ActiveRecord::Base
 	def update_inventory!
 		if self.selling 
 			self.citizen.remove_equipment!(self.equipment_type, self.quantity.abs)
-			self.citizen.add_credits!((self.quantity * self.equipment_type.exchange_price), "Sold #{self.quantity} x #{self.equipment_type}")
+			self.citizen.add_credits!((self.quantity.abs * self.equipment_type.exchange_price), "Sold #{self.quantity.abs} x #{self.equipment_type}")
 		else
 			self.citizen.add_equipment!(self.equipment_type, self.quantity)
 			self.citizen.remove_credits!((self.quantity * self.equipment_type.exchange_price), "Bought #{self.quantity} x #{self.equipment_type}")

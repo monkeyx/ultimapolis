@@ -47,7 +47,7 @@ class ExchangeTradeGood < ActiveRecord::Base
 	def update_inventory!
 		if self.selling 
 			self.citizen.remove_trade_good!(self.trade_good, self.quantity.abs)
-			self.citizen.add_credits!((self.quantity * self.trade_good.exchange_price), "Sold #{self.quantity} x #{self.trade_good}")
+			self.citizen.add_credits!((self.quantity.abs * self.trade_good.exchange_price), "Sold #{self.quantity.abs} x #{self.trade_good}")
 		else
 			self.citizen.add_trade_good!(self.trade_good, self.quantity)
 			self.citizen.remove_credits!((self.quantity * self.trade_good.exchange_price), "Bought #{self.quantity} x #{self.trade_good}")
