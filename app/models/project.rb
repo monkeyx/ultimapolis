@@ -38,6 +38,20 @@ class Project < ActiveRecord::Base
 
 	attr_accessor :skip_resource_costs
 
+	def progress
+		return @progress if defined?(@progress)
+		@progress = 0
+		total = 0
+		event_skill_costs.each do |skill_cost|
+			if skill_cost.cost > 0
+    			@progress = skill_points(skill_cost.skill)
+    			total = skill_cost.cost
+    		end
+    	end
+    	return (@progress = 100) unless total > 0
+    	@progress = ((@progress.to_f / total.to_f) * 100).round(0).to_i
+	end
+
 	def status_enum
 		PROJECT_STATUS
 	end
@@ -124,7 +138,9 @@ class Project < ActiveRecord::Base
 	    		if skill_cost.cost >= skill_mapping.points # work to be done in this skill
 			    	project_members.each do |member|
 			    		if (skill_rank = member.citizen.skill_rank(skill_cost.skill)) > 0 # member can contribute
-			    			if self.leader.credits >= (skill_rank * self.wages) # leader can afford to pay
+			    			if member.sabotaging
+			    				skill_mapping.points -= skill_rank
+			    			elsif self.leader.credits >= (skill_rank * self.wages) # leader can afford to pay
 			    				# pay wages
 			    				member_wages = (skill_rank * self.wages)
 			    				self.leader.remove_credits!(member_wages, "Pay Wages for #{self}", member.citizen)

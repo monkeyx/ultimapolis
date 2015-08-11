@@ -35,6 +35,7 @@ class CreateProjects < ActiveRecord::Migration
       t.integer :project_id
       t.integer :citizen_id
       t.integer :joined_on
+      t.boolean :sabotaging
       
       t.timestamps null: false
     end

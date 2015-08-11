@@ -506,6 +506,7 @@ ActiveRecord::Schema.define(version: 20150811085003) do
     t.integer  "project_id"
     t.integer  "citizen_id"
     t.integer  "joined_on"
+    t.boolean  "sabotaging"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

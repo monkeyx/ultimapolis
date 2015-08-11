@@ -25,6 +25,6 @@ class ProjectMembersController < ApplicationController
     end
 
     def project_member_params
-      params.require(:project_member).permit(:project_id)
+      params.require(:project_member).permit(:project_id, :sabotaging)
     end
 end

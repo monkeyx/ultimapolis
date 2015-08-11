@@ -3,6 +3,7 @@ class ProjectMember < ActiveRecord::Base
 	belongs_to :project
 	belongs_to :citizen
 	# t.integer :joined_on
+	# t.boolean :sabotaging
 	
 	validate :validate_member
 

@@ -50,6 +50,7 @@
       <th>Leader</th>
       <th>Status</th>
       <th>Wages</th>
+      <th>Progress</th>
       <th></th>
     </tr>
   </thead>
@@ -67,6 +68,7 @@
           <% end %>
         </td>
         <td><%=format_currency  project.wages %></td>
+        <td><%=format_rating project.progress %></td>
         <% if can?(:edit, @citizen) %>
           <% if current_citizen.id == project.leader.id %>
         <td>
@@ -77,7 +79,7 @@
         </td>
           <% elsif (@project_member_mapping = current_citizen.project_member_mapping(project)) %>
         <td>
-          <%= link_to 'Leave Project', @project_member_mapping, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          <%= link_to (@project_member_mapping.sabotaging? ? 'Stop Sabotaging' : 'Leave Project'), @project_member_mapping, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
         </td>
           <% end %>
         <% end %>
