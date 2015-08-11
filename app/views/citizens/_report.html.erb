@@ -1,7 +1,7 @@
 <h2>Report</h2>
 
 <% 
-report_entries = TurnReport.for_citizen_or_any(@citizen).limit(50)
+report_entries = TurnReport.for_citizen(@citizen).limit(50)
 %>
 <% if report_entries.count > 0 %>
 <ul class="list-group">
