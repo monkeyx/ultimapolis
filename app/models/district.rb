@@ -48,15 +48,15 @@ class District < ActiveRecord::Base
 			unrest: 0,
 			health: 50,
 			policing: 50,
-			social: 25,
-			environment: 50,
+			social: 100,
+			environment: 100,
 			housing: 500,
 			education: 50,
 			community: 50,
-			creativity: 0,
-			aesthetics: 10,
-			crime: 10,
-			corruption: 5
+			creativity: 25,
+			aesthetics: 50,
+			crime: 25,
+			corruption: 25
 		}.merge!(options)
 		create!(options)
 	end

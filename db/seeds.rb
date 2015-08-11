@@ -92,16 +92,16 @@ craft = Skill.create_new!("Craft", "Business", "Producing useful goods or servic
 
 # Districts
 
-district1 = District.create_new!("District 1", "The administration centre and home to the technoracy that governs Ultimapolis", leadership, {total_land: 100, free_land: 100, health: 100, policing: 100, environment: 90, education: 75, community: 10, creativity: 90, aesthetics: 100, crime: 0, corruption: 50})
-district2 = District.create_new!("District 2", "The financial district and home to the MegaCorporation HQ", admin, {total_land: 100, free_land: 100, health: 100, policing: 100, environment: 80, education: 75, community: 10, creativity: 75, aesthetics: 50, crime: 5, corruption: 50})
-district3 = District.create_new!("District 3", "The campus of the Universal Foundation of Higher Learning", advocacy, {total_land: 100, free_land: 100, health: 100, environment: 75, education: 100, creativity: 100, aesthetics: 75})
-district4 = District.create_new!("District 4", "The great exurbs where the vast majority of the population live", steward, {transport_capacity: 1000, housing: 1000, creativity: 10, aesthetics: 25})
-district5 = District.create_new!("District 5", "The light industrial district where finished consumer goods are produced", craft, {social: 5, education: 25, community: 10, creativity: 25})
-district6 = District.create_new!("District 6", "The heavy manufacturing district where raw goods are made into useful components", engineering, {social: 5, environment: 30, education: 25, community: 10, creativity: 5})
-district7 = District.create_new!("District 7", "The outskirt district which is home to power generation and dirty polluting industries", mechanics, {total_land: 500, free_land: 500, health: 10, social: 0, environment: 10, education: 10, community: 10, aesthetics: 0})
-district8 = District.create_new!("District 8", "The far district which is home to the automated farmlands that feeds Ultimapolis", farming, {total_land: 1000, free_land: 1000, health: 75, social: 5, environment: 60, education: 10, aesthetics: 5})
-district9 = District.create_new!("District 9", "The remote district which is home to the mining and excavation industries", demolitions, {total_land: 1000, free_land: 1000, health: 25, social: 0, environment: 30, education: 10, community: 10, aesthetics: 5, crime: 25})
-wastelands = District.create_new!("Wastelands", "Beyond the borders of Ultimapolis", combat, {total_land: 0, free_land: 0, housing: 0, health: 0, social: 0, environment: 0, education: 0, community: 0, aesthetics: 0, crime: 100})
+district1 = District.create_new!("District 1", "The administration centre and home to the technoracy that governs Ultimapolis", leadership, {total_land: 100, free_land: 100, health: 100, policing: 100, education: 90, community: 90, creativity: 90, aesthetics: 100, crime: 1, corruption: 50})
+district2 = District.create_new!("District 2", "The financial district and home to the MegaCorporation HQ", admin, {total_land: 100, free_land: 100, health: 100, policing: 100, education: 75, community: 50, creativity: 75, aesthetics: 75, crime: 5, corruption: 75})
+district3 = District.create_new!("District 3", "The campus of the Universal Foundation of Higher Learning", advocacy, {total_land: 100, free_land: 100, health: 100, education: 100, creativity: 100, aesthetics: 90})
+district4 = District.create_new!("District 4", "The great exurbs where the vast majority of the population live", steward, {transport_capacity: 1000, housing: 1000, creativity: 10})
+district5 = District.create_new!("District 5", "The light industrial district where finished consumer goods are produced", craft, {social: 5, education: 25, community: 50})
+district6 = District.create_new!("District 6", "The heavy manufacturing district where raw goods are made into useful components", engineering, {social: 5, education: 25, community: 50, creativity: 15})
+district7 = District.create_new!("District 7", "The outskirt district which is home to power generation and dirty polluting industries", mechanics, {total_land: 500, free_land: 500, aesthetics: 5})
+district8 = District.create_new!("District 8", "The far district which is home to the automated farmlands that feeds Ultimapolis", farming, {total_land: 1000, free_land: 1000, education: 10, community: 25, aesthetics: 5})
+district9 = District.create_new!("District 9", "The remote district which is home to the mining and excavation industries", demolitions, {total_land: 1000, free_land: 1000, social: 25, education: 10, community: 25, aesthetics: 5, crime: 25})
+wastelands = District.create_new!("Wastelands", "Beyond the borders of Ultimapolis", combat, {total_land: 0, free_land: 0, housing: 0, health: 0, social: 0, education: 0, community: 0, aesthetics: 0, crime: 100})
 
 # Facility Types / Trade Goods
 

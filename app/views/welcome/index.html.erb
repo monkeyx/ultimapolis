@@ -71,7 +71,7 @@
 <ul class="list-group">
   <% reports.each do |report| %>
   <li class="list-group-item">
-    <%=link_to(report.to_s.html_safe, report.district)%>
+    <%=link_to("#{report.district}: #{report.to_s}".html_safe, report.district)%>
     <span class="badge"><%=format_turn(report.turn)%></span>
   </li>
   <% end %>
