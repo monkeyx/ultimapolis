@@ -11,7 +11,7 @@ EnvironmentCleanUp,Opportunity,,This is an opportunity,This opportunity was seiz
 SecurityUpgrade,Opportunity,,This is an opportunity,This opportunity was seized,,crime,security,,,,Security Bot,Comms,Computers,Electronics,Muscle Mesh,1000
 BigBrother,Opportunity,,This is an opportunity,This opportunity was seized,,,security,liberty,,,Surveillance Network,Comms,Computers,Electronics,Artificial Intelligence,1000
 LandClaim,Opportunity,,This is an opportunity,This opportunity was seized,total_land,,,inflation,Basic Infrastructure,,Scrubbers,Economics,Demolitions,Broker,Nano-Charges,1000
-MassTransit,Opportunity,,This is an opportunity,This opportunity was seized,transport_capacity,,,,,,,Engineering,Mechanics,Broker,Motion Implant,1000
+MassTransit,Opportunity,,This is an opportunity,This opportunity was seized,transport_capacity,,,,Vehicles,,Basic Infrastructure,Engineering,Mechanics,Broker,Motion Implant,1000
 Pacification,Opportunity,,This is an opportunity,This opportunity was seized,,unrest,stability,,Security Bot,Holovids,Public Discourse,Psychology,Diplomacy,Farming,Babel Fish,1000
 Policing,Opportunity,,This is an opportunity,This opportunity was seized,policing,crime,,,,Surveillance Network,Security Bot,Steward,Flying,Investigation,Exo-Skeletal Suit,1000
 Housing,Opportunity,,This is an opportunity,This opportunity was seized,housing,,,,Basic Infrastructure,Communal Goods,Basic Education,Economics,Craft,Demolitions,Communal Goods,1000
