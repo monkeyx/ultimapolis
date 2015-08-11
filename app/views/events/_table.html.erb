@@ -19,7 +19,7 @@
 		</td>
 	</tr>
 	<tr>
-		<th>Rewards *</th>
+		<th>Rewards</th>
 		<td>
 			<% event.event_rewards.each do |reward| %>
 				<%=reward.to_s.html_safe%>
@@ -61,10 +61,10 @@
 	<% end %>
 </tbody>
 </table>
-<span class="text-muted">* 
+<p class="text-muted">*
 	<% if event.crisis? %>
 	If the crisis is not successfully resolved
 	<% elsif event.opportunity? %>
 	If the opportunity is seized
 	<% end %>
-</span>
+</p>
