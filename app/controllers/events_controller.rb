@@ -8,6 +8,7 @@ class EventsController < ApplicationController
     if current_user && current_user.citizen
       @breadcrumbs = [["Home", root_url], [current_user.citizen.to_s,"/citizens/#{current_user.citizen.id}?tab=projects"], [@event.to_s, "/events/#{@event.id}"]]
     end
+    @commentable = @event
   end
 
  private

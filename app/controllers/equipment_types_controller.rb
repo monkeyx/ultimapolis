@@ -13,6 +13,7 @@ class EquipmentTypesController < ApplicationController
   # GET /equipment_types/1.json
   def show
     @breadcrumbs = [["Home", root_url], ["Equipment","/equipment_types"], [@equipment_type.to_s, "/equipment_types/#{@equipment_type.id}"]]
+    @commentable = @equipment_type
   end
 
   private

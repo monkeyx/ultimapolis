@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Blogit::Engine => "/news"
+  mount Commontator::Engine => '/vox-populi'
   
   resources :citizens, except: [:index, :destroy] do 
     get :inventory

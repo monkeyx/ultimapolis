@@ -32,6 +32,8 @@ class District < ActiveRecord::Base
 
 	default_scope ->{ order('name ASC') }
 
+	acts_as_commontable
+
 	def self.create_new!(name, description, skill, options={})
 		options = {
 			name: name,

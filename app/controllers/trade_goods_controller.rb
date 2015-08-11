@@ -13,6 +13,7 @@ class TradeGoodsController < ApplicationController
   # GET /trade_goods/1.json
   def show
     @breadcrumbs = [["Home", root_url], ["Trade Goods","/trade_goods"], [@trade_good.to_s, "/trade_goods/#{@trade_good.id}"]]
+    @commentable = @trade_good
   end
 
   private

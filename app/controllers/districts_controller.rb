@@ -13,6 +13,7 @@ class DistrictsController < ApplicationController
   # GET /districts/1.json
   def show
     @breadcrumbs = [["Home", root_url], ["Districts","/districts"], [@district.to_s, "/districts/#{@district.id}"]]
+    @commentable = @district
   end
 
   private

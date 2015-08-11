@@ -33,6 +33,8 @@ class Event < ActiveRecord::Base
 
 	scope :current, -> { where(current: true )}
 
+	acts_as_commontable
+
 	def self.current_opportunity
 		@@current_opportunity ||= Event.where(event_type: 'Opportunity', current: true).first
 	end

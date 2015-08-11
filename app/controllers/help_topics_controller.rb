@@ -12,6 +12,7 @@ class HelpTopicsController < ApplicationController
   # GET /help_topics/1.json
   def show
     @breadcrumbs = [["Home", root_url], ["Help","/help_topics"], [@help_topic.to_s, "/help_topics/#{@help_topic.id}"]]
+    @commentable = @help_topic
   end
 
   private

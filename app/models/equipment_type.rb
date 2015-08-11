@@ -16,6 +16,8 @@ class EquipmentType < ActiveRecord::Base
 	scope :for_skill, ->(skill) { where(skill_id: skill.id )}
 	default_scope ->{ order('name ASC') }
 
+	acts_as_commontable
+
 	def self.create_new!(name, description, facility_type, skill, modifier, raw_materials=[])
 		et = create!(
 			name: name,

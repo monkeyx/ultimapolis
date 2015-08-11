@@ -17,6 +17,7 @@ class FacilityTypesController < ApplicationController
   # GET /facility_types/1.json
   def show
     @breadcrumbs = [["Home", root_url], ["Facilities","/facility_types"], [@facility_type.to_s, "/facility_types/#{@facility_type.id}"]]
+    @commentable = @facility_type
   end
 
   private

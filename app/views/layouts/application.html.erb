@@ -37,11 +37,18 @@
 	        <div class="row">
 	          <div class="col-lg-12">
 	          	<div class="jumbotron">
-				  <h1><%=content_for(:title) %></h1>
-				  <%=content_for(:lead)%>
-				</div>
+				        <h1><%=content_for(:title) %></h1>
+				        <p class="lead"><%=content_for(:lead)%></p>
+				       </div>
 	          </div>
 	        </div>
+          <% if defined?(@commentable) && @commentable %>
+          <div class="row">
+            <div class="col-lg-12">
+              <%= commontator_thread(@commentable) %>
+            </div>
+          </div>
+          <% end %>
 	    </div>
 
 		<div id="main" class="row">

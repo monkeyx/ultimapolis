@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
     has_one :citizen
 
     blogs
+    acts_as_commontator
 
     USER_ROLES.each do |role|
     	define_method("#{role}?") do

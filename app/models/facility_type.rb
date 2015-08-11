@@ -28,6 +28,8 @@ class FacilityType < ActiveRecord::Base
 
 	default_scope ->{ order('name ASC') }
 
+	acts_as_commontable
+
 	def self.create_new!(name, description, district, options={})
 		options = {
 			name: name,

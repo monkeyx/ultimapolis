@@ -1,11 +1,2 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @help_topic.name %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @help_topic.body %>
-</p>
+<% content_for :title, @help_topic.name %>
+<% content_for :lead, "<p class=\"lead\">#{@help_topic.body}.</p>".html_safe %>

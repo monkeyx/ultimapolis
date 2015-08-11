@@ -20,7 +20,6 @@ See [commit log](https://github.com/monkeyx/ultimapolis/commits/master)
 * Exchange price setting
 * Buy / sell trade goods
 * Buy / sell equipment
-* District discussions
 * Caching
 * News blog generation
 * Admin

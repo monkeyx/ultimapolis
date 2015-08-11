@@ -8,6 +8,8 @@ class HelpTopic < ActiveRecord::Base
 
 	default_scope ->{ order('topic_index ASC') }
 
+	acts_as_commontable
+
 	def to_s
 		name
 	end

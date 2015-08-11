@@ -11,6 +11,8 @@ class Skill < ActiveRecord::Base
 
 	default_scope ->{ order('name ASC') }
 
+	acts_as_commontable
+
 	def self.create_new!(name, group, description, primary, secondary, tertiary)
 		create!(
 			name: name,

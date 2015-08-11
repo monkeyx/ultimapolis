@@ -13,6 +13,7 @@ class ProfessionsController < ApplicationController
   # GET /professions/1.json
   def show
     @breadcrumbs = [["Home", root_url], ["Professions","/professions"], [@profession.to_s, "/professions/#{@profession.id}"]]
+    @commentable = @profession
   end
 
   private

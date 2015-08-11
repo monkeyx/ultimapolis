@@ -14,6 +14,8 @@ class TradeGood < ActiveRecord::Base
 	scope :named, ->(name) {where(name: name)}
 
 	default_scope ->{ order('name ASC') }
+
+	acts_as_commontable
 	
 	def self.create_new!(name, description, facility_type, raw_materials=[])
 		tg = create!(
