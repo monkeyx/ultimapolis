@@ -20,7 +20,6 @@ See [commit log](https://github.com/monkeyx/ultimapolis/commits/master)
 * Pollution effects
 * Caching
 * News blog generation
-* Admin
 * Retire citizen
 * Petitions
 * Graphs

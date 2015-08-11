@@ -6,4 +6,8 @@ class ProjectResource < ActiveRecord::Base
 
 	scope :for_project, ->(project) { where(project_id: project.id )}	
 	scope :for_trade_good, ->(trade_good) { where(trade_good_id: trade_good.id )}
+
+	def to_s
+		"#{trade_good} x #{quantity}"
+	end
 end

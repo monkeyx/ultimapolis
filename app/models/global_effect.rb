@@ -22,6 +22,14 @@ class GlobalEffect < ActiveRecord::Base
 
 	after_destroy :unapply!
 
+	def to_s
+		name
+	end
+
+	def summary
+		# TODO
+	end
+
 	def apply!
 		transaction do 
 			update_attributes!(active: true, started_on: Global.singleton.turn, expired_on: Global.singleton.turn + 60)

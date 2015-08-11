@@ -21,6 +21,10 @@ class Global < ActiveRecord::Base
 		Global.first
 	end	
 
+	def to_s
+		"Global"
+	end
+
 	def total_housing
 		@total_housing ||= District.all.to_a.sum{|d| d.housing } + Facility.with_facility_types(FacilityType.housing).to_a.sum{|f| f.housing_mod }
 	end

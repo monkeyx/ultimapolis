@@ -12,6 +12,10 @@ class ProjectMember < ActiveRecord::Base
 
 	scope :for_project, ->(project) { where(project_id: project.id )}	
 	scope :for_citizen, ->(citizen) { where(citizen_id: citizen.id )}
+
+	def to_s
+		"#{citizen}"
+	end
 	
 	def set_joined_on
 		joined_on = Global.singleton.turn

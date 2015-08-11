@@ -13,6 +13,10 @@ class CitizenCareer < ActiveRecord::Base
 
 	after_create :add_start_report!
 
+	def to_s
+		"#{profession}"
+	end
+
 	def turn_update!
 		transaction do
 			if rand(100) <= self.term_length # gain rank

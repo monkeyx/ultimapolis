@@ -38,6 +38,10 @@ class Project < ActiveRecord::Base
 
 	attr_accessor :skip_resource_costs
 
+	def status_enum
+		PROJECT_STATUS
+	end
+
 	def has_member?(citizen)
 		project_members.where(citizen_id: citizen.id).count > 0
 	end

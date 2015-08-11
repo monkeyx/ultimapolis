@@ -1,7 +1,9 @@
 class Profession < ActiveRecord::Base
 
+	PROFESSION_GROUPS = %w(Agent Military Corporate Entertainer Merchant Government Rogue Scientist)
+
 	validates :name, presence: true
-	validates :profession_group, presence: true
+	validates :profession_group, inclusion: {in: PROFESSION_GROUPS}
 	# t.text :description
 	# t.string :icon
 	has_many :primary_skills, class_name: 'Skill', foreign_key: 'primary_profession_id'
@@ -19,6 +21,10 @@ class Profession < ActiveRecord::Base
 			description: description,
 			icon: "/icons/professions/#{name.gsub(' ', '_').downcase}.png",
 		)
+	end
+
+	def profession_group_enum
+		PROFESSION_GROUPS
 	end
 
 	def to_s

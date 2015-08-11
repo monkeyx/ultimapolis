@@ -9,6 +9,10 @@ class CitizenTradeGood < ActiveRecord::Base
 
 	default_scope ->{ includes(:trade_good).order('trade_goods.name ASC') }
 
+	def to_s
+		"#{trade_good} x #{quantity}"
+	end
+
 	def value
 		return 0 unless self.trade_good
 		@value ||= (self.quantity * self.trade_good.exchange_price)

@@ -8,4 +8,8 @@ class CitizenSkill < ActiveRecord::Base
 	scope :for_skill, ->(skill) { where(skill_id: skill.id )}
 
 	default_scope ->{ includes(:skill).order('skills.name ASC') }
+
+	def to_s
+		"#{skill} #{rank}"
+	end
 end

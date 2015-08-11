@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
 	  	scope "#{role.pluralize}".to_sym, -> { where(role: role)}
     end
 
+    def role_enum
+      USER_ROLES
+    end
+
     def role?(role)
     	self.role == role
     end

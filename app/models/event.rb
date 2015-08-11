@@ -43,6 +43,10 @@ class Event < ActiveRecord::Base
 		@@current_crisis ||= Event.where(event_type: 'Crisis', current: true).first
 	end
 
+	def event_type_enum
+		EVENT_TYPES
+	end
+
 	def event_type?(event_type)
     	self.event_type == event_type
     end

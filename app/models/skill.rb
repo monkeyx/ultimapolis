@@ -1,7 +1,9 @@
 class Skill < ActiveRecord::Base
-	
+		
+	SKILL_GROUPS = %w(Animal Art Business Intelligence Legal Military Physique Science Social Tech)
+
 	validates :name, presence: true
-	validates :skill_group, presence: true
+	validates :skill_group, inclusion: {in: SKILL_GROUPS}
 	# t.text :description
 	# t.string :icon
 	belongs_to :primary_profession, class_name: 'Profession'
@@ -23,6 +25,10 @@ class Skill < ActiveRecord::Base
 			secondary_profession: secondary,
 			tertiary_profession: tertiary
 		)
+	end
+
+	def skill_group_enum
+		SKILL_GROUPS
 	end
 
 	def to_s

@@ -15,6 +15,10 @@ class Loan < ActiveRecord::Base
 
 	default_scope ->{ order('issued_on ASC') }
 
+	def to_s
+		"#{value}"
+	end
+
 	def validate_loan
 		if new_record?
 			unless self.citizen

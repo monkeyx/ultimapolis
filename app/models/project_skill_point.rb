@@ -6,4 +6,8 @@ class ProjectSkillPoint < ActiveRecord::Base
 
 	scope :for_project, ->(project) { where(project_id: project.id )}	
 	scope :for_skill, ->(skill) { where(skill_id: skill.id )}
+
+	def to_s
+		"#{skill} #{points}"
+	end
 end

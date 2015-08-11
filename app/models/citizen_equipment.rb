@@ -10,6 +10,10 @@ class CitizenEquipment < ActiveRecord::Base
 
 	default_scope ->{ includes(:equipment_type).order('equipment_types.name ASC') }
 
+	def to_s
+		"#{equipment_type} x #{quantity}"
+	end
+
 	def value
 		return 0 unless self.equipment_type
 		@value ||= (self.quantity * self.equipment_type.exchange_price)

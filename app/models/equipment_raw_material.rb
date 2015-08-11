@@ -5,4 +5,8 @@ class EquipmentRawMaterial < ActiveRecord::Base
 	validates :quantity, numericality: {only_integer: true}
 
 	alias_method :raw_material, :trade_good
+
+	def to_s
+		"#{trade_good} x #{quantity}"
+	end
 end
