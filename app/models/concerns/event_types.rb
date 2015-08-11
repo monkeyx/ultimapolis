@@ -2,6 +2,10 @@ module EventTypes
 	require 'csv'
 	extend ActiveSupport::Concern
 
+	SPECIAL_MODIFIERS = {
+		'transport_capacity' => 1000
+	}
+
 	def self.template_file_path
 		File.expand_path('../../../../config/event_templates.csv', __FILE__)
 	end
@@ -60,19 +64,19 @@ module EventTypes
 		
 		unless template['District Effect +'].blank?
 			effect_field = template['District Effect +'].strip.to_sym
-			event.add_district_effect!(district, effect_field, 5)
+			event.add_district_effect!(district, effect_field, field_modifier(template['District Effect +']))
 		end
 		unless template['District Effect -'].blank?
 			effect_field = template['District Effect -'].strip.to_sym
-			event.add_district_effect!(district, effect_field, -5)
+			event.add_district_effect!(district, effect_field, (0 - field_modifier(template['District Effect -'])))
 		end
 		unless template['Global Effect +'].blank?
 			effect_field = template['Global Effect +'].strip.to_sym
-			event.add_global_effect!(effect_field, 5)
+			event.add_global_effect!(effect_field, field_modifier(template['Global Effect +']))
 		end
 		unless template['Global Effect -'].blank?
 			effect_field = template['Global Effect -'].strip.to_sym
-			event.add_global_effect!(effect_field, -5)
+			event.add_global_effect!(effect_field, (0 - field_modifier(template['Global Effect -'])))
 		end
 
 		unless template['Resource x 3'].blank?
@@ -126,6 +130,10 @@ module EventTypes
 		end
 
 		event.add_credit_reward!(template['Reward Credits'].to_i * EventTypes.random_multiplier) unless template['Reward Credits'].blank?
+	end
+
+	def self.field_modifier(field)
+		SPECIAL_MODIFIERS.keys.include?(field) ? SPECIAL_MODIFIERS[field] : 5
 	end
 
 	def self.random_multiplier
