@@ -36,7 +36,7 @@ class DistrictEffect < ActiveRecord::Base
 	end
 
 	def summary
-		return @summary if defined?(@summary)
+		return @summary.join(', ') if defined?(@summary)
 		@summary = []
 		if self.total_land > 0
 			@summary << "Reclaimed land in #{district}"

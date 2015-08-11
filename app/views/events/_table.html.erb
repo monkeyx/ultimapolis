@@ -22,8 +22,17 @@
 		<th>Rewards</th>
 		<td>
 			<% event.event_rewards.each do |reward| %>
-				<%=reward.to_s.html_safe%></span>
+				<%=reward.to_s.html_safe%>
 				<br/>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<th>Effects*</th>
+		<td>
+			<% (event.district_effects.to_a + event.global_effects.to_a).each do |effect| %>
+			<%=effect%>
+			<br/>
 			<% end %>
 		</td>
 	</tr>
@@ -52,3 +61,10 @@
 	<% end %>
 </tbody>
 </table>
+<span class="text-muted">* 
+	<% if event.crisis? %>
+	If the crisis is not successfully resolved
+	<% elsif event.opportunity? %>
+	If the opportunity is seized
+	<% end %>
+</span>

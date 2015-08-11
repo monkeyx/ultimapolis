@@ -250,11 +250,13 @@ RailsAdmin.config do |config|
       end
       field :district
       field :summary
+      field :active
       sort_by :name
     end
     show do
       group :basic do
         field :name 
+        field :active
       end
       group :land do
         field :total_land
@@ -282,6 +284,7 @@ RailsAdmin.config do |config|
     edit do
       group :basic do
         field :name 
+        field :active
       end
       group :land do
         field :total_land
@@ -641,9 +644,11 @@ RailsAdmin.config do |config|
         sort_reverse false
       end
       field :summary
+      field :active
       sort_by :name
     end
     show do 
+      field :active
       group :economy do
         field :grid
         field :inflation
@@ -659,6 +664,7 @@ RailsAdmin.config do |config|
       end
     end
     edit do 
+      field :active
       group :economy do
         field :grid
         field :inflation

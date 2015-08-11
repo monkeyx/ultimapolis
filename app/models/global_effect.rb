@@ -27,7 +27,7 @@ class GlobalEffect < ActiveRecord::Base
 	end
 
 	def summary
-		return @summary if defined?(@summary)
+		return @summary.join(', ') if defined?(@summary)
 		@summary = []
 		if self.infrastructure > 0
 			@summary << "Infrastructure upgraded"
