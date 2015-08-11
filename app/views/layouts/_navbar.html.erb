@@ -35,6 +35,11 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
+              <% if current_user.admin? %>
+              <li>
+                <%=link_to('Admin', '/admin')%>
+              </li>
+              <% end %>
               <% if current_citizen %>
                 <li><a><%=format_currency(current_citizen.credits) %></a></li>
                 <li class="<% if is_navigation_active?('Users') %>active<% end %> dropdown">
@@ -50,8 +55,8 @@
                     <li><%= link_to 'Build Facility', main_app.new_facility_path %></li>
                     <li><%= link_to 'Change Profession', main_app.edit_citizen_path(current_citizen)%></li>
                     <li class="divider"></li>
-                    <li><%=link_to 'Buy / Sell Trade Goods', new_exchange_trade_good_path %></li>
-                    <li><%=link_to 'Buy / Sell Equipment', new_exchange_equipment_path %></li>
+                    <li><%=link_to 'Buy / Sell Trade Goods', main_app.new_exchange_trade_good_path %></li>
+                    <li><%=link_to 'Buy / Sell Equipment', main_app.new_exchange_equipment_path %></li>
                     <li class="divider"></li>
                     <li><%= link_to 'Buy a Bond', main_app.new_bond_path %></li>
                     <li><%= link_to 'Take a Loan', main_app.new_loan_path %></li>
