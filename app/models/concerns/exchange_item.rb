@@ -52,6 +52,6 @@ module ExchangeItem
 	end
 
 	def calculate_exchange_price
-		self.exchange_price = (base_price * exchange_demand * (Global.singleton.inflation.to_f / 100.0)).round(0).to_i
+		self.exchange_price = (base_price * exchange_demand * (1 + Global.singleton.inflation.to_f / 100.0)).round(0).to_i
 	end
 end
