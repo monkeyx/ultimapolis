@@ -7,9 +7,6 @@ class Citizen < ActiveRecord::Base
 	validates :current_profession_id, presence: true
 	validates :profession_rank, numericality: {only_integer: true}
 	belongs_to :user
-	# t.boolean :email_notifications
-	# t.boolean :daily_updates
-	# t.boolean :instant_updates
 	# t.integer :credits
 	# t.string :icon
 

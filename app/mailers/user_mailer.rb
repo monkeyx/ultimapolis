@@ -11,6 +11,8 @@ class UserMailer < MandrillMailer::TemplateMailer
 	end
 
 	def turn_report(user, turn)
+		report_entries = TurnReport.for_citizen_or_any(user.citizen).for_turn(turn).map{|tr| tr.to_s}
+		report_entries = ['No events to report'] if report_entries.empty?
 		mandrill_mail(
 			subject: "Ultimapolis Turn Report #{Global.format_turn(turn)}",
 			template: 'ultimapolis-turn-report',
@@ -20,7 +22,7 @@ class UserMailer < MandrillMailer::TemplateMailer
 			inline_css: true,
 			recipient_vars: [user_vars(user, {
 				'TURN' => Global.format_turn(turn),
-				'TURN_REPORTS' => TurnReport.for_citizen_or_any(user.citizen).for_turn(turn).map{|tr| tr.to_s}
+				'TURN_REPORTS' => report_entries
 			})]
 		)
 	end
@@ -36,6 +38,7 @@ class UserMailer < MandrillMailer::TemplateMailer
 		vars = {
 			user.email =>
 			{
+				'CITIZEN' => user.citizen.to_s,
 				'CITIZEN_PATH' => user.citizen_path
 			}
 		}

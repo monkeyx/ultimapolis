@@ -1,9 +1,6 @@
 class CreateCitizens < ActiveRecord::Migration
   def change
     create_table :citizens do |t|
-      t.boolean :email_notifications, default: true
-      t.boolean :daily_updates, default: false
-      t.boolean :instant_updates, default: true
       t.bigint :credits, default: 0
       t.integer :home_district_id
       t.integer :current_profession_id
