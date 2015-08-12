@@ -23,9 +23,14 @@ class User < ActiveRecord::Base
     after_create :send_registration!
 
     def send_registration!
-      UserMailer.registered(self).deliver unless admin?
+      UserMailer.registered(self).deliver unless !Rails.env.production? || admin?
     end
     handle_asynchronously :send_registration!
+
+    def send_turn_report!(turn)
+      UserMailer.turn_report(self,turn).deliver unless !Rails.env.production? || admin?
+    end
+    handle_asynchronously :send_turn_report!
 
     def citizen_path
       self.citizen ? "/citizens/#{self.citizen.id}" : nil
