@@ -9,7 +9,6 @@ class User < ActiveRecord::Base
 
     has_one :citizen
     
-    blogs
     acts_as_commontator
     acts_as_voter
 
