@@ -71,5 +71,5 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  map.connect 'test_exception_notifier', :controller => 'application', :action => 'test_exception_notifier'
+  get 'test_exception_notifier', :controller => 'application', :action => 'test_exception_notifier'
 end
