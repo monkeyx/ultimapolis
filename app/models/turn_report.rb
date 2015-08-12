@@ -15,6 +15,8 @@ class TurnReport < ActiveRecord::Base
 
 	default_scope ->{ order('created_at DESC') }
 
+	acts_as_commontable
+
 	def to_s
 		summary
 	end

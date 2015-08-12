@@ -10,6 +10,7 @@
     <li class="list-group-item">
       <%=report.to_s.html_safe%>
       <span class="badge"><%=format_turn(report.turn)%></span>
+      <%= commontator_thread(report) %>
     </li>
     <% end %>
   </ul>

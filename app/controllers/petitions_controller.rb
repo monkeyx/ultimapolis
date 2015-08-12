@@ -13,6 +13,7 @@ class PetitionsController < ApplicationController
   # GET /petitions/1.json
   def show
     @breadcrumbs = [["Home", root_url], ["Petitions","/petitions"], [@petition, "/petitions/#{@petition.id}"]]
+    @commentable = @petition
   end
 
   # GET /petitions/new
