@@ -11,10 +11,10 @@ class UserMailer < MandrillMailer::TemplateMailer
 	end
 
 	def turn_report(user, turn)
-		report_entries = TurnReport.for_citizen_or_any(user.citizen).for_turn(turn).map{|tr| tr.to_s}
+		report_entries = TurnReport.for_citizen_or_any(user.citizen).for_turn(turn).map{|tr| tr.citizen ? tr.to_s : "#{tr.district}: #{tr}"}
 		report_entries = ['No events to report'] if report_entries.empty?
 		mandrill_mail(
-			subject: "Ultimapolis Turn Report #{Global.format_turn(turn)}",
+			subject: "[Ultimapolis] #{Global.format_turn(turn)} Report",
 			template: 'ultimapolis-turn-report',
 			to: [user_to(user)],
 			vars: global_vars,
