@@ -1,28 +1,14 @@
 module TimerHelper
-	def next_turn_hour
-		h = Time.now.utc.hour 
-		m = Time.now.utc.min 
-		next_turn_hour = 0
+	def next_turn_time
+		now = Time.now.utc 
+		d = now.day 
 		TURN_HOURS.each do |turn_hour|
-			if h < next_turn_hour
-				next_turn_hour
-			elsif h == turn_hour && m == 0
-				turn_hour
-			else
-				next_turn_hour = turn_hour
+			next_time = Time.parse("#{now.year}-#{now.month}-#{d} #{turn_hour}:00:00 UTC")
+			if next_time > now 
+				return next_time
 			end
 		end
-		next_turn_hour
-	end
-
-	def next_turn_time
-		hour = next_turn_hour
-		now = Time.now.utc
-		time = Time.parse("#{now.year}-#{now.month}-#{now.day} #{hour}:00:00 UTC")
-		if hour < Time.now.utc.hour 
-			time = time + 1.day
-		end
-		time
+		Time.parse("#{now.year}-#{now.month}-#{(d+1)} 00:00:00 UTC")
 	end
 
 	def seconds_until_next_turn
