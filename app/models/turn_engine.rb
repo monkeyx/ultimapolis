@@ -2,6 +2,14 @@ class TurnEngine
 
 	def self.turn!
 		puts ">> ULTIMAPOLIS"
+
+		puts ">>> SEND TURN REPORTS"
+		progressbar = ProgressBar.create(:total => User.not_admin.count)
+		User.not_admin.find_each do |user|
+			user.send_turn_report!(Global.singleton.turn)
+			progressbar.increment
+		end
+
 		puts ">>> GLOBAL UPDATES"
 		Global.singleton.turn_update!
 

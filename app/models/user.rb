@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
 	  	scope "#{role.pluralize}".to_sym, -> { where(role: role)}
     end
 
+    scope :not_admin, -> { where(["role <> ?", 'admin'])}
+
     after_create :send_registration!
 
     def send_registration!

@@ -1,6 +1,4 @@
 class UserMailer < MandrillMailer::TemplateMailer
-	default from: 'support@ultimapolis.com'
-
 	def registered(user)
 		mandrill_mail(
 			template: 'ultimapolis-registration',
@@ -14,12 +12,14 @@ class UserMailer < MandrillMailer::TemplateMailer
 
 	def turn_report(user, turn)
 		mandrill_mail(
+			subject: "Ultimapolis Turn Report #{Global.format_turn(turn)}",
 			template: 'ultimapolis-turn-report',
 			to: [user_to(user)],
 			vars: global_vars,
 			important: true,
 			inline_css: true,
 			recipient_vars: [user_vars(user, {
+				'TURN' => Global.format_turn(turn),
 				'TURN_REPORTS' => TurnReport.for_citizen_or_any(user.citizen).for_turn(turn).map{|tr| tr.to_s}
 			})]
 		)
