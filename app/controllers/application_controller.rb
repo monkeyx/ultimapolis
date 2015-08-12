@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
   	def format_turn(n)
 		Global.format_turn(n)
 	end
+
+	def test_exception_notifier
+		raise 'This is a test. This is only a test.'
+	end
 end

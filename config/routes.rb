@@ -70,4 +70,6 @@ Rails.application.routes.draw do
   get 'charts', to: 'global_charts#index'
 
   root 'welcome#index'
+
+  map.connect 'test_exception_notifier', :controller => 'application', :action => 'test_exception_notifier'
 end
