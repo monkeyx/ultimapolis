@@ -35,6 +35,13 @@ module EventTypes
 		raise "Could not generate crisis" unless triggered
 	end
 
+	def self.test_event_templates!
+		district = District.first
+		event_templates.each do |template|
+			create_event!(district, template)
+		end
+	end
+
 	def self.generate_opportunity!
 		district = District.all.to_a.sample
 		create_event!(district, opportunity_templates.sample)
@@ -57,8 +64,8 @@ module EventTypes
 			event_type: template['Type'],
 			started_on: Global.singleton.turn,
 			max_duration: 24,
-			summary: template['Summary'],
-			description: template['Description'],
+			summary: template['Summary'].gsub('district',district.to_s),
+			description: template['Description'].gsub('district',district.to_s),
 			icon: "/icons/#{template['Type'].downcase}/#{template['Name'].gsub(' ', '_').downcase}.png"
 		)
 		

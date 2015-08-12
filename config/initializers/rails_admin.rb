@@ -389,8 +389,8 @@ RailsAdmin.config do |config|
       group :basic do 
         field :name
         field :event_type
+        field :summary
         field :description
-        field :winning_project
       end
       group :timing do 
         field :trigger_after_event
@@ -408,6 +408,7 @@ RailsAdmin.config do |config|
         field :global_effects
       end
       group :reward do 
+        field :winning_project
         field :event_rewards
       end
     end
@@ -416,7 +417,7 @@ RailsAdmin.config do |config|
         field :name
         field :event_type
         field :description
-        field :winning_project
+        field :summary
       end
       group :timing do 
         field :trigger_after_event
@@ -434,6 +435,7 @@ RailsAdmin.config do |config|
         field :global_effects
       end
       group :reward do 
+        field :winning_project
         field :event_rewards
       end
     end
