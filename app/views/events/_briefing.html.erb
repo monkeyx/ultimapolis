@@ -1,4 +1,7 @@
-<p class="summary"><%=event.summary.html_safe %></p>
+<blockquote>
+  <p class="summary"><%=event.summary.html_safe %></p>
+  <small><cite title="Source Title">City Core Government</cite></small>
+</blockquote>
 
 <%=render partial: '/events/table', locals: {event: event} %>
 
