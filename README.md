@@ -21,7 +21,6 @@ See [commit log](https://github.com/monkeyx/ultimapolis/commits/master)
 * News blog generation
 * Custom error / maintenance pages
 * Emails
-* Turn time ticker
 
 ## Issues
 
