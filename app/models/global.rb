@@ -58,6 +58,13 @@ class Global < ActiveRecord::Base
 		((power_available.to_f / power_demand.to_f) * 100).to_i
 	end
 
+	def set_power
+		self.power = 0
+		Facility.with_facility_types(FacilityType.power_generator).find_each do |facility|
+			self.power += facility.level * facility.facility_type.power_generation
+		end
+	end
+
 	def set_gdp
 		self.gdp = 0
 		Facility.powered.maintained.find_each do |facility|
@@ -84,10 +91,7 @@ class Global < ActiveRecord::Base
 			)
 			self.turn += 1
 			# Power
-			self.power = 0
-			Facility.with_facility_types(FacilityType.power_generator).find_each do |facility|
-				self.power += facility.level * facility.facility_type.power_generation
-			end
+			set_power
 			GlobalEffect.active.expires_on(self.turn).find_each do |effect|
 				effect.destroy
 			end

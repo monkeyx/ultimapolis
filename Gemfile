@@ -25,6 +25,7 @@ gem 'delayed_job_active_record'
 gem 'will_paginate'
 gem 'acts_as_votable'
 gem 'commontator'
+gem 'chartkick'
 
 group :development, :test do
   gem 'byebug'

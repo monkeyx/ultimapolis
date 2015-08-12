@@ -3,15 +3,15 @@ admin_user = User.create!(email: 'admin@ultimapolis.com', password: 'password', 
 
 # Global
 
-Global.create!(
-	infrastructure: 50,
-	grid: 50,
+g = Global.create!(
+	infrastructure: 75,
+	grid: 100,
 	power: 0,
 	stability: 100,
 	climate: 50,
-	liberty: 100,
-	security: 100,
-	borders: 50,
+	liberty: 80,
+	security: 80,
+	borders: 80,
 	turn: 1,
 	inflation: 2,
 	citizens: 0,
@@ -301,6 +301,15 @@ end
 #
 # Start the game
 #
+
+District.all.each do |d|
+	d.set_population
+	d.save!
+end
+
+g.set_power
+g.set_gdp
+g.save!
 
 TurnEngine.turn!
 

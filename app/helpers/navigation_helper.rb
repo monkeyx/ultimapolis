@@ -10,7 +10,9 @@ module NavigationHelper
             ['Facilities', main_app.facility_types_path],
             ['Professions', main_app.professions_path],
             ['Skills', main_app.skills_path],
-            ['Trade Goods', main_app.trade_goods_path]
+            ['Trade Goods', main_app.trade_goods_path],
+            ['',''],
+            ['Charts', '/charts']
           ]
         ]
   		]

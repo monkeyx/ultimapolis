@@ -48,13 +48,13 @@
         	</ul>
         	<% end %>
         	<p>
-        		<strong>GDP:</strong> <%=format_currency(Global.singleton.gdp)%>
+        		<strong>GDP:</strong> <%=link_to(format_currency(Global.singleton.gdp), '/charts?chart=gdp') %>
         	</p>
         	<p>
-        		<strong>Inflation:</strong> <%=format_rating(Global.singleton.inflation)%>
+        		<strong>Inflation:</strong> <%=link_to(format_rating(Global.singleton.inflation), '/charts?chart=inflation')%>
         	</p>
         	<p>
-        		<strong>Interest Rate:</strong> <%=format_rating(Global.singleton.interest)%>
+        		<strong>Interest Rate:</strong> <%=link_to(format_rating(Global.singleton.interest), '/charts?chart=interest')%>
         	</p>
 		  </div>
 		</div>

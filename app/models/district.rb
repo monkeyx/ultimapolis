@@ -113,6 +113,15 @@ class District < ActiveRecord::Base
 		@metrics
 	end
 
+	def set_population
+		self.civilians = 0
+		self.automatons = 0
+		Facility.for_district(self).find_each do |f|
+			self.civilians += (f.facility_type.employees * f.level)
+			self.automatons += (f.facility_type.automation * f.level)
+		end
+	end
+
 	def add_report!(summary)
 		turn_reports.create!(summary: summary, turn: Global.singleton.turn)
 	end
@@ -140,13 +149,7 @@ class District < ActiveRecord::Base
 				crime: crime,
 				corruption: corruption
 			)
-			# Population / automatons
-			self.civilians = 0
-			self.automatons = 0
-			Facility.for_district(self).find_each do |f|
-				self.civilians += (f.facility_type.employees * f.level)
-				self.automatons += (f.facility_type.automation * f.level)
-			end
+			set_population
 			DistrictEffect.for_district(self).active.expires_on(Global.singleton.turn).find_each do |effect|
 				effect.destroy
 			end

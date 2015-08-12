@@ -19,4 +19,5 @@ class DistrictSnapshot < ActiveRecord::Base
 	validates :crime, numericality: {only_integer: true}
 	validates :corruption, numericality: {only_integer: true}
 
+	scope :for_district, ->(district) { where(district_id: district.id) }
 end

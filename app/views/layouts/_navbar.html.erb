@@ -21,7 +21,11 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%=item[0]%> <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <% item[2].each do |sub_item| %>
+                  <% if sub_item[0].blank? %>
+                  <li class="divider"></li>
+                  <% else %>
                   <li><%=link_to sub_item[0], sub_item[1] %></li>
+                  <% end %>
                 <% end %>
               </ul>
               <% else %>

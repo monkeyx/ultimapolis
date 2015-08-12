@@ -19,7 +19,6 @@ See [commit log](https://github.com/monkeyx/ultimapolis/commits/master)
 * Event summaries / descriptions
 * Caching
 * News blog generation
-* Graphs
 * Custom error / maintenance pages
 * Emails
 * Turn time ticker
