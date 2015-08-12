@@ -53,7 +53,10 @@ class Loan < ActiveRecord::Base
 	def turn_update!
 		transaction do
 			pay_interest!
-			pay_off_loan! if matures?
+			if matures?
+				pay_off_loan! 
+				destroy 
+			end
 		end
 	end
 end

@@ -61,7 +61,10 @@ class Bond < ActiveRecord::Base
 	def turn_update!
 		transaction do
 			pay_interest!
-			return_value! if matures?
+			if matures?
+				return_value! 
+				destroy 
+			end
 		end
 	end
 end

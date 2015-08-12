@@ -19,6 +19,6 @@ module FinancialProduct
 	end
 
 	def matures?
-		self.matures_on == Global.singleton.turn 
+		turn_remaining < 1
 	end
 end
