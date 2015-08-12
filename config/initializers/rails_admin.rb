@@ -26,6 +26,10 @@ RailsAdmin.config do |config|
       'Project','ProjectMember','ProjectResource','ProjectSkillPoint','Skill','TradeGood','TradeGoodRawMaterial',
       'User']
 
+  config.navigation_static_links = {
+    'News Blog' => 'https://www.tumblr.com/blog/ultimapolis'
+  }
+
   config.model 'Bond' do 
     visible false
     object_label_method :to_s
