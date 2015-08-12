@@ -1,7 +1,7 @@
 <% content_for :title, @district.name %>
 <% content_for :lead, "#{@district.description}".html_safe %>
 
-<% cache(@district) %>
+<% cache(@district) do %>
   <% reports = TurnReport.district_news(@district).limit(10) %>
   <% unless reports.empty? %>
   <h2>News from <%=@district%></h2>
