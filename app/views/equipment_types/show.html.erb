@@ -1,26 +1,29 @@
 <% content_for :title, @equipment_type.name %>
 <% content_for :lead, "#{@equipment_type.description}. Gives +#{@equipment_type.skill_modifier} to #{link_to @equipment_type.skill.name, @equipment_type.skill} skill. Produced in a #{link_to @equipment_type.facility_type.name, @equipment_type.facility_type}.".html_safe %>
 
-<h2>Production Cost</h2>
-<table class="table table-striped table-hover">
-  <thead>
-    <tr>
-      <th>Trade Good</th>
-      <th>Quantity</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @equipment_type.equipment_raw_materials.sort{|a,b| a.trade_good.name <=> b.trade_good.name}.each do | erm | %>
-    <tr>
-      <td><%= link_to(erm.trade_good.name, erm.trade_good) %></td>
-      <td><%= erm.quantity %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<% cache(@equipment_type) do %>
+  <h2>Production Cost</h2>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Trade Good</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @equipment_type.equipment_raw_materials.sort{|a,b| a.trade_good.name <=> b.trade_good.name}.each do | erm | %>
+      <tr>
+        <td><%= link_to(erm.trade_good.name, erm.trade_good) %></td>
+        <td><%= erm.quantity %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<h2>Exchange Price</h2>
-<p><%= format_currency @equipment_type.exchange_price %></p>
+  <h2>Exchange Price</h2>
+  <p><%= format_currency @equipment_type.exchange_price %></p>
+
+<% end %>
 
 <% content_for :help_title, "How do you use equipment?" %>
 <% content_for :help_body do %>

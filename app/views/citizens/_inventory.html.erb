@@ -1,53 +1,57 @@
 <h2>Inventory</h2>
 
 <% if (@citizen.citizen_equipment.count + @citizen.citizen_trade_goods.count) > 0 %>
-	<% if @citizen.citizen_equipment.count > 0 %>
-	<h3>Equipment</h3>
-	<table class="table table-striped table-hover ">
-		<tbody>
-	  <% @citizen.citizen_equipment.each do |equipment| %>
-	  		<tr>
-	  			<td>
-	    			<%=link_to equipment.equipment_type.name, equipment.equipment_type %> x <%=equipment.quantity %>
-	    		</td>
-	    		<td class="text-right">
-	    			<span class="badge"><%=equipment.equipment_type.skill%> +<%=(equipment.equipment_type.skill_modifier * equipment.quantity)%>
-	    			</span>
-	    		</td>
-	    		<% if can?(:edit, @citizen) %>
-	    		<td class="text-right">
-	    			<%=link_to 'Sell', "#{new_exchange_equipment_path}?equipment_type=#{equipment.equipment_type_id}&buy_or_sell=sell", class: 'btn btn-primary' %>
-	    		</td>
-	    		<% end %>
-	    	</tr>
-	  <% end %>
-		</tbody>
-	</table>
+	<% cache(cache_key_for_collection("inventory-equipment-#{@citizen.id}", @citizen.citizen_equipment)) do %>
+		<% if @citizen.citizen_equipment.count > 0 %>
+		<h3>Equipment</h3>
+		<table class="table table-striped table-hover ">
+			<tbody>
+		  <% @citizen.citizen_equipment.each do |equipment| %>
+		  		<tr>
+		  			<td>
+		    			<%=link_to equipment.equipment_type.name, equipment.equipment_type %> x <%=equipment.quantity %>
+		    		</td>
+		    		<td class="text-right">
+		    			<span class="badge"><%=equipment.equipment_type.skill%> +<%=(equipment.equipment_type.skill_modifier * equipment.quantity)%>
+		    			</span>
+		    		</td>
+		    		<% if can?(:edit, @citizen) %>
+		    		<td class="text-right">
+		    			<%=link_to 'Sell', "#{new_exchange_equipment_path}?equipment_type=#{equipment.equipment_type_id}&buy_or_sell=sell", class: 'btn btn-primary' %>
+		    		</td>
+		    		<% end %>
+		    	</tr>
+		  <% end %>
+			</tbody>
+		</table>
+		<% end %>
 	<% end %>
 
-	<% if @citizen.citizen_trade_goods.count > 0 %>
-	<h3>Trade Goods</h3>
-	<table class="table table-striped table-hover ">
-		<tbody>
-	  <% @citizen.citizen_trade_goods.each do |trade_good| %>
-	  		<tr>
-	  			<td>
-	  				<%=link_to trade_good.trade_good.name, trade_good.trade_good %> x <%=trade_good.quantity %>
-	  			</td>
-	  			<td class="text-right">
-			    	<span class="badge">
-			    		<%=format_currency((trade_good.trade_good.exchange_price * trade_good.quantity))%>
-			    	</span>
-			    </td>
-			    <% if can?(:edit, @citizen) %>
-			    <td class="text-right">
-			    	<%=link_to 'Sell', "#{new_exchange_trade_good_path}?trade_good=#{trade_good.trade_good_id}&buy_or_sell=sell", class: 'btn btn-primary' %>
-			    </td>
-			    <% end %>
-	  		</tr>
-	  <% end %>
-	  	</tbody>
-	</table>
+	<% cache(cache_key_for_collection("inventory-trade-goods-#{@citizen.id}", @citizen.citizen_trade_goods)) do %>
+		<% if @citizen.citizen_trade_goods.count > 0 %>
+		<h3>Trade Goods</h3>
+		<table class="table table-striped table-hover ">
+			<tbody>
+		  <% @citizen.citizen_trade_goods.each do |trade_good| %>
+		  		<tr>
+		  			<td>
+		  				<%=link_to trade_good.trade_good.name, trade_good.trade_good %> x <%=trade_good.quantity %>
+		  			</td>
+		  			<td class="text-right">
+				    	<span class="badge">
+				    		<%=format_currency((trade_good.trade_good.exchange_price * trade_good.quantity))%>
+				    	</span>
+				    </td>
+				    <% if can?(:edit, @citizen) %>
+				    <td class="text-right">
+				    	<%=link_to 'Sell', "#{new_exchange_trade_good_path}?trade_good=#{trade_good.trade_good_id}&buy_or_sell=sell", class: 'btn btn-primary' %>
+				    </td>
+				    <% end %>
+		  		</tr>
+		  <% end %>
+		  	</tbody>
+		</table>
+		<% end %>
 	<% end %>
 <% else %>
 <div class="alert alert-dismissible alert-warning">
@@ -70,5 +74,3 @@
 <% end %>
   </div>
 </div>
-
-<hr class="clear"/>

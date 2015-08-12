@@ -86,6 +86,9 @@ class TurnEngine
 			progressbar.increment
 		end
 
+		puts ">>> CLEARING CACHE"
+		Rails.cache.clear
+
 		puts ">> TURN COMPLETE"
 	end
 

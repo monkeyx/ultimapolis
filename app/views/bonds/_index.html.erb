@@ -1,5 +1,6 @@
 <h2>Bonds</h2>
 
+<% cache(cache_key_for_collection("bonds-#{@citizen.id}",@citizen.bonds)) do %>
 <% if @citizen.bonds.count  > 0 %>
   <table class="table table-striped table-hover ">
     <thead>
@@ -29,4 +30,5 @@
   </table>
 <% else %>
 <p>No bonds owned.</p>
+<% end %>
 <% end %>

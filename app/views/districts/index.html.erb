@@ -1,41 +1,43 @@
 <% content_for :title, 'Districts' %>
 <% content_for :lead, "The city is divided into a number of districts each specialising in a particular utilitarian function.".html_safe %>
 
-<% i = 0 %>
+<% cache(cache_key_for_collection("districts", @districts)) do %>
+  <% i = 0 %>
 
-<% @districts.each do |district| %>
-  <% if i % 3 == 0 %>
-    <div class="row">
-  <% end %>
+  <% @districts.each do |district| %>
+    <% if i % 3 == 0 %>
+      <div class="row">
+    <% end %>
 
-  <div class="col-lg-4">
-    <div class="panel panel-primary">
-      <div class="panel-heading"><!--<%=image_tag(district.icon)%>--><h3 class="panel-title"><%=link_to(district.name, district) %></h3></div>
-      <div class="panel-body">
-        <p><%=district.description.html_safe %></p>
-        <p><strong>Population:</strong> <%=district.civilians%> &nbsp; <strong>Land Usage:</strong> <%=district.land_usage%></p>
-        <% unless district.notes.empty? %>
-        <p><strong>Special Conditions:</strong>
-          <ul class="list-group">
-            <% district.notes.each do |note| %>
-            <li class="list-group-item"><%=note %></li>
-            <% end %>
-          </ul>
-        </p>
-        <% end %>
+    <div class="col-lg-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><!--<%=image_tag(district.icon)%>--><h3 class="panel-title"><%=link_to(district.name, district) %></h3></div>
+        <div class="panel-body">
+          <p><%=district.description.html_safe %></p>
+          <p><strong>Population:</strong> <%=district.civilians%> &nbsp; <strong>Land Usage:</strong> <%=district.land_usage%></p>
+          <% unless district.notes.empty? %>
+          <p><strong>Special Conditions:</strong>
+            <ul class="list-group">
+              <% district.notes.each do |note| %>
+              <li class="list-group-item"><%=note %></li>
+              <% end %>
+            </ul>
+          </p>
+          <% end %>
+        </div>
       </div>
     </div>
-  </div>
 
-  <% if i % 3 == 2 %>
-    </div>
+    <% if i % 3 == 2 %>
+      </div>
+    <% end %>
+
+    <% i += 1 %>
   <% end %>
 
-  <% i += 1 %>
-<% end %>
-
-<% if i % 3 != 0 %>
-    </div>
+  <% if i % 3 != 0 %>
+      </div>
+  <% end %>
 <% end %>
 
 <% content_for :help_title, "History of Ultimapolis" %>

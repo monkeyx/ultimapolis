@@ -4,89 +4,90 @@
 <% else %>
 <% content_for :lead, "<p>The future city simulation</p>".html_safe %>
 <% end %>
-<div class="row">
-	<div class="col-lg-5">
-		<div class="panel panel-primary">
-		  <div class="panel-heading">
-		    <h3 class="panel-title">Current Opportunity</h3>
-		  </div>
-		  <div class="panel-body">
-		  	<% if Event.current_opportunity %>
-		  	<%=render partial: '/events/briefing', locals: {event: Event.current_opportunity} %>
-		  	<% else %>
-		  	<p>There is no current opportunity. There will be another along shortly.</p>
-		  	<% end %>
-		  </div>
+<% cache("welcome-#{(current_citizen ? current_citizen.id : 'public')}") do %>
+	<div class="row">
+		<div class="col-lg-5">
+			<div class="panel panel-primary">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Current Opportunity</h3>
+			  </div>
+			  <div class="panel-body">
+			  	<% if Event.current_opportunity %>
+			  	<%=render partial: '/events/briefing', locals: {event: Event.current_opportunity} %>
+			  	<% else %>
+			  	<p>There is no current opportunity. There will be another along shortly.</p>
+			  	<% end %>
+			  </div>
+			</div>
+		</div>
+		<div class="col-lg-2">
+			<%
+			panel_class = if Global.singleton.notes.empty?
+				"panel-success"
+			else
+				"panel-warning"
+			end
+			%>
+			<div class="panel <%=panel_class%>">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">City Status</h3>
+			  </div>
+			  <div class="panel-body">
+		    	<% if Global.singleton.notes.empty? %>
+		    	<p>
+	        		Peace and prosperity
+	        	</p>
+	        	<% elsif Global.singleton.notes.count == 1 %>
+	        	<p><%=Global.singleton.notes[0]%></p> 
+	        	<% else %>
+	        	<ul class="list-group">
+	        		<% Global.singleton.notes.each do |note| %>
+	        		<li class="list-group-item">
+	        			<%=note.html_safe %>
+	        		</li>
+	        		<% end %>
+	        	</ul>
+	        	<% end %>
+	        	<p>
+	        		<strong>GDP:</strong> <%=link_to(format_currency(Global.singleton.gdp), '/charts?chart=gdp') %>
+	        	</p>
+	        	<p>
+	        		<strong>Inflation:</strong> <%=link_to(format_rating(Global.singleton.inflation), '/charts?chart=inflation')%>
+	        	</p>
+	        	<p>
+	        		<strong>Interest Rate:</strong> <%=link_to(format_rating(Global.singleton.interest), '/charts?chart=interest')%>
+	        	</p>
+			  </div>
+			</div>
+		</div>
+		<div class="col-lg-5">
+			<div class="panel panel-danger">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Current Crisis</h3>
+			  </div>
+			  <div class="panel-body">
+			    <% if Event.current_crisis %>
+			    <%=render partial: '/events/briefing', locals: {event: Event.current_crisis} %>
+			  	<% else %>
+			  	<p>There is no current crisis. Phew!</p>
+			  	<% end %>
+			  </div>
+			</div>
 		</div>
 	</div>
-	<div class="col-lg-2">
-		<%
-		panel_class = if Global.singleton.notes.empty?
-			"panel-success"
-		else
-			"panel-warning"
-		end
-		%>
-		<div class="panel <%=panel_class%>">
-		  <div class="panel-heading">
-		    <h3 class="panel-title">City Status</h3>
-		  </div>
-		  <div class="panel-body">
-	    	<% if Global.singleton.notes.empty? %>
-	    	<p>
-        		Peace and prosperity
-        	</p>
-        	<% elsif Global.singleton.notes.count == 1 %>
-        	<p><%=Global.singleton.notes[0]%></p> 
-        	<% else %>
-        	<ul class="list-group">
-        		<% Global.singleton.notes.each do |note| %>
-        		<li class="list-group-item">
-        			<%=note.html_safe %>
-        		</li>
-        		<% end %>
-        	</ul>
-        	<% end %>
-        	<p>
-        		<strong>GDP:</strong> <%=link_to(format_currency(Global.singleton.gdp), '/charts?chart=gdp') %>
-        	</p>
-        	<p>
-        		<strong>Inflation:</strong> <%=link_to(format_rating(Global.singleton.inflation), '/charts?chart=inflation')%>
-        	</p>
-        	<p>
-        		<strong>Interest Rate:</strong> <%=link_to(format_rating(Global.singleton.interest), '/charts?chart=interest')%>
-        	</p>
-		  </div>
-		</div>
-	</div>
-	<div class="col-lg-5">
-		<div class="panel panel-danger">
-		  <div class="panel-heading">
-		    <h3 class="panel-title">Current Crisis</h3>
-		  </div>
-		  <div class="panel-body">
-		    <% if Event.current_crisis %>
-		    <%=render partial: '/events/briefing', locals: {event: Event.current_crisis} %>
-		  	<% else %>
-		  	<p>There is no current crisis. Phew!</p>
-		  	<% end %>
-		  </div>
-		</div>
-	</div>
-</div>
-<% reports = TurnReport.global_news.limit(5) %>
-<% unless reports.empty? %>
-<h2>News Headlines</h2>
-<ul class="list-group">
-  <% reports.each do |report| %>
-  <li class="list-group-item">
-    <%=link_to("#{report.district}: #{report.to_s}".html_safe, report.district)%>
-    <span class="badge"><%=format_turn(report.turn)%></span>
-  </li>
-  <% end %>
-</ul>
-<% end%>
-
+	<% reports = TurnReport.global_news.limit(5) %>
+	<% unless reports.empty? %>
+	<h2>News Headlines</h2>
+	<ul class="list-group">
+	  <% reports.each do |report| %>
+	  <li class="list-group-item">
+	    <%=link_to("#{report.district}: #{report.to_s}".html_safe, report.district)%>
+	    <span class="badge"><%=format_turn(report.turn)%></span>
+	  </li>
+	  <% end %>
+	</ul>
+	<% end%>
+<% end %>
 <% content_for :help_title, "What is this?" %>
 <% content_for :help_body do %>
 Ultimapolis is a persistent browser-based game which sumulates the workings of a single futuristic city. Citizens run by players compete and collaborate to deal with new crisis and opportunities whilst expanding their own pool of knowledge (skills) and resources. The simulation is the foundation for a roleplaying game. There is no final objective to achieve and different citizens will have different ideas about what is the best for their city.

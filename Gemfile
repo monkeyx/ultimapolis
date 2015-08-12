@@ -27,6 +27,7 @@ gem 'acts_as_votable'
 gem 'commontator'
 gem 'chartkick'
 gem 'mandrill_mailer'
+gem 'exception_notification'
 
 group :development, :test do
   gem 'byebug'

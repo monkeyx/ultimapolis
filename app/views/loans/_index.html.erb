@@ -1,32 +1,34 @@
 <h2>Loans</h2>
 
-<% if @citizen.loans.count  > 0 %>
-  <table class="table table-striped table-hover ">
-    <thead>
-      <tr>
-        <th>Value</th>
-        <th>Issued On</th>
-        <th>Matures On</th>
-        <th>Interest (Rate)</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @citizen.loans.each do |loan| %>
-      <tr>
-        <td><%=format_currency(loan.value)%></td>
-        <td><%=format_turn(loan.issued_on)%></td>
-        <td><%=format_turn(loan.matures_on)%></td>
-        <td><%=format_currency(loan.interest_value_per_turn)%> (<%=format_rating(loan.interest)%>)</td>
-        <td>
-          <% if current_citizen && current_citizen.id == @citizen.id %>
-          <%= link_to 'Repay Early', loan, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-<p>No loans to be repaid.</p>
+<% cache(cache_key_for_collection("loans-#{@citizen.id}", @citizen.loans)) do %>
+  <% if @citizen.loans.count  > 0 %>
+    <table class="table table-striped table-hover ">
+      <thead>
+        <tr>
+          <th>Value</th>
+          <th>Issued On</th>
+          <th>Matures On</th>
+          <th>Interest (Rate)</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @citizen.loans.each do |loan| %>
+        <tr>
+          <td><%=format_currency(loan.value)%></td>
+          <td><%=format_turn(loan.issued_on)%></td>
+          <td><%=format_turn(loan.matures_on)%></td>
+          <td><%=format_currency(loan.interest_value_per_turn)%> (<%=format_rating(loan.interest)%>)</td>
+          <td>
+            <% if current_citizen && current_citizen.id == @citizen.id %>
+            <%= link_to 'Repay Early', loan, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+  <p>No loans to be repaid.</p>
+  <% end %>
 <% end %>

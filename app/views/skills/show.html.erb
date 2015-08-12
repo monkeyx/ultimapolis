@@ -1,33 +1,36 @@
 <% content_for :title, "#{@skill.name} [#{@skill.skill_group}]" %>
 <% content_for :lead, "#{@skill.description}".html_safe %>
 
-<h2>Learned In</h2>
-<ul class="list-group">
-	<% if @skill.district %>
-	<li class="list-group-item"><%= link_to @skill.district.name, @skill.district %></li>
-	<% end %>
-	<% if @skill.primary_profession %>
-	<li class="list-group-item"><%= link_to @skill.primary_profession.name, @skill.primary_profession %></li>
-	<% end %>
-	<% if @skill.secondary_profession %>
-	<li class="list-group-item"><%= link_to @skill.secondary_profession.name, @skill.secondary_profession %></li>
-	<% end %>
-	<% if @skill.tertiary_profession %>
-	<li class="list-group-item"><%= link_to @skill.tertiary_profession.name, @skill.tertiary_profession %></li>
-	<% end %>
-</uk>
+<% cache(@skill) do %>
+	<h2>Learned In</h2>
+	<ul class="list-group">
+		<% if @skill.district %>
+		<li class="list-group-item"><%= link_to @skill.district.name, @skill.district %></li>
+		<% end %>
+		<% if @skill.primary_profession %>
+		<li class="list-group-item"><%= link_to @skill.primary_profession.name, @skill.primary_profession %></li>
+		<% end %>
+		<% if @skill.secondary_profession %>
+		<li class="list-group-item"><%= link_to @skill.secondary_profession.name, @skill.secondary_profession %></li>
+		<% end %>
+		<% if @skill.tertiary_profession %>
+		<li class="list-group-item"><%= link_to @skill.tertiary_profession.name, @skill.tertiary_profession %></li>
+		<% end %>
+	</uk>
 
-<% if (equipment_types = EquipmentType.for_skill(@skill)).count > 0 %>
-<h2>Useful Equipment</h2>
-<ul class="list-group">
-	<% equipment_types.each do |equipment_type| %>
-	<li class="list-group-item">
-		<%=link_to equipment_type.to_s, equipment_type %>
-		<span class="badge">+<%=equipment_type.skill_modifier%></span>
-	</li>
+	<% if (equipment_types = EquipmentType.for_skill(@skill)).count > 0 %>
+	<h2>Useful Equipment</h2>
+	<ul class="list-group">
+		<% equipment_types.each do |equipment_type| %>
+		<li class="list-group-item">
+			<%=link_to equipment_type.to_s, equipment_type %>
+			<span class="badge">+<%=equipment_type.skill_modifier%></span>
+		</li>
+		<% end %>
+	</uk>
 	<% end %>
-</uk>
 <% end %>
+
 <% content_for :help_title, "What are skills used for?" %>
 <% content_for :help_body do %>
 The main use of a citizen's skills are in working on projects to deal with crisis or seize opportunities. Project leaders will pay a wage for a citizen's contribution in skills that meet the needs of a specific event. The more skilled a citizen in a skill useful to the project, the more they will earn for their contribution and the quicker that particular project will be completed.

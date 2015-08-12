@@ -1,77 +1,80 @@
-<% if facility_type.produceable.count > 0 %>
-<h2>Production</h2>
-<ul class="list-group">
-  <% facility_type.produceable.each do |item| %>
-  <li class="list-group-item">
-    <%=link_to item.name, item %>
-    <% if defined?(producing_trade_good) && item.is_a?(TradeGood) && producing_trade_good && item.id == producing_trade_good.id %>
-    <span class="badge"><%=glyph_check_or_cross(true)%></span>
+  <% if facility_type.produceable.count > 0 %>
+  <h2>Production</h2>
+  <ul class="list-group">
+    <% facility_type.produceable.each do |item| %>
+    <li class="list-group-item">
+      <%=link_to item.name, item %>
+      <% if defined?(producing_trade_good) && item.is_a?(TradeGood) && producing_trade_good && item.id == producing_trade_good.id %>
+      <span class="badge"><%=glyph_check_or_cross(true)%></span>
+      <% end %>
+      <% if defined?(producing_equipment_type) && item.is_a?(EquipmentType) && producing_equipment_type && item.id == producing_equipment_type.id %>
+      <span class="badge"><%=glyph_check_or_cross(true)%></span>
+      <% end %>
+    </li>
     <% end %>
-    <% if defined?(producing_equipment_type) && item.is_a?(EquipmentType) && producing_equipment_type && item.id == producing_equipment_type.id %>
-    <span class="badge"><%=glyph_check_or_cross(true)%></span>
-    <% end %>
-  </li>
+  </ul>
   <% end %>
-</ul>
-<% end %>
 
-<% if facility_type.power_generation > 0 %>
-<h2>Power Generation</h2>
-<p>
-  The grid will currently pay this facility <%=format_currency(facility_type.power_generation_income) %> per facility level.
-</p>
-<% end %>
+<% cache(@facility_type) do %>
+  <% if facility_type.power_generation > 0 %>
+  <h2>Power Generation</h2>
+  <p>
+    The grid will currently pay this facility <%=format_currency(facility_type.power_generation_income) %> per facility level.
+  </p>
+  <% end %>
 
-<% if facility_type.housing_mod > 0 %>
-<h2>Rent</h2>
-<p>
-  The tenants will currently pay the facility owner <%=format_currency(facility_type.rent_income) %> per facility level.
-</p>
-<% end %>
+  <% if facility_type.housing_mod > 0 %>
+  <h2>Rent</h2>
+  <p>
+    The tenants will currently pay the facility owner <%=format_currency(facility_type.rent_income) %> per facility level.
+  </p>
+  <% end %>
 
-<h2>Data</h2>
-<table class="table table-striped table-hover">
-  <tbody>
-    <%=content_for(:data_body)%>
-    <tr>
-      <th>Build cost:</th>
-      <td><%=format_currency  facility_type.build_cost %></td>
-    </tr>
-    <tr>
-      <th>Mainteance cost:</th>
-      <td><%=format_currency  facility_type.maintenance_cost %></td>
-    </tr>
-    <tr>
-      <th>Employees:</th>
-      <td><%= facility_type.employees %></td>
-    </tr>
-    <tr>
-      <th>Automation:</th>
-      <td><%= facility_type.automation %></td>
-    </tr>
-    <% if facility_type.power_consumption > 0 %>
-    <tr>
-      <th>Power consumption:</th>
-      <td><%= facility_type.power_consumption %></td>
-    </tr>
-    <% end %>
-    <% if facility_type.power_generation > 0 %>
-    <tr>
-      <th>Power generation:</th>
-      <td><%= facility_type.power_generation %></td>
-    </tr>
-    <% end %>
-    <%if facility_type.pollution > 0 %>
-    <tr>
-      <th>Pollution:</th>
-      <td><%= facility_type.pollution %></td>
-    </tr>
-    <% end %>
-    <% if facility_type.housing_mod > 0 %>
-    <tr>
-      <th>Housing:</th>
-      <td><%= facility_type.housing_mod %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+  <h2>Data</h2>
+  <table class="table table-striped table-hover">
+    <tbody>
+      <%=content_for(:data_body)%>
+      <tr>
+        <th>Build cost:</th>
+        <td><%=format_currency  facility_type.build_cost %></td>
+      </tr>
+      <tr>
+        <th>Mainteance cost:</th>
+        <td><%=format_currency  facility_type.maintenance_cost %></td>
+      </tr>
+      <tr>
+        <th>Employees:</th>
+        <td><%= facility_type.employees %></td>
+      </tr>
+      <tr>
+        <th>Automation:</th>
+        <td><%= facility_type.automation %></td>
+      </tr>
+      <% if facility_type.power_consumption > 0 %>
+      <tr>
+        <th>Power consumption:</th>
+        <td><%= facility_type.power_consumption %></td>
+      </tr>
+      <% end %>
+      <% if facility_type.power_generation > 0 %>
+      <tr>
+        <th>Power generation:</th>
+        <td><%= facility_type.power_generation %></td>
+      </tr>
+      <% end %>
+      <%if facility_type.pollution > 0 %>
+      <tr>
+        <th>Pollution:</th>
+        <td><%= facility_type.pollution %></td>
+      </tr>
+      <% end %>
+      <% if facility_type.housing_mod > 0 %>
+      <tr>
+        <th>Housing:</th>
+        <td><%= facility_type.housing_mod %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% end %>

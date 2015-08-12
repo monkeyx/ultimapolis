@@ -1,16 +1,18 @@
 <h2>Report</h2>
 
-<% 
-report_entries = TurnReport.for_citizen(@citizen).limit(50)
-%>
-<% if report_entries.count > 0 %>
-<ul class="list-group">
-  <% report_entries.each do |report| %>
-  <li class="list-group-item">
-    <%=report %><span class="badge"><%=format_turn(report.turn)%></span>
-  </li>
-  <% end %>
-</ul>
-<% else %>
-<p>Nothing to report yet.</p>
+<% cache(cache_key_for_collection("report-#{@citizen.id}", TurnReport.for_citizen(@citizen).limit(50))) do %>
+	<% 
+	report_entries = TurnReport.for_citizen(@citizen).limit(50)
+	%>
+	<% if report_entries.count > 0 %>
+	<ul class="list-group">
+	  <% report_entries.each do |report| %>
+	  <li class="list-group-item">
+	    <%=report %><span class="badge"><%=format_turn(report.turn)%></span>
+	  </li>
+	  <% end %>
+	</ul>
+	<% else %>
+	<p>Nothing to report yet.</p>
+	<% end %>
 <% end %>

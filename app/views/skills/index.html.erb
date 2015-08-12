@@ -1,41 +1,43 @@
 <% content_for :title, 'Skills' %>
 <% content_for :lead, "Citizens learn skills to help them make a worthwhile contribution to <a href=\"/projects\">projects</a>. Every citizen learned something from their home district and from their <a href=\"/professions\">profession</a>.".html_safe %>
 
-
-<table class="table table-striped table-hover">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Name</th>
-      <th>Group</th>
-      <th>Learned In</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @skills.each do |skill| %>
+<% cache(cache_key_for_collection("skills", @skills)) do %>
+  <table class="table table-striped table-hover">
+    <thead>
       <tr>
-        <td><!--<%=image_tag(skill.icon)%>--></td>
-        <td><%= link_to skill.name, skill %></td>
-        <td><%= skill.skill_group %></td>
-        <td>
-          <% if skill.district %>
-          <%= link_to skill.district.name, skill.district %> &nbsp;
-          <% end %>
-          <% if skill.primary_profession %>
-          <%= link_to skill.primary_profession.name, skill.primary_profession %> &nbsp;
-          <% end %>
-          <% if skill.secondary_profession %>
-          <%= link_to skill.secondary_profession.name, skill.secondary_profession %> &nbsp;
-          <% end %>
-          <% if skill.tertiary_profession %>
-          <%= link_to skill.tertiary_profession.name, skill.tertiary_profession %> &nbsp;
-          <% end %>
-        </td>
+        <th></th>
+        <th>Name</th>
+        <th>Group</th>
+        <th>Learned In</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @skills.each do |skill| %>
+        <tr>
+          <td><!--<%=image_tag(skill.icon)%>--></td>
+          <td><%= link_to skill.name, skill %></td>
+          <td><%= skill.skill_group %></td>
+          <td>
+            <% if skill.district %>
+            <%= link_to skill.district.name, skill.district %> &nbsp;
+            <% end %>
+            <% if skill.primary_profession %>
+            <%= link_to skill.primary_profession.name, skill.primary_profession %> &nbsp;
+            <% end %>
+            <% if skill.secondary_profession %>
+            <%= link_to skill.secondary_profession.name, skill.secondary_profession %> &nbsp;
+            <% end %>
+            <% if skill.tertiary_profession %>
+            <%= link_to skill.tertiary_profession.name, skill.tertiary_profession %> &nbsp;
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% end %>
 
 <% content_for :help_title, "What are skills used for?" %>
 <% content_for :help_body do %>

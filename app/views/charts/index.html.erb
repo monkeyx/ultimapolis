@@ -1,55 +1,58 @@
 <% content_for :title, 'Charts' %>
 
-<ul class="nav nav-pills">
-<% if defined?(@district) && @district %>
-<% params[:chart] = 'total_land' if params[:chart].blank? %>
-<% content_for :lead, "Historical data for #{@district}.".html_safe %>
-	<% DistrictChartsController::GRAPHS.each do |d| %>
-	<li class="<% if params[:chart] == d%>active<% end%>"><%=link_to(d.gsub('_',' ').capitalize, "/charts?chart=#{d}&id=#{@district.id}")%></li>
+<% cache("charts-#{params[:chart]}-#{(defined?(@district) && @district ? @district.id : 'global')}") do %>
+	<ul class="nav nav-pills">
+	<% if defined?(@district) && @district %>
+	<% params[:chart] = 'total_land' if params[:chart].blank? %>
+	<% content_for :lead, "Historical data for #{@district}.".html_safe %>
+		<% DistrictChartsController::GRAPHS.each do |d| %>
+		<li class="<% if params[:chart] == d%>active<% end%>"><%=link_to(d.gsub('_',' ').capitalize, "/charts?chart=#{d}&id=#{@district.id}")%></li>
+		<% end %>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Districts<span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<% District.all.each do |district| %>
+				<li><%=link_to district.to_s, "/charts?chart=#{params[:chart]}&id=#{district.id}" %></li>
+				<% end %>
+			</ul>
+		</li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Global<span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<% GlobalChartsController::GRAPHS.each do |g| %>
+				<li><%=link_to(g.capitalize, "/charts?chart=#{g}")%></li>
+				<% end %>
+			</ul>
+		</li>
+	<% else %>
+	<% params[:chart] = 'gdp' if params[:chart].blank? %>
+	<% content_for :lead, "You love charts. We love charts.".html_safe %>
+		<% GlobalChartsController::GRAPHS.each do |g| %>
+		<li class="<% if params[:chart] == g%>active<% end%>"><%=link_to(g.gsub('_',' ').capitalize, "/charts?chart=#{g}")%></li>
+		<% end %>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Districts<span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<% District.all.each do |district| %>
+				<li><%=link_to district.to_s, "/charts?id=#{district.id}" %></li>
+				<% end %>
+			</ul>
+		</li>
 	<% end %>
-	<li class="dropdown">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Districts<span class="caret"></span></a>
-		<ul class="dropdown-menu">
-			<% District.all.each do |district| %>
-			<li><%=link_to district.to_s, "/charts?chart=#{params[:chart]}&id=#{district.id}" %></li>
-			<% end %>
-		</ul>
-	</li>
-	<li class="dropdown">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Global<span class="caret"></span></a>
-		<ul class="dropdown-menu">
-			<% GlobalChartsController::GRAPHS.each do |g| %>
-			<li><%=link_to(g.capitalize, "/charts?chart=#{g}")%></li>
-			<% end %>
-		</ul>
-	</li>
-<% else %>
-<% params[:chart] = 'gdp' if params[:chart].blank? %>
-<% content_for :lead, "You love charts. We love charts.".html_safe %>
-	<% GlobalChartsController::GRAPHS.each do |g| %>
-	<li class="<% if params[:chart] == g%>active<% end%>"><%=link_to(g.gsub('_',' ').capitalize, "/charts?chart=#{g}")%></li>
-	<% end %>
-	<li class="dropdown">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Districts<span class="caret"></span></a>
-		<ul class="dropdown-menu">
-			<% District.all.each do |district| %>
-			<li><%=link_to district.to_s, "/charts?id=#{district.id}" %></li>
-			<% end %>
-		</ul>
-	</li>
+	</ul>
+
+	<% if defined?(@district) && @district
+		chart_name = DistrictChartsController::GRAPHS.include?(params[:chart]) ? params[:chart] : 'total_land'
+		chart_path = "/charts/#{chart_name}?id=#{@district.id}"
+	else 
+		chart_name = GlobalChartsController::GRAPHS.include?(params[:chart]) ? params[:chart] : 'gdp'
+		chart_path = "/charts/#{chart_name}"
+	end %>
+
+	<h2><%=chart_name.gsub('_',' ').capitalize%></h2>
+	<%=column_chart chart_path %>
+
 <% end %>
-</ul>
-
-<% if defined?(@district) && @district
-	chart_name = DistrictChartsController::GRAPHS.include?(params[:chart]) ? params[:chart] : 'total_land'
-	chart_path = "/charts/#{chart_name}?id=#{@district.id}"
-else 
-	chart_name = GlobalChartsController::GRAPHS.include?(params[:chart]) ? params[:chart] : 'gdp'
-	chart_path = "/charts/#{chart_name}"
-end %>
-
-<h2><%=chart_name.gsub('_',' ').capitalize%></h2>
-<%=column_chart chart_path %>
 
 <% content_for :help_title, "What is this?" %>
 <% content_for :help_body do %>

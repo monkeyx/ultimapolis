@@ -1,28 +1,31 @@
 <% content_for :title, @trade_good.name %>
 <% content_for :lead, "#{@trade_good.description}. Produced in a #{link_to @trade_good.facility_type.name, @trade_good.facility_type}.".html_safe %>
 
-<% if @trade_good.trade_good_raw_materials.count > 0 %>
-<h2>Production Cost</h2>
-<table class="table table-striped table-hover">
-  <thead>
-    <tr>
-      <th>Trade Good</th>
-      <th>Quantity</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @trade_good.trade_good_raw_materials.sort{|a,b| a.raw_material.name <=> b.raw_material.name}.each do | erm | %>
-    <tr>
-      <td><%= link_to(erm.raw_material.name, erm.raw_material) %></td>
-      <td><%= erm.quantity %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-<% end %>
+<% cache(@trade_good) do %>
+  <% if @trade_good.trade_good_raw_materials.count > 0 %>
+  <h2>Production Cost</h2>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Trade Good</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @trade_good.trade_good_raw_materials.sort{|a,b| a.raw_material.name <=> b.raw_material.name}.each do | erm | %>
+      <tr>
+        <td><%= link_to(erm.raw_material.name, erm.raw_material) %></td>
+        <td><%= erm.quantity %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
 
-<h2>Exchange Price</h2>
-<p><%=format_currency @trade_good.exchange_price %></p>
+  <h2>Exchange Price</h2>
+  <p><%=format_currency @trade_good.exchange_price %></p>
+
+<% end %>
 
 <% content_for :help_title, "Trade Goods" %>
 <% content_for :help_body do %>

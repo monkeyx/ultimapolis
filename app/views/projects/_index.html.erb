@@ -1,90 +1,92 @@
 <h2>Projects</h2>
 
-<% if @projects.empty? %>
-<div class="alert alert-dismissible alert-warning">
-  <h4>No Projects</h4>
-  <% if current_citizen && current_citizen.id == @citizen.id %>
-  <p>You should join a project to contribute your skills and earn a wage.</p>
-  <% else %>
-  <p>This citizen has not joined any projects.</p>
-  <% end %>
-</div>
-
-<div class="row">
-  <div class="col-lg-6">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">Current Opportunity</h3>
-      </div>
-      <div class="panel-body">
-        <% if Event.current_opportunity %>
-        <%=render partial: '/events/briefing', locals: {event: Event.current_opportunity} %>
-        <% else %>
-        <p>There is no current opportunity. There will be another along shortly.</p>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-6">
-    <div class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title">Current Crisis</h3>
-      </div>
-      <div class="panel-body">
-        <% if Event.current_crisis %>
-        <%=render partial: '/events/briefing', locals: {event: Event.current_crisis} %>
-        <% else %>
-        <p>There is no current crisis. Phew!</p>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
-
-<% else %>
-
-<table class="table table-striped table-hover">
-  <thead>
-    <tr>
-      <th>Event</th>
-      <th>Leader</th>
-      <th>Status</th>
-      <th>Wages</th>
-      <th>Progress</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= link_to project.event.name, project.event %></td>
-        <td><%= link_to project.leader.to_s, project.leader %></td>
-        <td>
-          <% if project.started? %>
-            Started in <%=format_turn(project.began_on)%>
-          <% elsif project.finished? %>
-            Finished in <%=format_turn(project.finished_on)%>
-          <% end %>
-        </td>
-        <td><%=format_currency  project.wages %></td>
-        <td><%=format_rating project.progress %></td>
-        <% if can?(:edit, @citizen) %>
-          <% if current_citizen.id == project.leader.id %>
-        <td>
-          <%= link_to 'Cancel Project', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-        </td>
-        <td>
-          <%= link_to 'Adjust Wages', edit_project_path(project),  class: 'btn btn-primary' %>
-        </td>
-          <% elsif (@project_member_mapping = current_citizen.project_member_mapping(project)) %>
-        <td>
-          <%= link_to (@project_member_mapping.sabotaging? ? 'Stop Sabotaging' : 'Leave Project'), @project_member_mapping, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-        </td>
-          <% end %>
-        <% end %>
-      </tr>
+<% cache(cache_key_for_collection("projects-#{@citizen.id}-#{(current_citizen ? current_citizen.id : 'public')}", @projects)) do %>
+  <% if @projects.empty? %>
+  <div class="alert alert-dismissible alert-warning">
+    <h4>No Projects</h4>
+    <% if current_citizen && current_citizen.id == @citizen.id %>
+    <p>You should join a project to contribute your skills and earn a wage.</p>
+    <% else %>
+    <p>This citizen has not joined any projects.</p>
     <% end %>
-  </tbody>
-</table>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Current Opportunity</h3>
+        </div>
+        <div class="panel-body">
+          <% if Event.current_opportunity %>
+          <%=render partial: '/events/briefing', locals: {event: Event.current_opportunity} %>
+          <% else %>
+          <p>There is no current opportunity. There will be another along shortly.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title">Current Crisis</h3>
+        </div>
+        <div class="panel-body">
+          <% if Event.current_crisis %>
+          <%=render partial: '/events/briefing', locals: {event: Event.current_crisis} %>
+          <% else %>
+          <p>There is no current crisis. Phew!</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% else %>
+
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Leader</th>
+        <th>Status</th>
+        <th>Wages</th>
+        <th>Progress</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @projects.each do |project| %>
+        <tr>
+          <td><%= link_to project.event.name, project.event %></td>
+          <td><%= link_to project.leader.to_s, project.leader %></td>
+          <td>
+            <% if project.started? %>
+              Started in <%=format_turn(project.began_on)%>
+            <% elsif project.finished? %>
+              Finished in <%=format_turn(project.finished_on)%>
+            <% end %>
+          </td>
+          <td><%=format_currency  project.wages %></td>
+          <td><%=format_rating project.progress %></td>
+          <% if can?(:edit, @citizen) %>
+            <% if current_citizen.id == project.leader.id %>
+          <td>
+            <%= link_to 'Cancel Project', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          </td>
+          <td>
+            <%= link_to 'Adjust Wages', edit_project_path(project),  class: 'btn btn-primary' %>
+          </td>
+            <% elsif (@project_member_mapping = current_citizen.project_member_mapping(project)) %>
+          <td>
+            <%= link_to (@project_member_mapping.sabotaging? ? 'Stop Sabotaging' : 'Leave Project'), @project_member_mapping, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          </td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
 <% end %>

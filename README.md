@@ -17,7 +17,6 @@ See [commit log](https://github.com/monkeyx/ultimapolis/commits/master)
 ## To Dos
 
 * Event summaries / descriptions
-* Caching
 * News blog generation
 * Custom error / maintenance pages
 
