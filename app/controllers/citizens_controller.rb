@@ -46,7 +46,7 @@ class CitizensController < ApplicationController
 
     respond_to do |format|
       if @citizen.save
-        format.html { redirect_to @citizen, notice: 'Citizen was successfully created.' }
+        format.html { redirect_to @citizen, notice: 'Welcome to Ultimapolis citizen!' }
         format.json { render :show, status: :created, location: @citizen }
       else
         format.html { render :new }
@@ -60,7 +60,7 @@ class CitizensController < ApplicationController
   def update
     respond_to do |format|
       if @citizen.update(citizen_params)
-        format.html { redirect_to @citizen, notice: 'Citizen was successfully updated.' }
+        format.html { redirect_to @citizen, notice: 'Profession changed.' }
         format.json { render :show, status: :ok, location: @citizen }
       else
         format.html { render :edit }

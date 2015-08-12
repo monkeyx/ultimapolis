@@ -23,10 +23,10 @@ class Citizen < ActiveRecord::Base
 	has_many :turn_reports, dependent: :delete_all
 	has_many :petitions, dependent: :nullify
 
+	before_save :check_profession_change!
 	after_create :set_initial_skills!
 	after_create :create_free_facility!
 	after_create :increment_citizen_count!
-	after_save :check_careers!
 	after_destroy :decrease_citizen_count!
 
 	#
@@ -307,14 +307,14 @@ class Citizen < ActiveRecord::Base
 		end
 	end
 
-	def check_careers!
-		if current_career_mapping.nil? || (current_career_mapping.profession_id != current_profession_id)
+	def check_profession_change!
+		if current_profession_id_changed?
+			self.profession_rank = 1
 			if current_career_mapping
 				current_career_mapping.update_attributes!(current: false)
+				career_index = CitizenCareer.for_citizen(self).count + 1
+				citizen_careers.create!(profession: current_profession, career_index: career_index, current: true)
 			end
-			career_index = CitizenCareer.for_citizen(self).count + 1
-			citizen_careers.create!(profession: current_profession, career_index: career_index, current: true)
-			update_attributes!(profession_rank: 1)
 		end
 	end
 
