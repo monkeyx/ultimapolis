@@ -12,7 +12,7 @@ class FacilitiesController < ApplicationController
   def new
     @facility = Facility.new
     @facility_types = (current_user && current_user.citizen ? FacilityType.buildable_and_affordable(current_user.citizen.credits) : [])
-    @breadcrumbs = [["Home", root_url], [@facility.citizen,"/citizens/#{@facility.citizen.id}?tab=facilities"]]
+    @breadcrumbs = [["Home", root_url], [@facility.citizen,"/citizens/#{current_user.citizen.id}?tab=facilities"]]
     if @facility_types.empty?
       respond_to do |format|
         format.html { redirect_to current_user.citizen , alert: 'No suitable facilities can be built.' }
