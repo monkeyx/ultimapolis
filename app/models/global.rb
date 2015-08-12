@@ -74,7 +74,7 @@ class Global < ActiveRecord::Base
 	end
 
 	def power_generation_income
-		@power_generation_income ||= 10 + (power_demand > power_available ? (power_available > 0 ? (10 * (power_demand.to_f / power_available.to_f)).to_i : 50 ) : 0)
+		@power_generation_income ||= 12 + (power_demand > power_available ? (power_available > 0 ? (10 * (power_demand.to_f / power_available.to_f)).to_i : 50 ) : 0)
 		@power_generation_income > 1000 ? 1000 : @power_generation_income
 	end
 
