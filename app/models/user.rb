@@ -20,6 +20,16 @@ class User < ActiveRecord::Base
 	  	scope "#{role.pluralize}".to_sym, -> { where(role: role)}
     end
 
+    after_create :send_registration!
+
+    def send_registration!
+      UserMailer.registered(self).deliver unless admin?
+    end
+
+    def citizen_path
+      self.citizen ? "/citizens/#{self.citizen.id}" : nil
+    end
+
     def role_enum
       USER_ROLES
     end

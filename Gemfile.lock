@@ -92,6 +92,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     erubis (2.7.0)
+    excon (0.45.4)
     execjs (2.5.2)
     font-awesome-rails (4.4.0.0)
       railties (>= 3.2, < 5.0)
@@ -118,6 +119,13 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    mandrill-api (1.0.53)
+      excon (>= 0.16.0, < 1.0)
+      json (>= 1.7.7, < 2.0)
+    mandrill_mailer (1.0.3)
+      actionpack
+      activesupport
+      mandrill-api (~> 1.0.9)
     mime-types (2.6.1)
     mini_portile (0.6.2)
     minitest (5.8.0)
@@ -243,6 +251,7 @@ DEPENDENCIES
   devise
   jbuilder (~> 2.0)
   jquery-rails
+  mandrill_mailer
   omniauth
   pg
   puma

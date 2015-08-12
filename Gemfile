@@ -26,6 +26,7 @@ gem 'will_paginate'
 gem 'acts_as_votable'
 gem 'commontator'
 gem 'chartkick'
+gem 'mandrill_mailer'
 
 group :development, :test do
   gem 'byebug'

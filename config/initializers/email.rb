@@ -1,5 +1,5 @@
 EMAIL_DEFAULT_FROM = "Ultimapolis <support@ultimapolis.com>"
-EMAIL_DEFAULT_REPLY = "Ultimapolis <admin@ultimapolis.com>"
+EMAIL_DEFAULT_REPLY = "Ultimapolis <support@ultimapolis.com>"
 
 unless Rails.env.production?
 	EMAIL_BASE_HOST = "localhost:3000"
@@ -20,3 +20,7 @@ ActionMailer::Base.smtp_settings = {
   :domain  => "ultimapolis.com",
   :enable_starttls_auto => true
 }
+
+MandrillMailer.configure do |config|
+  config.api_key = ENV['SMTP_PASSWORD']
+end
