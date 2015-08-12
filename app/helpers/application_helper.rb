@@ -51,7 +51,7 @@ module ApplicationHelper
 		seconds = "0#{seconds}" if seconds < 10
 		if hours > 0
 			"for another #{hours}:#{minutes}:#{seconds} hours"
-		elsif minutes < 1 && seconds < 1
+		elsif minutes.to_i < 1 && seconds.to_i < 1
 			"has past. Please refresh."
 		else
 			"for another #{minutes}:#{seconds} minutes"
