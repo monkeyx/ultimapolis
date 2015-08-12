@@ -1,10 +1,11 @@
 EMAIL_DEFAULT_FROM = "Ultimapolis <support@ultimapolis.com>"
 EMAIL_DEFAULT_REPLY = "Ultimapolis <support@ultimapolis.com>"
-
 unless Rails.env.production?
 	EMAIL_BASE_HOST = "localhost:3000"
+	EMAIL_HOME_URL = "http://#{EMAIL_BASE_HOST}"
 else
 	EMAIL_BASE_HOST = "ultimapolis.com"
+	EMAIL_HOME_URL = "http://www.#{EMAIL_BASE_HOST}"
 end
 
 ActionMailer::Base.delivery_method = :smtp

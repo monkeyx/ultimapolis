@@ -6,7 +6,7 @@ class UserMailer < MandrillMailer::TemplateMailer
 			template: 'ultimapolis-registration',
 			to: [{email: user.email, name: user.username }],
 			vars: {
-				'HOME_PATH' => root_url
+				'HOME_PATH' => EMAIL_HOME_URL
 			},
 			important: true,
 			inline_css: true,
