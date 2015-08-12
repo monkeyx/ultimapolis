@@ -1,4 +1,4 @@
-class UserMail < MandrillMailer::TemplateMailer
+class UserMailer < MandrillMailer::TemplateMailer
 	default from: EMAIL_DEFAULT_FROM
 
 	def registered(user)

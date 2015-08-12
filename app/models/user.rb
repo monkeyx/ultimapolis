@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
     def send_registration!
       UserMailer.registered(self).deliver unless admin?
     end
+    handle_asynchronously :send_registration!
 
     def citizen_path
       self.citizen ? "/citizens/#{self.citizen.id}" : nil
