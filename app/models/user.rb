@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
     handle_asynchronously :send_registration!
 
     def send_turn_report!(turn)
-      UserMailer.turn_report(self,turn).deliver unless !Rails.env.production? || admin?
+      UserMailer.turn_report(self,turn).deliver unless !Rails.env.production? || admin? || self.citizen.nil?
     end
     handle_asynchronously :send_turn_report!
 

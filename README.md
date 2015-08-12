@@ -20,7 +20,6 @@ See [commit log](https://github.com/monkeyx/ultimapolis/commits/master)
 * Caching
 * News blog generation
 * Custom error / maintenance pages
-* Emails
 
 ## Issues
 

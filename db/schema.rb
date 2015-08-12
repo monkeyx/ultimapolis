@@ -99,9 +99,6 @@ ActiveRecord::Schema.define(version: 20150811210832) do
   add_index "citizen_trade_goods", ["citizen_id", "trade_good_id"], name: "index_citizen_trade_goods_on_citizen_id_and_trade_good_id", using: :btree
 
   create_table "citizens", force: :cascade do |t|
-    t.boolean  "email_notifications",             default: true
-    t.boolean  "daily_updates",                   default: false
-    t.boolean  "instant_updates",                 default: true
     t.integer  "credits",               limit: 8, default: 0
     t.integer  "home_district_id"
     t.integer  "current_profession_id"
@@ -109,8 +106,8 @@ ActiveRecord::Schema.define(version: 20150811210832) do
     t.integer  "current_project_id"
     t.string   "icon"
     t.integer  "user_id"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   add_index "citizens", ["current_project_id"], name: "index_citizens_on_current_project_id", using: :btree
