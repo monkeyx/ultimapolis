@@ -16,6 +16,38 @@
 //= require turbolinks
 //= require_tree .
 
+var infoTop;
+var infoTitle;
+var infoBody;
+
+function showInfoPanel() {
+    if(infoTop){
+        id = 'infoTop';
+        glyph = 'glyphicon-arrow-down';
+    } else {
+        id = 'infoBottom';
+        glyph = 'glyphicon-arrow-up';
+    }
+    div = $('#' + id);
+    div.html('<div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title">' +
+        infoTitle + 
+        '<span id="switchInfoButton" class="glyphicon ' + 
+        glyph +
+        '"></span></h3></div><div class="panel-body">' +
+        infoBody +
+        '</div></div>');
+    $('#switchInfoButton').click(function ($) {
+        switchInfoPanelLocation();
+    });
+}
+
+function switchInfoPanelLocation() {
+    $('#infoTop').empty();
+    $('#infoBottom').empty();
+    infoTop = !infoTop;
+    showInfoPanel();
+}
+
 function turnTimer(duration, display) {
     var timer = duration, minutes, seconds;
     setInterval(function () {
