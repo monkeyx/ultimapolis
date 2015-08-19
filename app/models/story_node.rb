@@ -16,6 +16,7 @@ class StoryNode < ActiveRecord::Base
 	has_many :story_node_flags, dependent: :delete_all
 
 	after_create :post_creation!
+	before_save :add_citizen_report!
 
 	attr_accessor :story_choice_id, :choice_result
 
@@ -66,6 +67,12 @@ class StoryNode < ActiveRecord::Base
 				choice.failure_node = self
 			end
 			choice.save!
+		end
+	end
+
+	def add_citizen_report!
+		if narrative_changed? && narrative_was.blank? && created_by && created_by.citizen
+			created_by.citizen.add_report!(self.narrative)
 		end
 	end
 end

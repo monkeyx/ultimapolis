@@ -19,6 +19,7 @@ class CitizenStory < ActiveRecord::Base
 			status.destroy if status
 		end
 		CitizenStory.create!(citizen: citizen, story: story, story_node: story.first_node)
+		citizen.add_report!(story.first_node.narrative)
 	end
 
 	def self.restartable_story?(citizen, story)
@@ -51,6 +52,7 @@ class CitizenStory < ActiveRecord::Base
 		if cs 
 			cs.story_node = node
 			cs.save!
+			citizen.add_report!(node.narrative) unless node.narrative.blank?
 		end
 	end
 
