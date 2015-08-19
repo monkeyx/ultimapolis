@@ -4,7 +4,7 @@ class StoryNode < ActiveRecord::Base
 
 	belongs_to :story
 	validates :name, presence: true
-	validates :name, length: {in: 5..128 }
+	validates :name, length: {in: 3..128 }
 	validates :narrative, length: {minimum: 3 }, if: :active?
 	validates :icon_css, inclusion: {in: ICONS }
 	belongs_to :created_by, class_name: 'User'
