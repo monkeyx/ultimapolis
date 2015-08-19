@@ -1,6 +1,7 @@
 class FacilityType < ActiveRecord::Base
 
 	validates :name, presence: true
+	validates :name, length: {in: 3..255 }
 	belongs_to :district
 	# t.text :description
 	# t.string :icon

@@ -31,7 +31,7 @@ class PetitionsController < ApplicationController
   # POST /petitions.json
   def create
     @petition = Petition.new(petition_params)
-    @petition.citizen = current_user.citizen
+    @petition.citizen = current_citizen
 
     respond_to do |format|
       if @petition.save

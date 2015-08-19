@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
     validates :role, inclusion: {in:  USER_ROLES}
 
     has_one :citizen
+    has_many :stories, dependent: :nullify, foreign_key: 'created_by_id'
+    has_many :story_nodes, dependent: :nullify, foreign_key: 'created_by_id'
     
     acts_as_commontator
     acts_as_voter

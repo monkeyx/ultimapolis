@@ -22,12 +22,36 @@ class Citizen < ActiveRecord::Base
 	has_many :financial_transactions, dependent: :delete_all
 	has_many :turn_reports, dependent: :delete_all
 	has_many :petitions, dependent: :nullify
+	has_many :citizen_stories, dependent: :delete_all
 
 	before_save :check_profession_change!
 	after_create :set_initial_skills!
 	after_create :create_free_facility!
 	after_create :increment_citizen_count!
 	after_destroy :decrease_citizen_count!
+
+	#
+	# Stories
+	#
+
+	def current_story_status(story)
+		return unless story
+		CitizenStory.for_citizen(self).for_story(story).first
+	end
+
+	def story_challenges(story)
+		status = current_story_status(story)
+		status ? status.challenges : 0
+	end
+
+	def story_threats(story)
+		status = current_story_status(story)
+		status ? status.threats : 0
+	end
+
+	def story_difficulty(story)
+		story_challenges(story) + story_threats(story)
+	end
 
 	#
 	# Report
@@ -250,6 +274,19 @@ class Citizen < ActiveRecord::Base
 		mapping = skill_mapping(skill)
 		skill_rank = mapping ? mapping.rank : 0
 		skill_rank += equipment_for_skill(skill).to_a.sum{|e| e.quantity * e.equipment_type.skill_modifier }
+		skill_rank
+	end
+
+	def best_skill_mapping_in_group(skill_group)
+		CitizenSkill.for_citizen(self).for_skill_group(skill_group).order_rank.first
+	end
+
+	def best_skill_rank_in_group(skill_group)
+		mapping = best_skill_mapping_in_group(skill_group)
+		skill_rank = mapping ? mapping.rank : 0
+		if mapping 
+			skill_rank += equipment_for_skill(mapping.skill).to_a.sum{|e| e.quantity * e.equipment_type.skill_modifier }
+		end
 		skill_rank
 	end
 

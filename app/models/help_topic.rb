@@ -1,6 +1,7 @@
 class HelpTopic < ActiveRecord::Base
 	
 	validates :name, presence: true
+	validates :name, length: {in: 3..255 }
 	validates :topic_index, numericality: {only_integer: true }
 	validates :topic_index, uniqueness: true
 	validates :summary, presence: true

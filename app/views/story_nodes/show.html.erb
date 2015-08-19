@@ -1,0 +1,51 @@
+<% content_for :title, @story_node.name %>
+<% content_for :lead, @story_node.story.name %>
+<blockquote>
+  <p class="summary"><%= @story_node.narrative %></p>
+  <small><cite title="Source Title"><%=@story_node.created_by.username%></cite></small>
+</blockquote>
+<% if can?(:flag, @story_node) %>
+<div class="row">
+	<div id="moderation" class="col-lg-12 text-right">
+		<button id="flag-node-button" style="btn-sm btn-warning">
+			<% if @story_node.flagged?(current_user) %>
+			Unflag for moderation
+			<% else %>
+			Flag for moderation
+			<% end %>
+		</button>
+		<br/><small>Flagged by <%=pluralize(@story_node.flagged, 'user') %> </small>
+	</div>
+</div>
+<% end %>
+
+<%=render partial: '/story_choices/choices', locals: {node: @story_node} %>
+
+<script>
+flagged = <%= !@story_node.flagged?(current_user).nil? %>;
+flag_url = '<%=flag_story_node_path(@story_node)%>';
+unflag_url = '<%=unflag_story_node_path(@story_node)%>';
+
+jQuery(function ($) {
+	$('#flag-node-button').click( function(e){
+		e.preventDefault();
+		if (window.confirm("Are you sure?")) {
+			if(flagged){
+				$.get(unflag_url, {}, function(data) {
+					$('#moderation').append('<div class="moderation-message">' + data + '</div>')
+					$('.moderation-message').delay(1000).fadeOut();
+					flagged = false;
+					$('#flag-node-button').html('Flag for moderation');
+				});
+			} else {
+				$.get(flag_url, {}, function(data) {
+					$('#moderation').append('<div class="moderation-message">' + data + '</div>')
+					$('.moderation-message').delay(1000).fadeOut();
+					flagged = true;
+					$('#flag-node-button').html('Unflag for moderation');
+				});
+			}
+		}
+	});
+});
+</script>

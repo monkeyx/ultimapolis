@@ -1,0 +1,37 @@
+<%= form_for(@story_node, html: {class: "form-horizontal"}) do |f| %>
+  <% if @story_node.errors.any? %>
+    <div id="error_explanation" class="alert alert-dismissible alert-warning">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <h4><%= pluralize(@story_node.errors.count, "error") %> prohibited this story from being saved:</h4>
+
+      <ul>
+      <% @story_node.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%=f.hidden_field :story_id %>
+  <%=f.hidden_field :icon_css %>
+  <%=f.hidden_field :name %>
+  <%=f.hidden_field :story_choice_id %>
+  <%=f.hidden_field :choice_result %>
+
+  <fieldset>
+    <legend>What happened next?</legend>
+    <div class="form-group">
+      <div class="col-lg-12">
+        <%= f.text_area :narrative, row: 30, class: 'form-control' %>
+        <span class="help-block">Please use the first person in the retelling (eg. "I walked onwards into the sunset")</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-12 text-center">
+        <%= f.submit 'Continue your story', class: "btn-lg btn-primary" %>
+      </div>
+    </div>
+  </fieldset>
+
+<% end %>

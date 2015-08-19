@@ -3,6 +3,7 @@ class Profession < ActiveRecord::Base
 	PROFESSION_GROUPS = %w(Agent Military Corporate Entertainer Merchant Government Rogue Scientist)
 
 	validates :name, presence: true
+	validates :name, length: {in: 3..255 }
 	validates :profession_group, inclusion: {in: PROFESSION_GROUPS}
 	# t.text :description
 	# t.string :icon

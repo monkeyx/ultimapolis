@@ -1,0 +1,35 @@
+<% content_for :title, 'Stories' %>
+<% content_for :lead, "There are countless stories in the City of the Future. What is yours citizen?".html_safe %>
+
+<% i = 0 %>
+
+<% @stories.each do |story| %>
+  <% if i % 3 == 0 %>
+    <div class="row">
+  <% end %>
+
+  <div class="col-lg-4">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><h3 class="panel-title"><%=story.name %></h3></div>
+      <div class="panel-body">
+        <p><%= current_story_narrative(story) %></p>
+        <div class="well text-center"><%=story_button(story)%></div>
+      </div>
+    </div>
+  </div>
+
+  <% if i % 3 == 2 %>
+    </div>
+  <% end %>
+
+  <% i += 1 %>
+<% end %>
+
+<% if i % 3 != 0 %>
+    </div>
+<% end %>
+
+<% content_for :help_title, "Storytelling" %>
+<% content_for :help_body do %>
+In Ultimapolis, citizens choose their own path through each of the possible stories presented. Sometimes the choices have been made before and the narrative is already written. Other times, you will decide how the story unfolds based on the choices your citizen makes. What you decide will determine what someone else making the same choices with the same results will experience. And so the story goes on and on.  
+<% end %>

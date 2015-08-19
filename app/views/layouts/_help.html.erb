@@ -1,7 +1,6 @@
 <% help_title = content_for(:help_title) %>
 <% if help_title %>
 <script>
-	infoTop = true;
 	infoTitle = '<%=escape_javascript(help_title.html_safe)%>';
 	infoBody = '<%=escape_javascript(content_for(:help_body).html_safe)%>';
 	jQuery(function ($) {

@@ -5,8 +5,8 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    if current_user && current_user.citizen
-      @breadcrumbs = [["Home", root_url], [current_user.citizen.to_s,"/citizens/#{current_user.citizen.id}?tab=projects"], [@event.to_s, "/events/#{@event.id}"]]
+    if current_user && current_citizen
+      @breadcrumbs = [["Home", root_url], [current_citizen.to_s,"/citizens/#{current_citizen.id}?tab=projects"], [@event.to_s, "/events/#{@event.id}"]]
     end
     @commentable = @event
   end

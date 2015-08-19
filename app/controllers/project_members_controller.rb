@@ -4,18 +4,18 @@ class ProjectMembersController < ApplicationController
 
 	def create
 		@project_member = ProjectMember.new(project_member_params)
-		@project_member.citizen = current_user.citizen
+		@project_member.citizen = current_citizen
 
 		if @project_member.save
-		  	redirect_to "/citizens/#{current_user.citizen.id}?tab=projects", notice: 'Successfully joined project.'
+		  	redirect_to "/citizens/#{current_citizen.id}?tab=projects", notice: 'Successfully joined project.'
 		else
-			redirect_to "/citizens/#{current_user.citizen.id}?tab=projects", alert: "Failed to join project because #{@project_member.errors.full_messages.join("\n")}"
+			redirect_to "/citizens/#{current_citizen.id}?tab=projects", alert: "Failed to join project because #{@project_member.errors.full_messages.join("\n")}"
 		end
 	end
 
 	def destroy
 		@project_member.destroy
-		redirect_to "/citizens/#{current_user.citizen.id}?tab=projects", notice: 'Left the project.'
+		redirect_to "/citizens/#{current_citizen.id}?tab=projects", notice: 'Left the project.'
 	end
 
   private

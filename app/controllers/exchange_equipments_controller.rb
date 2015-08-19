@@ -3,7 +3,7 @@ class ExchangeEquipmentsController < ApplicationController
   
   # GET /exchange_equipments/new
   def new
-    @breadcrumbs = [["Home", root_url], [current_user.citizen,"/citizens/#{current_user.citizen.id}?tab=inventory"]]
+    @breadcrumbs = [["Home", root_url], [current_citizen,"/citizens/#{current_citizen.id}?tab=inventory"]]
     @exchange_equipment = ExchangeEquipment.new
     unless params[:equipment_type].blank?
       @equipment_type = EquipmentType.find(params[:equipment_type])
@@ -16,7 +16,7 @@ class ExchangeEquipmentsController < ApplicationController
   # POST /exchange_equipments.json
   def create
     @exchange_equipment = ExchangeEquipment.new(exchange_equipment_params)
-    @exchange_equipment.citizen = current_user.citizen 
+    @exchange_equipment.citizen = current_citizen 
     @exchange_equipment.turn = Global.singleton.turn 
     @exchange_equipment.price = @exchange_equipment.equipment_type ? @exchange_equipment.equipment_type.exchange_price : 0
 
@@ -29,8 +29,8 @@ class ExchangeEquipmentsController < ApplicationController
 
     respond_to do |format|
       if @exchange_equipment.save
-        format.html { redirect_to "/citizens/#{current_user.citizen.id}?tab=inventory", notice: 'Equipment traded.' }
-        format.json { render json: @exchange_equipment, status: :created, location: "/citizens/#{current_user.citizen.id}?tab=inventory" }
+        format.html { redirect_to "/citizens/#{current_citizen.id}?tab=inventory", notice: 'Equipment traded.' }
+        format.json { render json: @exchange_equipment, status: :created, location: "/citizens/#{current_citizen.id}?tab=inventory" }
       else
         format.html { render :new }
         format.json { render json: @exchange_equipment.errors, status: :unprocessable_entity }

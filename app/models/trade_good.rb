@@ -2,6 +2,7 @@ class TradeGood < ActiveRecord::Base
 	include ExchangeItem
 
 	validates :name, presence: true
+	validates :name, length: {in: 3..255 }
 	belongs_to :facility_type
 	validates :exchange_price, numericality: {only_integer: true}
 	# t.text :description

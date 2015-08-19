@@ -9,15 +9,15 @@ class LoansController < ApplicationController
 
   # GET /loans/new
   def new
-    @breadcrumbs = [["Home", root_url], [current_user.citizen,"/citizens/#{current_user.citizen.id}?tab=finances"]]
-    @loan = Loan.new(value: current_user.citizen.maximum_loan)
+    @breadcrumbs = [["Home", root_url], [current_citizen,"/citizens/#{current_citizen.id}?tab=finances"]]
+    @loan = Loan.new(value: current_citizen.maximum_loan)
   end
 
   # POST /loans
   # POST /loans.json
   def create
     @loan = Loan.new(loan_params)
-    @loan.citizen = current_user.citizen
+    @loan.citizen = current_citizen
 
     respond_to do |format|
       if @loan.save

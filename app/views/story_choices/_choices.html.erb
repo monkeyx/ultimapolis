@@ -1,0 +1,55 @@
+<h3>What do you do next?</h3>
+<ul class="list-group">
+<% node.story_choices.to_a.sort{ rand }.each do |choice| %>
+	<li class="list-group-item existing-choice">
+		<div class="row">
+			<div class="col-lg-10">
+				<%=choice.type_and_skill %><%=choice.description %>
+			</div>
+			<div class="col-lg-2">
+				<%=link_to "Proceed", choice, class: 'btn-lg btn-primary text-right' %>
+			</div>
+		</div>
+	</li>
+<% end %>
+	<li class="list-group-item">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<button id="show_choice_button" class="btn-lg btn-primary">I want to try something different</buttn>
+			</div>
+		</div>
+	</li>
+	<li class="list-group-item" id="new_choice_form">
+	<%=render partial: '/story_choices/form', locals: {choice: defined?(@story_choice) && @story_choice ? @story_choice : node.new_choice} %>
+	</li>
+</ul>
+
+<% content_for :help_title, "Story Choices" %>
+<% content_for :help_body do %>
+At any point in a story you may decide to take the safest choice by procedding with an <strong>easy choice</strong> without drawing upon your citizen's skills. The story will continue but there will be no rewards. If you up the ante by taking a <strong>challenging choice</strong> you will be rewarded. The greater the reward the more challenges taken in this story so far. If you fail a challenge, the story will still continues but without the reward. The truly brave (or reckless) will face <strong>threatening choices</strong> for the best rewards. However, if you fail a skill check for a threat, your citizen's journey through this story will come to an end.
+<% end %>
+
+<script>
+	jQuery(function ($) {
+		<% unless (defined?(@story_choice) && @story_choice.errors.count > 0) || node.story_choices.empty? %>
+		$('#new_choice_form').hide();
+		<% else %>
+		$('#show_choice_button').html('Hide');
+		<% end %>
+
+		<% if node.story_choices.empty? %>
+		$('#show_choice_button').hide();
+		<% end %>
+
+		$('#show_choice_button').click(function () {
+			$('#new_choice_form').toggle();
+			if($('#new_choice_form').is(':visible')){
+				$('#show_choice_button').html('Hide');
+				$('.existing-choice').hide();
+			}else {
+				$('#show_choice_button').html('I want to try something different');
+				$('.existing-choice').show();
+			}
+		});
+	});
+</script>

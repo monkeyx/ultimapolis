@@ -16,6 +16,9 @@ See [commit log](https://github.com/monkeyx/ultimapolis/commits/master)
 
 ## To Dos
 
+* Ideas (R&D)
+* Help Topics
+* Show Introductary Help Topic after registeration
 * Custom error / maintenance pages
 
 ## Issues

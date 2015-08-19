@@ -1,0 +1,58 @@
+<%= form_for(choice, html: {class: "form-horizontal"}) do |f| %>
+  <% if choice.errors.any? %>
+    <div id="error_explanation" class="alert alert-dismissible alert-warning">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <h4><%= pluralize(choice.errors.count, "error") %> prohibited this choice:</h4>
+
+      <ul>
+      <% choice.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%=f.hidden_field :story_node_id %>
+  <fieldset>
+    <div class="row">
+      <div class="col-lg-10">
+        <div class="form-group">
+          <%= f.text_field :description, maxlength: '64', placeholder: 'I will proceed by... (fill this in)', class: 'form-control' %>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="form-group text-right">
+          <%= f.submit 'Proceed', class: "btn-lg btn-primary" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <label for="choice_type_choice">Easy Choice</label>
+        <input type="radio" name="story_choice[choice_type]" id="choice_type_choice" value="Choice" <%=(choice.choice_type == 'Choice' ? 'checked' : '')%>>
+        <span class="help-block">No rewards</span>
+      </div>
+      <div class="col-lg-4">
+        <label for="choice_type_challenge">Challenging Choice</label>
+        <input type="radio" name="story_choice[choice_type]" id="choice_type_challenge" value="Challenge" <%=(choice.choice_type == 'Challenge' ? 'checked' : '')%>>
+        <span class="help-block">Some reward if successful</span>
+      </div>
+      <div class="col-lg-4">
+        <label for="choice_type_threat">Threatening Choice</label>
+        <input type="radio" name="story_choice[choice_type]" id="choice_type_threat" value="Threat" <%=(choice.choice_type == 'Threat' ? 'checked' : '')%>>
+        <span class="help-block">Good reward if successful, story ends if not</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2">
+        <label for="skill_group" class="control-label">Using these skills:</label>
+      </div>
+      <div class="col-lg-10">
+        <div class="form-group">
+            <%= f.select :skill_group, StoryChoice::SKILL_GROUPS, {}, class: 'form-control' %>
+            <span class="help-block">Must be used with challenging or threatening choices</span>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+<% end %>

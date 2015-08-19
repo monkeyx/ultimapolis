@@ -36,6 +36,15 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :stories, only: [:index]
+  resources :story_nodes, only: [:show, :edit, :update] do 
+    member do 
+      get :flag, as: :flag
+      get :unflag, as: :unflag
+    end
+  end
+  resources :story_choices, only: [:show, :create]
+  
   devise_for :users
 
   get 'charts/total_land', to: 'district_charts#total_land'

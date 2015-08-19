@@ -2,6 +2,7 @@ class EquipmentType < ActiveRecord::Base
 	include ExchangeItem
 
 	validates :name, presence: true
+	validates :name, length: {in: 5..128 }
 	belongs_to :facility_type
 	# t.text :description
 	# t.string :icon

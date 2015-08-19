@@ -299,6 +299,19 @@ end
 end
 
 #
+# Stories
+#
+
+s1 = Story.create!(name: 'Ultimapols Nights', created_by: admin_user)
+s1.create_first_node!("It was a rainy night in District 5 and I was walking alone without an umbrella. The air stank of industrial cleaners and the synth street cleaners were out in force. A strange man in a bright yellow jacket loitered threateningly on the corner.", admin_user)
+
+s2 = Story.create!(name: 'A Day in the Life', created_by: admin_user)
+s2.create_first_node!("I read the news about the riots in District 8 with a mixture of resignation and concern. I stepped outside to catch my tram into work and my mind wandered thinking about an old friend who had recently died in a car crash.", admin_user)
+
+s3 =  Story.create!(name: 'Out in the Wastes', created_by: admin_user)
+s3.create_first_node!("Armed with my revolver and three days worth of water, foot and rad meds I ventured forth into the great Wasteland to begin my search.", admin_user)
+
+#
 # Start the game
 #
 

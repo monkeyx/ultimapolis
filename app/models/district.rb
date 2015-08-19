@@ -2,6 +2,7 @@ class District < ActiveRecord::Base
 	include DistrictStatus
 	
 	validates :name, presence: true
+	validates :name, length: {in: 5..128 }
 	belongs_to :skill 
 	validates :total_land, numericality: {only_integer: true}
 	validates :free_land, numericality: {only_integer: true}

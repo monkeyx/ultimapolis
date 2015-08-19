@@ -21,12 +21,19 @@ var infoTitle;
 var infoBody;
 
 function showInfoPanel() {
+    setting = Cookies.get('info-panel-setting');
+    if(setting == 'bottom'){
+        infoTop = false; 
+    } else {
+        infoTop = true;
+    }
+
     if(infoTop){
         id = 'infoTop';
-        glyph = 'glyphicon-arrow-down';
+        glyph = 'glyphicon-download';
     } else {
         id = 'infoBottom';
-        glyph = 'glyphicon-arrow-up';
+        glyph = 'glyphicon-upload';
     }
     div = $('#' + id);
     div.html('<div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title">' +
@@ -45,6 +52,11 @@ function switchInfoPanelLocation() {
     $('#infoTop').empty();
     $('#infoBottom').empty();
     infoTop = !infoTop;
+    if(infoTop){
+        Cookies.set('info-panel-setting', 'top');
+    } else {
+        Cookies.set('info-panel-setting', 'bottom');
+    }
     showInfoPanel();
 }
 

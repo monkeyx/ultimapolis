@@ -4,6 +4,7 @@ class Event < ActiveRecord::Base
 	EVENT_TYPES = %w(Crisis Opportunity)
 
 	validates :name, presence: true
+	validates :name, length: {in: 3..255 }
 	validates :event_type, inclusion: {in: EVENT_TYPES}
 	# t.integer :started_on
 	# t.integer :finished_on

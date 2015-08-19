@@ -1,0 +1,8 @@
+<% content_for :title, @story_choice.story_node.name %>
+<% content_for :lead, @story_choice.story_node.story.name %>
+<blockquote>
+  <p class="summary"><%= @story_choice.story_node.narrative %></p>
+  <small><cite title="Source Title"><%=@story_choice.story_node.created_by.username%></cite></small>
+</blockquote>
+
+<%=render partial: '/story_choices/choices', locals: {node: @story_choice.story_node} %>

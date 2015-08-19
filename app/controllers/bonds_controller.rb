@@ -10,7 +10,7 @@ class BondsController < ApplicationController
 
   # GET /bonds/new
   def new
-    @breadcrumbs = [["Home", root_url], [current_user.citizen,"/citizens/#{current_user.citizen.id}?tab=finances"]]
+    @breadcrumbs = [["Home", root_url], [current_citizen,"/citizens/#{current_citizen.id}?tab=finances"]]
     @bond = Bond.new
   end
 
@@ -18,7 +18,7 @@ class BondsController < ApplicationController
   # POST /bonds.json
   def create
     @bond = Bond.new(bond_params)
-    @bond.citizen = current_user.citizen
+    @bond.citizen = current_citizen
 
     respond_to do |format|
       if @bond.save

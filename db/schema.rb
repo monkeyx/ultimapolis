@@ -11,37 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811210832) do
+ActiveRecord::Schema.define(version: 20150818104330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "blogit_comments", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.string   "email",      null: false
-    t.string   "website"
-    t.text     "body",       null: false
-    t.integer  "post_id",    null: false
-    t.string   "state"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "blogit_comments", ["post_id"], name: "index_blogit_comments_on_post_id", using: :btree
-
-  create_table "blogit_posts", force: :cascade do |t|
-    t.string   "title",                            null: false
-    t.text     "body",                             null: false
-    t.string   "state",          default: "draft", null: false
-    t.integer  "comments_count", default: 0,       null: false
-    t.integer  "blogger_id"
-    t.string   "blogger_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "description"
-  end
-
-  add_index "blogit_posts", ["blogger_type", "blogger_id"], name: "index_blogit_posts_on_blogger_type_and_blogger_id", using: :btree
 
   create_table "bonds", force: :cascade do |t|
     t.integer  "citizen_id"
@@ -87,6 +60,19 @@ ActiveRecord::Schema.define(version: 20150811210832) do
   end
 
   add_index "citizen_skills", ["citizen_id", "skill_id"], name: "index_citizen_skills_on_citizen_id_and_skill_id", using: :btree
+
+  create_table "citizen_stories", force: :cascade do |t|
+    t.integer  "citizen_id"
+    t.integer  "story_id"
+    t.boolean  "finished",      default: false
+    t.integer  "story_node_id"
+    t.integer  "challenges",    default: 0
+    t.integer  "threats",       default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "citizen_stories", ["citizen_id", "story_id", "finished"], name: "idx_citizen_stories", using: :btree
 
   create_table "citizen_trade_goods", force: :cascade do |t|
     t.integer  "citizen_id"
@@ -578,25 +564,55 @@ ActiveRecord::Schema.define(version: 20150811210832) do
   add_index "skills", ["secondary_profession_id"], name: "index_skills_on_secondary_profession_id", using: :btree
   add_index "skills", ["tertiary_profession_id"], name: "index_skills_on_tertiary_profession_id", using: :btree
 
-  create_table "taggings", force: :cascade do |t|
-    t.integer  "tag_id"
-    t.integer  "taggable_id"
-    t.string   "taggable_type"
-    t.integer  "tagger_id"
-    t.string   "tagger_type"
-    t.string   "context",       limit: 128
-    t.datetime "created_at"
+  create_table "stories", force: :cascade do |t|
+    t.integer  "first_node_id"
+    t.integer  "created_by_id"
+    t.string   "name"
+    t.boolean  "active",        default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+  add_index "stories", ["created_by_id", "active"], name: "index_stories_on_created_by_id_and_active", using: :btree
 
-  create_table "tags", force: :cascade do |t|
-    t.string  "name"
-    t.integer "taggings_count", default: 0
+  create_table "story_choices", force: :cascade do |t|
+    t.integer  "story_node_id"
+    t.text     "description"
+    t.string   "choice_type",     default: "Choice"
+    t.integer  "success_node_id"
+    t.integer  "failure_node_id"
+    t.string   "skill_group",     default: ""
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
+  add_index "story_choices", ["failure_node_id"], name: "index_story_choices_on_failure_node_id", using: :btree
+  add_index "story_choices", ["story_node_id"], name: "index_story_choices_on_story_node_id", using: :btree
+  add_index "story_choices", ["success_node_id"], name: "index_story_choices_on_success_node_id", using: :btree
+
+  create_table "story_node_flags", force: :cascade do |t|
+    t.integer  "story_node_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "story_node_flags", ["story_node_id", "user_id"], name: "idx_node_flags", using: :btree
+
+  create_table "story_nodes", force: :cascade do |t|
+    t.integer  "story_id"
+    t.string   "name"
+    t.text     "narrative"
+    t.string   "icon_css",      default: ""
+    t.integer  "created_by_id"
+    t.boolean  "active",        default: false
+    t.integer  "flagged",       default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "story_nodes", ["created_by_id"], name: "index_story_nodes_on_created_by_id", using: :btree
+  add_index "story_nodes", ["story_id"], name: "index_story_nodes_on_story_id", using: :btree
 
   create_table "trade_good_raw_materials", force: :cascade do |t|
     t.integer  "trade_good_id"

@@ -1,6 +1,7 @@
 module NavigationHelper
 	def navigation_items
   		@navigation_items ||= [
+        ['Stories', main_app.stories_path, nil],
   			['Districts', main_app.districts_path, nil],
         ['Petitions', '/petitions', nil],
         ['Databank',nil,

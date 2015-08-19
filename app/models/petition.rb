@@ -2,6 +2,7 @@ class Petition < ActiveRecord::Base
 	
 	belongs_to :citizen 
 	validates :name, presence: true
+	validates :name, length: {in: 5..128 }
 	validates :summary, presence: true
 	# t.boolean :accepted
 

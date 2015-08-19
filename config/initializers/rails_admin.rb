@@ -23,8 +23,8 @@ RailsAdmin.config do |config|
   config.included_models = ['Bond', 'Citizen', 'CitizenCareer', 'CitizenEquipment','CitizenSkill','CitizenTradeGood',
       'District', 'DistrictEffect', 'EquipmentRawMaterial','EquipmentType','Event','EventResourceCost','EventReward',
       'EventSkillCost','Facility','FacilityType','Global','GlobalEffect','HelpTopic','Loan','Profession',
-      'Project','ProjectMember','ProjectResource','ProjectSkillPoint','Skill','TradeGood','TradeGoodRawMaterial',
-      'User']
+      'Project','ProjectMember','ProjectResource','ProjectSkillPoint','Skill','Story','StoryChoice', 'StoryNode', 
+      'TradeGood','TradeGoodRawMaterial','User']
 
   config.navigation_static_links = {
     'News Blog' => 'https://www.tumblr.com/blog/ultimapolis'
@@ -870,6 +870,87 @@ RailsAdmin.config do |config|
         field :primary_profession
         field :secondary_profession
         field :tertiary_profession
+      end
+    end
+  end
+
+  config.model 'Story' do 
+    object_label_method :to_s
+    list do
+      field :name
+      field :created_by
+      field :first_node
+    end
+    show do 
+      group :basic do 
+        field :name
+        field :created_by
+        field :first_node
+      end
+      group :nodes do 
+        field :story_nodes
+      end
+    end
+    edit do 
+      group :basic do 
+        field :name
+        field :created_by
+        field :first_node
+      end
+      group :nodes do 
+        field :story_nodes
+      end
+    end
+  end
+
+  config.model 'StoryChoice' do 
+    object_label_method :to_s
+    visible false 
+    show do 
+      group :basic do 
+        field :story_node
+        field :choice_type
+        field :skill_group
+      end
+      group :consequences do 
+        field :success_node
+        field :failure_node
+      end
+    end
+    edit do 
+      group :basic do 
+        field :story_node
+        field :choice_type
+        field :skill_group
+      end
+      group :consequences do 
+        field :success_node
+        field :failure_node
+      end
+    end
+  end
+
+  config.model 'StoryNode' do 
+    object_label_method :to_s
+    visible false 
+    show do
+      group :basic do 
+        field :story
+        field :name
+        field :icon_css
+      end
+      group :narrative do 
+        field :narrative
+      end
+    end
+    edit do
+      group :basic do 
+        field :story
+        field :name
+        field :icon_css
+      end
+      group :narrative do 
+        field :narrative
       end
     end
   end

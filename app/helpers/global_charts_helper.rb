@@ -1,2 +1,0 @@
-module GlobalChartsHelper
-end

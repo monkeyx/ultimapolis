@@ -3,7 +3,7 @@ class ExchangeTradeGoodsController < ApplicationController
   
   # GET /exchange_trade_goods/new
   def new
-    @breadcrumbs = [["Home", root_url], [current_user.citizen,"/citizens/#{current_user.citizen.id}?tab=inventory"]]
+    @breadcrumbs = [["Home", root_url], [current_citizen,"/citizens/#{current_citizen.id}?tab=inventory"]]
     @exchange_trade_good = ExchangeTradeGood.new
     unless params[:trade_good].blank?
       @trade_good = TradeGood.find(params[:trade_good])
@@ -16,7 +16,7 @@ class ExchangeTradeGoodsController < ApplicationController
   # POST /exchange_trade_goods.json
   def create
     @exchange_trade_good = ExchangeTradeGood.new(exchange_trade_good_params)
-    @exchange_trade_good.citizen = current_user.citizen 
+    @exchange_trade_good.citizen = current_citizen 
     @exchange_trade_good.turn = Global.singleton.turn 
     @exchange_trade_good.price = @exchange_trade_good.trade_good ? @exchange_trade_good.trade_good.exchange_price : 0
 
@@ -29,8 +29,8 @@ class ExchangeTradeGoodsController < ApplicationController
     
     respond_to do |format|
       if @exchange_trade_good.save
-        format.html { redirect_to "/citizens/#{current_user.citizen.id}?tab=inventory", notice: 'Trade good traded.' }
-        format.json { render json: @exchange_trade_good, status: :created, location: "/citizens/#{current_user.citizen.id}?tab=inventory" }
+        format.html { redirect_to "/citizens/#{current_citizen.id}?tab=inventory", notice: 'Trade good traded.' }
+        format.json { render json: @exchange_trade_good, status: :created, location: "/citizens/#{current_citizen.id}?tab=inventory" }
       else
         format.html { render :new }
         format.json { render json: @exchange_trade_good.errors, status: :unprocessable_entity }

@@ -3,6 +3,7 @@ class Skill < ActiveRecord::Base
 	SKILL_GROUPS = %w(Animal Art Business Intelligence Legal Military Physique Science Social Tech)
 
 	validates :name, presence: true
+	validates :name, length: {in: 3..255 }
 	validates :skill_group, inclusion: {in: SKILL_GROUPS}
 	# t.text :description
 	# t.string :icon
@@ -11,6 +12,8 @@ class Skill < ActiveRecord::Base
 	belongs_to :tertiary_profession, class_name: 'Profession'
 	has_one :district
 
+	scope :for_group, ->(group) { where(skill_group: group)}
+	
 	default_scope ->{ order('name ASC') }
 
 	acts_as_commontable

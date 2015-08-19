@@ -10,18 +10,18 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-    @breadcrumbs = [["Home", root_url], [current_user.citizen.to_s,"/citizens/#{current_user.citizen.id}?tab=projects"], [@project.to_s, "/projects/#{@project.id}/edit"]]
+    @breadcrumbs = [["Home", root_url], [current_citizen.to_s,"/citizens/#{current_citizen.id}?tab=projects"], [@project.to_s, "/projects/#{@project.id}/edit"]]
   end
 
   # POST /projects
   # POST /projects.json
   def create
     @project = Project.new(project_params)
-    @project.leader = current_user.citizen
+    @project.leader = current_citizen
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to "/citizens/#{current_user.citizen.id}?tab=projects", notice: 'Project was started.' }
+        format.html { redirect_to "/citizens/#{current_citizen.id}?tab=projects", notice: 'Project was started.' }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }
@@ -35,7 +35,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to "/citizens/#{current_user.citizen.id}?tab=projects", notice: 'Project was updated.' }
+        format.html { redirect_to "/citizens/#{current_citizen.id}?tab=projects", notice: 'Project was updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit }
@@ -49,7 +49,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-      format.html { redirect_to "/citizens/#{current_user.citizen.id}?tab=projects", notice: 'Project was cancelled.' }
+      format.html { redirect_to "/citizens/#{current_citizen.id}?tab=projects", notice: 'Project was cancelled.' }
       format.json { head :no_content }
     end
   end
@@ -57,7 +57,7 @@ class ProjectsController < ApplicationController
   private
     def set_event
       if params[:event_type].blank?
-        redirect_to "/citizens/#{current_user.citizen.id}?tab=projects", alert: "Invalid event"
+        redirect_to "/citizens/#{current_citizen.id}?tab=projects", alert: "Invalid event"
         return false
       else
         case params[:event_type]
@@ -68,7 +68,7 @@ class ProjectsController < ApplicationController
        end
       end
       unless @event 
-        redirect_to "/citizens/#{current_user.citizen.id}?tab=projects", alert: "Invalid event"
+        redirect_to "/citizens/#{current_citizen.id}?tab=projects", alert: "Invalid event"
         return false
       end
     end
