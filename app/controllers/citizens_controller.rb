@@ -48,7 +48,7 @@ class CitizensController < ApplicationController
       if @citizen.save
         redirect_path = session[:redirect_to]
         session[:redirect_to] = nil
-        format.html { redirect_to redirect_path || @citizen, notice: 'Welcome to Ultimapolis citizen!' }
+        format.html { redirect_to redirect_path || root_url, notice: 'Welcome to Ultimapolis citizen!' }
         format.json { render :show, status: :created, location: @citizen }
       else
         format.html { render :new }
