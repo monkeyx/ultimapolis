@@ -1,7 +1,7 @@
 <% content_for :title, "#{@profession.name} [#{@profession.profession_group}]" %>
 <% content_for :lead, "#{@profession.description}".html_safe %>
 
-<% cache(@profession) do %>
+<% cache(cache_key_for_model(@profession)) do %>
 	<h2>Skills</h2>
 	<ul class="list-group">
 	<% @profession.skills.each do |skill| %>

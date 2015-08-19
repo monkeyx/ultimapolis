@@ -1,7 +1,7 @@
 <% content_for :title, "#{@skill.name} [#{@skill.skill_group}]" %>
 <% content_for :lead, "#{@skill.description}".html_safe %>
 
-<% cache(@skill) do %>
+<% cache(cache_key_for_model(@skill)) do %>
 	<h2>Learned In</h2>
 	<ul class="list-group">
 		<% if @skill.district %>

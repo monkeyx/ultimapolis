@@ -1,7 +1,7 @@
 <% content_for :title, @trade_good.name %>
 <% content_for :lead, "#{@trade_good.description}. Produced in a #{link_to @trade_good.facility_type.name, @trade_good.facility_type}.".html_safe %>
 
-<% cache(@trade_good) do %>
+<% cache(cache_key_for_model(@trade_good)) do %>
   <% if @trade_good.trade_good_raw_materials.count > 0 %>
   <h2>Production Cost</h2>
   <table class="table table-striped table-hover">

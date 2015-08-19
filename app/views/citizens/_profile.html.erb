@@ -1,6 +1,6 @@
 <h2>Profile</h2>
 
-<% cache("profile-#{@citizen}-#{@citizen.updated_at}") do %>
+<% cache(cache_key_for_name("profile-#{@citizen}-#{@citizen.updated_at}")) do %>
   <% if @citizen.known_skills.count > 0 %>
   <h3>Skills</h3>
   <ul class="list-group">

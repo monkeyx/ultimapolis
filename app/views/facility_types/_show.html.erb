@@ -15,7 +15,7 @@
   </ul>
   <% end %>
 
-<% cache(@facility_type) do %>
+<% cache(cache_key_for_model(@facility_type)) do %>
   <% if facility_type.power_generation > 0 %>
   <h2>Power Generation</h2>
   <p>

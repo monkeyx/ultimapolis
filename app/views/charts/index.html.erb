@@ -1,6 +1,6 @@
 <% content_for :title, 'Charts' %>
 
-<% cache("charts-#{params[:chart]}-#{(defined?(@district) && @district ? @district.id : 'global')}") do %>
+<% cache(cache_key_for_name("charts-#{params[:chart]}-#{(defined?(@district) && @district ? @district.id : 'global')}")) do %>
 	<ul class="nav nav-pills">
 	<% if defined?(@district) && @district %>
 	<% params[:chart] = 'total_land' if params[:chart].blank? %>

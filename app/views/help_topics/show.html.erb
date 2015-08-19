@@ -1,4 +1,4 @@
 <% content_for :title, @help_topic.name %>
-<% cache(@help_topic) %>
+<% cache(cache_key_for_model(@help_topic)) %>
 	<%=@help_topic.body.html_safe %>
 <% end %>

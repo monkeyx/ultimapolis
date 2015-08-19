@@ -4,7 +4,7 @@
 <% else %>
 <% content_for :lead, "<p>The future city simulation</p>".html_safe %>
 <% end %>
-<% cache("welcome-#{(current_citizen ? current_citizen.id : 'public')}") do %>
+<% cache(cache_key_for_name("welcome")) do %>
 	<div class="row">
 		<div class="col-lg-5">
 			<div class="panel panel-primary">
