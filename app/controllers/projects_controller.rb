@@ -5,6 +5,9 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
+    if current_citizen.on_a_project?
+      redirect_to "/citizens/#{current_citizen.id}?tab=projects", alert: "You're already involved in a project"
+    end
     @project = Project.new(event_id: @event.id)
   end
 
