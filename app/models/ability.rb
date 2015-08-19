@@ -23,7 +23,7 @@ class Ability
         can :flag, StoryNode
         
         if user.citizen
-            can :read, [Facility, Project, StoryNode]
+            can :read, [Facility, Project, StoryNode, StoryChoice]
             can :vote_for, Petition
             can :vote_against, Petition
             can :create, [Facility, Petition, Project, ProjectMember, ExchangeEquipment, ExchangeTradeGood, StoryNode, StoryChoice]
