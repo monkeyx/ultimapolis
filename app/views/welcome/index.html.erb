@@ -1,9 +1,16 @@
 <% content_for :title, "Ultimapolis" %>
-<% unless current_user && !current_user.admin? && current_user.citizen %>
-<% content_for :lead, "<p>The future city simulation</p><p><a class=\"btn btn-primary btn-lg\" href=\"#{new_citizen_path}\">Become a Citizen</a>".html_safe %>
-<% else %>
-<% content_for :lead, "<p>The future city simulation</p>".html_safe %>
-<% end %>
+<% 
+unless current_user && !current_user.admin? && current_user.citizen
+	button_html = [link_to("Become a Citizen", new_citizen_path, class: "btn-lg btn-primary")]
+else 
+	button_html = [
+		link_to("Tell your Story", stories_path, class: "btn-lg btn-primary"),
+		link_to("Join a Project", current_citizen_path('projects'), class: "btn-lg btn-info"),
+		link_to("Manage Facilities", current_citizen_path('facilities'), class: "btn-lg btn-primary"),
+		link_to("View Profile", current_citizen_path('profile'), class: "btn-lg btn-info")
+	]
+end %>
+<% content_for :lead, "The future city simulation.<p>#{button_html.join('&nbsp;&nbsp;&nbsp;').html_safe}</p>".html_safe %>
 <% cache(cache_key_for_name("welcome")) do %>
 	<div class="row">
 		<div class="col-lg-5">
